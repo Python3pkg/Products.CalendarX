@@ -10,7 +10,7 @@
 """
 Queries the catalog for Events before a start date using ZCatalog query dictionary.
 
-modified for CalendarX 0.6.6 fix q_xsub initialization as empty list.
+modified for CalendarX 0.9.1(alpha) for 'listOfReviewStatesDisplayed' attribute
 Released under the GPL (see LICENSE.txt)
 does NOT use AdvancedQuery product of Dieter
 List of variables used (and to be used someday)
@@ -88,6 +88,9 @@ if xpub == 'pend':
 showForGroups = context.getCXAttribute('showPrivateEventsToGroupMembers')
 if showForGroups:
     q_xpub.append('private')
+extraStates = context.getCXAttribute('listOfReviewStatesDisplayed')
+for state in extraStates:
+    q_xpub.append(state)
 if xpub  == '11':   #override other requests for Personal Events calendar call
     q_xpub = []
 

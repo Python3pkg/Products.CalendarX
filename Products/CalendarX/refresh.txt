@@ -1,8 +1,1 @@
-This is the refresh.txt file for CalendarX.  If it doesn't work (it 
-usually does), then restart Zope.  If you have new translations for 
-CalendarX, then you MUST restart Zope in order for the translation 
-process to pick them up.  If you have changes to the existing translation 
-files (po files) then you must either restart Zope or go to the 
-Placeless Translation Service in your ZMI Control Panel and find the 
-translation of interest and click Reindex to get the new translation 
-registered.  
+you used the refresh.

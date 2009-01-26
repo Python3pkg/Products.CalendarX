@@ -1,8 +1,17 @@
 CUSTOM.txt
-  CalendarX 0.6.6(stable)  January 03 2006
+  CalendarX 0.9.0(dev)  January 06 2008
   (last modified for CalendarX 0.6.5)
 by +lupa+ (lupaz on sf.net, lupa at zurven dot com)
 Released under the GPL (see LICENSE.txt)
+
+
+THIS IS TOTALLY OUT OF DATE for 0.9.0+  There may be useful information
+here, but more likely there is misinformation.  The descriptions of 
+properties (attributes) is largely ok, but everything about property 
+sheets is old, gone, kaput... all the attributes are in Archetypes
+schemata now.  YOU HAVE BEEN WARNED.
+
+
 
 Notes on customizing CalendarX 0.4 branch. (also 0.6 branch)
 

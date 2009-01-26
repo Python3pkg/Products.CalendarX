@@ -1,16 +1,42 @@
 MIGRATE.txt
-  CalendarX 0.6.6(stable)  January 03 2006
-  (last modified for CalendarX 0.6.6)
+  CalendarX 0.9.0(dev)  January 06 2008
+  (last modified for CalendarX 0.9.0)
 by +lupa+ (lupaz on sf.net, lupa at zurven dot com)
 Released under the GPL (see LICENSE.txt)
 
 Note: Not fully tested for Plone 2.1.1 and above.  
 
-I.   Upgrading from 0.6 branch versions of CalendarX (updated 0.6.6)
-II.   Upgrading from 0.4 branch versions of CalendarX (updated 0.6.4)
+I.    Upgrading to 0.9 branch versions of CalendarX (updated 0.9.0)
+II.   Upgrading from 0.6 branch versions of CalendarX (updated 0.6.6)
+III.  Upgrading from 0.4 branch versions of CalendarX (updated 0.6.4)
 
       
-I. Upgrading to 0.6.6 from 0.6 branch versions of CalendarX.
+I.  Upgrading to 0.9 branch versions of CalendarX (updated 0.9.0)
+
+0.  This is ONLY for migrating up to Plone 3.0.  My advice is don't even 
+    try migrating...  just start a new CalendarX (it's not that hard).  
+
+1.  Delete your old CalendarX instances from your Plone 2.x site.  
+
+2.  Take the CalendarX folder out of your Plone 2.x INSTANCE_HOME/Products 
+    folder
+
+3.  Migrate your Plone 2.x site up to Plone 3.
+
+4.  Put a new version of CalendarX in your INSTANCE_HOME/Products
+    folder (0.9.0 or higher).  
+
+5.  Restart Zope.
+
+6.  Use Site Setup to install CalendarX into your Plone 3 site, then add
+    a CalendarX instance and use the "manage" tab to adjust the site 
+    attributes (no more property sheets to adjust).  Set up your new 
+    CalendarX instance just the way you like it (all the old functionality
+    from the 0.6 branch should *just work*.
+
+
+
+II. Upgrading to 0.6.6 from 0.6 branch versions of CalendarX.
 
 1.  Replace the old version of CalendarX in your INSTANCE_HOME/Products
     folder with the new version of CalendarX (0.6 or higher).  
@@ -71,7 +97,7 @@ I. Upgrading to 0.6.6 from 0.6 branch versions of CalendarX.
     
 
 
-II. Upgrading to 0.6 from 0.4 branch versions of CalendarX.
+III. Upgrading to 0.6 from 0.4 branch versions of CalendarX.
 
 1.  Replace the old version of CalendarX in your INSTANCE_HOME/Products
     folder with the new version of CalendarX (0.6 or higher).  

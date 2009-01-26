@@ -1,6 +1,6 @@
 CREDITS.txt
-  CalendarX 0.6.6(stable)  January 03 2006
-  (last modified for CalendarX 0.6.6)
+  CalendarX 0.9.0(dev)  January 06 2008
+  (last modified for CalendarX 0.9.0)
 by +lupa+ (lupaz on sf.net, lupa at zurven dot com)
 Released under the GPL (see LICENSE.txt)
 
@@ -30,6 +30,14 @@ Alec Mitchell, who wrote the code to make CalendarX into a PloneFolder-based
 Scott Sturgeon, for makeCSV.py and addEvent code
 Joris Bauer for XHTML validity fixes throughout the 0.4 branch.
 Gaël Pegliasco for i18n kickstart to the 0.6 branch.
+George Lee for setting up the Collective SVN repository with EVERY earlier 
+  release of CalendarX set up as tagged releases. Fabulous job.
+Guy Heckman's CalendarX Patch Sprint at Penn State University in December 2007,
+  who says Eric Steele, Erik Rose, and Daryl Noye from WebLion deserve 
+  special kudos for their contributions.  Thanks to all the Sprinters, this 
+  gave us the /plone-3-compatibility branch in the Collective SVN that served   
+  as the real starting place for the 0.9.x branch of CalendarX... my earlier  
+  efforts have been happily discarded.
 
 Special coding inspiration:
 Raphael Ritz for MySite and many listserv postings
@@ -41,6 +49,9 @@ Monetary Contributors (thanks!):
 Several people and organizations have made donations through Sourceforge,
   which helps a lot because this is almost purely for hobby now, and an 
   occasional consulting gig for customization help.
+Additionally, the late 2007 Fundable project gave me the funding to be able
+  to get moving again.  Many contributors there, but I'll not release all 
+  their names.  Thanks SO much.
 
 Logistical Support:
 Design53
@@ -80,5 +91,8 @@ Diana Szczesuil, Scott Brown, Kurt Bendl, Bronwyn Carlisle, Souheil Chelfouh,
 Francis Lapique, Joshua Levy, Rik Belew, George Lee, BenO, Tess Bond, 
 Matt Phillips, Jürgen Plasser, John Wright, Nuno Henriques, Peter Anderson, 
 Mike Revoir, Aaron Bookvich, Ed Gordon, Tracy Reed, Dennis Jen, Colin Donald, 
-Vaishal Sheth, Sébastien Douche, Jens Nachtigall, Uwe Daub.
+Vaishal Sheth, Sébastien Douche, Jens Nachtigall, Uwe Daub...
+
+(I need to update this list, there have been new contributors since the 0.6.6 
+release in 2006.  I'll get this soon.)
 

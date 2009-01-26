@@ -10,8 +10,7 @@
 """
 Queries catalog to retrieve events between two dates using AdvancedQuery.
 
-modified for CalendarX 0.6.1(dev) change 'ALL' behavior in xsub, and filtering
-  for restricted subject list.
+modified for CalendarX 0.9.1(alpha) for 'listOfReviewStatesDisplayed' attribute
 Released under the GPL (see LICENSE.txt)
  List of variables used
  xmy = improved MY/PUBLIC event switcher: MY == any review_state + user == CREATOR
@@ -77,6 +76,9 @@ if xpub == 'pend':
 showForGroups = context.getCXAttribute('showPrivateEventsToGroupMembers')
 if showForGroups:  
     qxpublist.append('private')
+extraStates = context.getCXAttribute('listOfReviewStatesDisplayed')
+for state in extraStates:
+    qxpublist.append(state)
 q_xpub = In('review_state', qxpublist)
 if xpub == '11':   #override other requests for Personal Events calendar call
     q_xpub = []

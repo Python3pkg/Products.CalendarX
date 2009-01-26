@@ -53,12 +53,6 @@ TABLE.cal TD {
     padding: 5px;
     BORDER: <dtml-var "getCXAttribute('calTableDataBorderColor')"> <dtml-var "getCXAttribute('calTableDataBorderWidth')"> solid;
 }
-TABLE.cal TD.hour {
-    WIDTH: 10%;
-    FONT-WEIGHT: bold;
-    FONT-SIZE: <dtml-var "getCXAttribute('calTableDataFontHeightHour')">;
-    TEXT-ALIGN: right
-}
 
 
 

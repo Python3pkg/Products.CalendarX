@@ -35,15 +35,10 @@ Contents:
 10.  copyright - Powered by CalendarX link.
 11.  subjectlinks - shows choices for Subject categories, plus other widgets.
 -->
-<!-- HISTORY for 0.6.6 (code base is 0.6.6)
-mod: eventlister and mmeventlister: removed the offensive 
-  tal:repeat="subject event/Subject" command that was in place for 
-  useEventTypeIcons option.  Bug caused multiple showing of the EventTypeIcon
-  if an event had multiple Subjects selected... which is only appropriate for 
-  use with the useSubjectIcons property. Thanks to George for the tip.
-mod: prevnextcurrentlinks: added  tal:omit-tag="" to each of the i18n tags that
-  use tal:content, so that CSS for the combined string is all handled by the 
-  class="center" tag.  Thanks to Jens for the tip.
+<!-- HISTORY for 0.9.1 (code base is 0.9.0)
+bugfix: subjectlinks: i18n label: label_sublinks_backtoresources fixed from
+  erroneous label_sublinks_show_backtoresources.
+bugfix: subcalendars broke subjectlinks macro badly.  mostly fixed now, i think.
 -->
 
 
@@ -94,16 +89,24 @@ mod: prevnextcurrentlinks: added  tal:omit-tag="" to each of the i18n tags that
   <tr> 
     <th>
         <div class="calTabs">
+          <a class="plain" href="#" tal:condition="python:checkPermission('Modify portal content', here)" 
+              tal:attributes="href python:context.absolute_url()+'/edit'" 
+              i18n:translate="label_managetab">manage</a> 
           <a class="plain" href="#" tal:attributes="href Dict/urlMonth2;
-                                                    class multimonthClass;" i18n:translate="label_multimonth">3 months</a> 
+                                                    class multimonthClass;" 
+             i18n:translate="label_multimonth">3 months</a> 
           <a class="plain" href="#" tal:attributes="href Dict/urlMonth;
-                                                    class monthClass;" i18n:translate="label_month">month</a> 
+                                                    class monthClass;" 
+             i18n:translate="label_month">month</a> 
           <a class="plain" href="#" tal:attributes="href Dict/urlWeek;
-                                                    class weekClass;" i18n:translate="label_week_by_day">week by day</a> 
+                                                    class weekClass;" 
+             i18n:translate="label_week_by_day">week by day</a> 
           <a class="plain" href="#" tal:attributes="href Dict/urlWeek2;
-                                                    class week2Class;" i18n:translate="label_week_by_hour">week by hour</a> 
+                                                    class week2Class;" 
+             i18n:translate="label_week_by_hour">week by hour</a> 
           <a class="plain" href="#" tal:attributes="href Dict/urlDay;
-                                                    class dayClass;" i18n:translate="label_day">day</a>
+                                                    class dayClass;" 
+             i18n:translate="label_day">day</a>
           <a class="plain" href="#" tal:condition="python:here.getCXAttribute('useCalendarHelp')"
                                     tal:attributes="href Dict/urlHelp;
                                                     class helpClass;" i18n:translate="label_calendar_help">calendar help</a>
@@ -469,8 +472,7 @@ mod: prevnextcurrentlinks: added  tal:omit-tag="" to each of the i18n tags that
                    tal:define="strDate python:currentDate.Date();
                                urlly string:${request/URL2}/$viewname?currentDate=$strDate&xmy=$xmy&xsub=ALL"
                    tal:attributes="href string:$urlly"
-                   tal:content="string:<== Back to Resources "
-                   i18n:translate="label_sublinks_show_backtoresources">
+                   i18n:translate="label_sublinks_backtoresources">
                    resource schedule link
                 </a>    
                 <span class="nowrap" tal:define="subcalname Dict/subcalname;
@@ -491,36 +493,55 @@ mod: prevnextcurrentlinks: added  tal:omit-tag="" to each of the i18n tags that
                                          value string:ALL; 
                                          checked python:count(xsub,'ALL') or nothing; 
                                          onclick string:fixCategories('ALL');;" />
-                  <span i18n:translate="label_sublinks_viewall">View Allll</span>
+                  <span i18n:translate="label_sublinks_viewall">View All</span>
                 </span>
                 <span class="nowrap" 
+                      tal:condition="python:not here.getCXAttribute('useSubCalendarSubjectMenu') or here.getCXAttribute('isSubCalendar')"
                       tal:define="sublist python:here.getCXAttribute('listOfSubjects');
-                                  firstsub python:sublist[0];
-                                  useportalcatalogvalues python:test(firstsub == '',1,0);
+                                  hassublist python:len(sublist);
+                                  useportalcatalogvalues python:test(hassublist,0,1);
                                   subtitles python:here.getListOfSubjectTitles();
-                                  subcalendarnames python:here.getCXAttribute('listOfSubCalendars');
-                                  usesubtitles python:here.getCXAttribute('useSubjectTitles');"
+                                  hassubtitles python:len(subtitles);
+                                  usesubtitles python:(here.getCXAttribute('useSubjectTitles') and hassubtitles);
+                                  strDate python:currentDate.Date();"
                       tal:repeat="subby python:test(useportalcatalogvalues,container.portal_catalog.uniqueValuesFor('Subject'),sublist)">
                   <input tal:attributes="type string:checkbox; 
                                          name string:xsub; 
                                          value string:$subby; 
                                          checked python:count(xsub,subby) or nothing;
                                          onclick string:fixCategories();;"/>
-                  <span tal:condition="python:here.getCXAttribute('useSubCalendarSubjectMenu') and not here.getCXAttribute('isSubCalendar')">
-                    <a tal:define="n repeat/subby/number;
-                                   strDate python:currentDate.Date();
-                                   subcalendarname python:subcalendarnames[n-1];
-                                   urlly string:${context/absolute_url}/$subcalendarname/$viewname?currentDate=$strDate&xmy=$xmy&xsub=ALL"
-                       tal:attributes="href string:$urlly"
-                       tal:content="python:test(usesubtitles,subtitles[n-1],subby)">
-                       subcalendar link
-                    </a>    
+                  <span tal:define="n repeat/subby/number" 
+                        tal:attributes="class python: test(useSubjCSS,here.getSubjectCSSClasses(subject=subby),'eventPublished')"
+                        tal:omit-tag=""> 
+                      <span tal:condition="python:usesubtitles"
+                            tal:content="python:subtitles[n-1]"
+                            tal:omit-tag="" /> 
+                      <span tal:condition="python:not usesubtitles"
+                            tal:content="python:subby"
+                            tal:omit-tag="" /> 
                   </span>
-                  <span tal:condition="python:not here.getCXAttribute('useSubCalendarSubjectMenu') or here.getCXAttribute('isSubCalendar')">
-                    <span tal:define="n repeat/subby/number" 
-                          tal:attributes="class python: test(useSubjCSS,here.getSubjectCSSClasses(subject=subby),'eventPublished')"
-                          tal:content="python:test(usesubtitles,subtitles[n-1],subby)" />
-                  </span>
+                </span>
+
+                <span class="nowrap" 
+                      tal:condition="python:here.getCXAttribute('useSubCalendarSubjectMenu') and not here.getCXAttribute('isSubCalendar')"
+                      tal:define="subcalendarnames python:here.getCXAttribute('listOfSubCalendars');
+                                  subcalendarids python:here.getCXAttribute('listOfSubCalendarIDs');
+                                  strDate python:currentDate.Date();"
+                      tal:repeat="subby python:subcalendarnames">
+                  <input tal:attributes="type string:checkbox; 
+                                         name string:xsub; 
+                                         value string:$subby; 
+                                         checked python:count(xsub,subby) or nothing;
+                                         onclick string:fixCategories();;"/>
+                  <a tal:define="n repeat/subby/number;
+                                 subcalendarname python:subcalendarnames[n-1];
+                                 subcalendarid python:subcalendarids[n-1];
+                                 urlly string:${context/absolute_url}/$subcalendarid/$viewname?currentDate=$strDate&xmy=$xmy&xsub=ALL"
+                     tal:attributes="href string:$urlly"
+                     tal:content="subcalendarname">
+                     subcalendar link
+                  </a>    
+
                 </span>
                 <span>
                   <input type="submit" i18n:attributes="value" value="label_sublinks_refresh"/>
@@ -530,23 +551,30 @@ mod: prevnextcurrentlinks: added  tal:omit-tag="" to each of the i18n tags that
 
             <span tal:condition="python:not here.getCXAttribute('useMultiSubjects')"
                   tal:define="sublist python:here.getCXAttribute('listOfSubjects');
-                              firstsub python:sublist[0];
-                              useportalcatalogvalues python:test(firstsub == '',1,0);
+                              issublist python:len(sublist);
+                              useportalcatalogvalues python:test(issublist,0,1);
                               subtitles python:here.getListOfSubjectTitles();
+                              hassubtitles python:len(subtitles);
                               usesubtitles python:here.getCXAttribute('useSubjectTitles');
                               image here/calLinkOpaque.gif;
                               subls python:[subl for subl in sublist if count(xsub,subl)];">
+              <span tal:define="global subtitlesstr python:''" />
+<!-- dunno exactly why we need this.
               <span tal:define="global subtitlesstr python:''" 
                     tal:repeat="subby python:test(useportalcatalogvalues,container.portal_catalog.uniqueValuesFor('Subject'),sublist)">
-                  <span tal:define="n repeat/subby/number;
-                                    global subtitlesstr python:test(subby in subls,subtitlesstr+subtitles[n-1]+',',subtitlesstr);
+                  <span tal:condition="python:subby in subls and hassubtitles"
+                        tal:define="n repeat/subby/number;
+                                    global subtitlesstr python:subtitlesstr+subtitles[n-1]+',';
+                                    global subtitlesstr python:test(count(xsub,'ALL'),'ALL,',subtitlesstr)" />
+                  <span tal:condition="python:not subby in subls"
+                        tal:define="n repeat/subby/number;
                                     global subtitlesstr python:test(count(xsub,'ALL'),'ALL,',subtitlesstr)" />
               </span>
+-->
               <span tal:define="subject python:test(usesubtitles,subtitlesstr[:-1],Dict['xsub'])"
                     tal:content="structure string: $image $subject $image">
                 Current Subject
               </span>
-<!--              &nbsp;&nbsp; Categories: &nbsp; ||    -->
               <span i18n:translate="label_sublinks_cat_header" tal:omit-tag="">
                   <span i18n:name="label_sublinks_categories">
                       <span i18n:translate="label_sublinks_categories"> </span>
@@ -558,9 +586,16 @@ mod: prevnextcurrentlinks: added  tal:omit-tag="" to each of the i18n tags that
               </a>
                || 
               <span tal:repeat="subby python:test(useportalcatalogvalues,container.portal_catalog.uniqueValuesFor('Subject'),sublist)">
-                  <a href="#" tal:attributes="href string:${Dict/urlMinusXsub}&xsub=$subby"
+                  <a href="#" tal:condition="python: usesubtitles"
+                              tal:attributes="href string:${Dict/urlMinusXsub}&xsub=$subby"
                               tal:define="n repeat/subby/number"
-                              tal:content="python:test(usesubtitles,subtitles[n-1],subby)">
+                              tal:content="python: subtitles[n-1]">
+                    Subject Name
+                  </a>
+                  <a href="#" tal:condition="python: not usesubtitles"
+                              tal:attributes="href string:${Dict/urlMinusXsub}&xsub=$subby"
+                              tal:define="n repeat/subby/number"
+                              tal:content="subby">
                     Subject Name
                   </a>
                    || 

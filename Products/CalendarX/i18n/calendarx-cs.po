@@ -26,6 +26,10 @@ msgstr ""
 # calTabs - tabs for each view in CalendarX
 #
 
+# label "manage" on tab for a link to Edit CalendarX properties and others
+msgid "label_managetab"
+msgstr "spravovat"
+
 # label "3 months" on tab for the month view
 msgid "label_multimonth"
 msgstr "3 měsíce"

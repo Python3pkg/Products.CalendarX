@@ -10,7 +10,7 @@
 """
 returns a dictionary of useful objects for the calendar views
 
-modified for CalendarX 0.6.3 for code improvements (removed a few naked try/excepts, etc)
+modified for CalendarX 0.9.1 to improve subcalendar usage and fix View All bug
 Released under the GPL (see LICENSE.txt)
 viewname = string name of the view page template
 IMPORTANT:  If you add a new view to your calendar, it must be added in here.  See code.
@@ -37,6 +37,12 @@ try:
         xsub.remove('ALL')
     xsub = ','.join(xsub)
 except AttributeError: xsub = 'ALL'
+# (mod 0.9.1) if xsubALL is present and == 'ALL', then xsub='ALL'
+if hasattr(request,'xsubALL'):  
+    xsubALL = request.xsubALL
+    if xsubALL == 'ALL':
+        xsub = 'ALL'
+
 if hasattr(request,'xpub'):  
     xpub = request.xpub
 else:
@@ -126,7 +132,7 @@ if viewname == 'multimonth':
         weeksInMonthToShowList.append(weeksInMonthToShow)
 
 
-#if a subCalendar, add this.
+#if a subCalendar, add these.
 if context.getCXAttribute('isSubCalendar'):
     subcalname = context.absolute_url().split('/')[-1].upper()
 #    subcalname = context.absolute_url().split('/')[-2]
@@ -135,6 +141,10 @@ if context.getCXAttribute('isSubCalendar'):
 #    subcalname = context.matchinlists(scals,scalnames,subcalname)
 else:
     subcalname = ''
+othername = context.getCXAttribute('nameOfSubCalendar')
+if othername and context.getCXAttribute('isSubCalendar'):
+    subcalname = othername
+
 
 
 #need these URLs for macros and querystrings

@@ -8,16 +8,13 @@
 ##title=key = name of desired attribute
 ##
 """
-Returns an attribute from within the CalendarX default skin property sheets.
+Returns an attribute from CalendarX's schema.
 
-mod by lupa for CalendarX-0.4.0(dev)
+mod by lupa for CalendarX-0.9.0(dev)
 Released under the GPL (see LICENSE.txt)
 key = name of the attribute desired.  REQUIRED.
-val = value of the key attribute in one of the CalendarX property sheets
+modified for Archetypes and /plone-3-compatibility branch at the 
+  PSU CalendarX Patch Sprint in Dec 2007. thanks folks :-)
 """
-skinslist = getattr(context,'skinSheets','no such sheet list found')
-for skin in skinslist:
-    skinsheet = getattr(context,skin,'no such skin property sheet found')
-    val = getattr(skinsheet,key,'nope')
-    if val != 'nope':
-        return val
+
+return getattr(context, 'get%s%s' % (key[0].upper(), key[1:]))()

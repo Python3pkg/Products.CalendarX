@@ -1,62 +1,215 @@
-from Products.CalendarX import calendarxGlobals, PROJECTNAME
+# -*- coding: utf-8 -*-
+#
+# File: Install.py
+#
+# Copyright (c) 2007 by []
+# Generator: ArchGenXML Version 1.6.0-beta-svn
+#            http://plone.org/products/archgenxml
+#
+# GNU General Public License (GPL)
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+# 02110-1301, USA.
+#
+
+__author__ = """unknown <unknown>"""
+__docformat__ = 'plaintext'
+
+
+import os.path
+import sys
 from StringIO import StringIO
-from Products.CMFCore.utils import getToolByName, minimalpath
-from Products.CMFCore.DirectoryView import addDirectoryViews, \
-     registerDirectory, manage_listAvailableDirectories
+from sets import Set
 from App.Common import package_home
-from Products.CMFCore.TypesTool import FactoryTypeInformation
-from os.path import isdir, join
-import os
-
-def install_subskin(self, out, globals=calendarxGlobals, product_skins_dir='skins'):
-    skinstool=getToolByName(self, 'portal_skins')
-
-    fullProductSkinsPath = os.path.join(package_home(globals), product_skins_dir)
-    productSkinsPath = minimalpath(fullProductSkinsPath)
-    registered_directories = manage_listAvailableDirectories()
-    if productSkinsPath not in registered_directories:
-        try:
-            registerDirectory(product_skins_dir, globals)
-        except OSError, ex:
-            if ex.errno == 2: # No such file or directory
-                return
-            raise
-    try:
-        addDirectoryViews(skinstool, product_skins_dir, globals)
-    except BadRequestException, e:
-        pass  # directory view has already been added
-
-    files = os.listdir(fullProductSkinsPath)
-    for productSkinName in files:
-        if (isdir(join(fullProductSkinsPath, productSkinName))
-            and productSkinName != 'CVS'
-            and productSkinName != '.svn'):
-            for skinName in skinstool.getSkinSelections():
-                path = skinstool.getSkinPath(skinName)
-                path = [i.strip() for i in  path.split(',')]
-                try:
-                    if productSkinName not in path:
-                        path.insert(path.index('custom') +1, productSkinName)
-                except ValueError:
-                    if productSkinName not in path:
-                        path.append(productSkinName)
-                path = ','.join(path)
-                skinstool.addSkinSelection(skinName, path)
-
-
 from Products.CMFCore.utils import getToolByName
+from Products.CMFCore.utils import manage_addTool
+from Products.ExternalMethod.ExternalMethod import ExternalMethod
+from zExceptions import NotFound, BadRequest
 
-def install(self):
-    ''' '''
+from Products.Archetypes.Extensions.utils import installTypes
+from Products.Archetypes.Extensions.utils import install_subskin
+from Products.Archetypes.config import TOOL_NAME as ARCHETYPETOOLNAME
+from Products.Archetypes.atapi import listTypes
+from Products.CalendarX.config import PROJECTNAME
+from Products.CalendarX.config import product_globals as GLOBALS
+
+
+def install(self, reinstall=False):
+    """ External Method to install CalendarX """
     out = StringIO()
-    install_subskin(self, out, calendarxGlobals)
+    print >> out, "Installation log of %s:" % PROJECTNAME
 
-    typesTool=getToolByName(self, 'portal_types')
-    if hasattr(typesTool, 'CalendarX'):
-        typesTool._delObject('CalendarX')
-    typesTool.manage_addTypeInformation(FactoryTypeInformation.meta_type,
-                                        id='CalendarX',
-                                        typeinfo_name='CalendarX: CalendarX')
+    # If the config contains a list of dependencies, try to install
+    # them.  Add a list called DEPENDENCIES to your custom
+    # AppConfig.py (imported by config.py) to use it.
+    try:
+        from Products.CalendarX.config import DEPENDENCIES
+    except:
+        DEPENDENCIES = []
+    portal = getToolByName(self,'portal_url').getPortalObject()
+    quickinstaller = portal.portal_quickinstaller
+    for dependency in DEPENDENCIES:
+        print >> out, "Installing dependency %s:" % dependency
+        quickinstaller.installProduct(dependency)
+        import transaction
+        transaction.savepoint(optimistic=True)
 
-    print >> out, "Successfully installed %s." % PROJECTNAME
+    classes = listTypes(PROJECTNAME)
+    installTypes(self, out,
+                 classes,
+                 PROJECTNAME)
+    install_subskin(self, out, GLOBALS)
+
+
+
+    # enable portal_factory for given types
+    factory_tool = getToolByName(self,'portal_factory')
+    factory_types=[
+        "CalendarXFolder",
+        ] + factory_tool.getFactoryTypes().keys()
+    factory_tool.manage_setPortalFactoryTypes(listOfTypeIds=factory_types)
+
+    from Products.CalendarX.config import STYLESHEETS
+    try:
+        portal_css = getToolByName(portal, 'portal_css')
+        for stylesheet in STYLESHEETS:
+            try:
+                portal_css.unregisterResource(stylesheet['id'])
+            except:
+                pass
+            defaults = {'id': '',
+            'media': 'all',
+            'enabled': True}
+            defaults.update(stylesheet)
+            portal_css.registerStylesheet(**defaults)
+    except:
+        # No portal_css registry
+        pass
+    from Products.CalendarX.config import JAVASCRIPTS
+    try:
+        portal_javascripts = getToolByName(portal, 'portal_javascripts')
+        for javascript in JAVASCRIPTS:
+            try:
+                portal_javascripts.unregisterResource(javascript['id'])
+            except:
+                pass
+            defaults = {'id': ''}
+            defaults.update(javascript)
+            portal_javascripts.registerScript(**defaults)
+    except:
+        # No portal_javascripts registry
+        pass
+
+    # try to call a custom install method
+    # in 'AppInstall.py' method 'install'
+    try:
+        install = ExternalMethod('temp', 'temp',
+                                 PROJECTNAME+'.AppInstall', 'install')
+    except NotFound:
+        install = None
+
+    if install:
+        print >>out,'Custom Install:'
+        try:
+            res = install(self, reinstall)
+        except TypeError:
+            res = install(self)
+        if res:
+            print >>out,res
+        else:
+            print >>out,'no output'
+    else:
+        print >>out,'no custom install'
+    setup_tool = getToolByName(portal, 'portal_setup')
+    old_context = setup_tool.getImportContextID()
+    setup_tool.runAllImportStepsFromProfile('profile-CalendarX:default')
+    print >> out, "Ran all GS import steps."
     return out.getvalue()
+
+
+def uninstall(self, reinstall=False):
+    out = StringIO()
+    # try to call a custom uninstall method
+    # in 'AppInstall.py' method 'uninstall'
+    try:
+        uninstall = ExternalMethod('temp', 'temp',
+                                   PROJECTNAME+'.AppInstall', 'uninstall')
+    except:
+        uninstall = None
+    if uninstall:
+        print >>out,'Custom Uninstall:'
+        try:
+            res = uninstall(self, reinstall)
+        except TypeError:
+            res = uninstall(self)
+        if res:
+            print >>out,res
+        else:
+            print >>out,'no output'
+    else:
+        print >>out,'no custom uninstall'
+    return out.getvalue()
+
+
+def beforeUninstall(self, reinstall, product, cascade):
+    """ try to call a custom beforeUninstall method in 'AppInstall.py'
+        method 'beforeUninstall'
+    """
+    out = StringIO()
+    try:
+        beforeuninstall = ExternalMethod(
+            'temp', 'temp',
+            PROJECTNAME+'.AppInstall', 'beforeUninstall')
+    except:
+        beforeuninstall = []
+
+    if beforeuninstall:
+        print >>out, 'Custom beforeUninstall:'
+        res = beforeuninstall(self,
+                              reinstall=reinstall,
+                              product=product,
+                              cascade=cascade)
+        if res:
+            print >>out, res
+        else:
+            print >>out, 'no output'
+    else:
+        print >>out, 'no custom beforeUninstall'
+    return (out,cascade)
+
+
+def afterInstall(self, reinstall, product):
+    """ try to call a custom afterInstall method in 'AppInstall.py' method
+        'afterInstall'
+    """
+    out = StringIO()
+    try:
+        afterinstall = ExternalMethod('temp', 'temp',
+                                   PROJECTNAME+'.AppInstall', 'afterInstall')
+    except:
+        afterinstall = None
+
+    if afterinstall:
+        print >>out, 'Custom afterInstall:'
+        res = afterinstall(self,
+                           product=None,
+                           reinstall=None)
+        if res:
+            print >>out, res
+        else:
+            print >>out, 'no output'
+    else:
+        print >>out, 'no custom afterInstall'
+    return out

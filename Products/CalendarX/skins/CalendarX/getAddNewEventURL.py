@@ -7,6 +7,7 @@
 ##parameters=
 ##title=return URL for Add New Event link
 ##
+##
 """
 Returns a URL for the Add New Event link based on property sheet values
 
@@ -22,7 +23,11 @@ if context.getCXAttribute('useMemberFolder'):
         #falls back to portal root here 
         ANEUrl = container.absolute_url()  
 if context.getCXAttribute('useMemberSubfolder'):
-    ANEUrl = container.portal_membership.getHomeUrl()+context.getCXAttribute('memberSubfolderPath')
+    ANEUrl = container.portal_membership.getHomeUrl()
+    if not ANEUrl:
+        #falls back to portal root here 
+        ANEUrl = container.absolute_url()  
+    ANEUrl = ANEUrl + context.getCXAttribute('memberSubfolderPath')
 if context.getCXAttribute('useANEFolder'):
     ANEUrl = container.absolute_url()+context.getCXAttribute('ANEFolderPath')
 if context.getCXAttribute('useUsersAndFolders'):

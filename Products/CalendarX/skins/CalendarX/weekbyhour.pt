@@ -242,7 +242,7 @@
           <span class="day">
             <span i18n:translate="heading_fmt_day_weekbyhour" tal:omit-tag="">
                 <span i18n:name="dayName"><span i18n:translate="" tal:content="python: day.Day()" tal:omit-tag="">dayName</span></span>
-                <span i18n:name="month3"><span i18n:translate="" tal:content="python: day.aMonth()" tal:omit-tag="">month3</span></span>
+                <span i18n:name="month3"><span i18n:translate="" tal:content="python: day.aMonth()+'_3'" tal:omit-tag="">month3</span></span>
                 <span i18n:name="day" tal:content="python: day.day()" tal:omit-tag="">day</span>
             </span>
           </span>
