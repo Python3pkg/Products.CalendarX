@@ -1,0 +1,48 @@
+#INSTRUCTIONS may be found at the bottom of this sheet
+#PROPS_SUBCALENDAR property sheet controls subcalendar behavior
+#START OF PROPERTIES
+
+title:string=subcalendar properties
+
+useSubCalendarSubjectMenu:boolean=
+
+listOfSubCalendars:lines=5
+beamers
+bicycles
+cameras
+laptops
+rooms
+
+isSubCalendar:boolean=
+
+nameOfSubCalendar:string=
+
+
+#END OF PROPERTIES
+#INSTRUCTIONS FOR CONSTRUCTING ENTRIES
+#    a pound sign is a comment, these are all commented examples
+
+#a_string:string=this is a string
+
+#an_int:int=53
+
+#a_true_boolean:boolean=somestring
+
+#a_false_boolean:boolean=      #an empty string, or "FALSE"
+
+#some_lines:lines=4
+#line1
+#line2
+#line3
+#line4 but you don't use the # sign in front of the lines
+
+#some_text:text=5
+#this is line 1
+#and
+#this
+#is line 4
+#and line 5 but you don't use the # sign in front of the lines
+
+#a_blank_lines:lines=1     (for a blank lines field, use 1, not 0)
+#        (this is a line left blank for lines to read in)
+

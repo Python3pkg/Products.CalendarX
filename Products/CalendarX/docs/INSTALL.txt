@@ -1,0 +1,324 @@
+INSTALL.txt  
+  CalendarX 0.6.6(stable)  January 03 2006
+  (last modified for CalendarX 0.6.5)
+by +lupa+ (lupaz on sf.net, lupa at zurven dot com)
+Released under the GPL (see LICENSE.txt)
+
+I.  Software requirements  (Updated for 0.6.5)
+II.  Instructions for Installation for the first time.  (0.6.5)
+III. i18n: Internationalization instructions.  WE NEED TRANSLATIONS! (0.6.5)
+IV. Documentation available.
+V.  Caveats.  
+
+Old Instructions for upgrading to new versions of CalendarX 
+    (MOVED these instructions to MIGRATE.txt) 
+Plone BUGFIXES: There are two known Plone bugs that should be fixed in 
+  order for everything to work right in CalendarX... one in Plone 2.0.5
+  and another in Plone 2.1.1.  Details are below.
+
+
+I.  Software requirements
+!!! DON'T USE Python 2.4 !!!  Well, ok, it does run on Python 2.4 but there 
+  have been some peculiar problems, especially when a file accidentally had 
+  DOS carriage returns in it.  Talk about picky!  Oh well.
+Software Requirements for CalendarX (0.6 branch): 
+  1. Plone 2.0+ (also tested working in 2.1.1).
+  2. Python 2.2 or 2.3, NOT 2.4.
+Software Suggestions (NOT REQUIRED):
+  1. Zope 2.7.x+ (may work on earlier Zopes, but untested. Python 2.2+ is not
+    standard until Zope 2.7+)
+  2. AdvancedQuery [this is available at Dieter's site:
+       http://www.dieter.handshake.de/pyprojects/zope/ ]
+    AdvancedQuery is one of two query techniques used.  By default, the 
+    traditional ZCatalog query method is used, but using AQ is simply a 
+    switch option in the skins property sheet. 
+
+    
+II.  Instructions for Installation for the first time.
+*NOTE* these instructions were written for Plone 2.0.5.  They still work 
+  roughly the same in Plone 2.1.1, but there may be small differences.  I've 
+  only just begun working in Plone 2.1.1 myself and haven't a lot of 
+  experience here yet.  But it does work, no fear about that.
+
+1.  Make sure you have the required software and additional Zope Products
+    in place. Additionally, there may be bugfixes you need to apply to 
+    your Plone install.  Here are the two I'm aware of, one for Plone 2.0
+    and one for Plone 2.1.
+
+#NOTE: IMPORTANT BUGFIX TO Plone version 2.0.5# 
+There is a bug in Plone 2.0.5 that will bite you if you change your Events 
+  from 24 hour clock to the 12am,pm style.  The bug is documented here on the
+  Plone.org website: 
+
+  http://trac.plone.org/plone/ticket/3641 or
+  http://plone.org/collector/3641 (older link, reroutes to above)
+
+and is also described on the CalendarX website here: 
+
+  http://calendarx.org/issues/talkback/1104958175
+
+You can patch the bug either on the filesystem, or through the ZMI in your 
+  portal_skins/custom folder.
+
+#NOTE: IMPORTANT BUGFIX TO Plone version 2.1.1# 
+There is a bug in ATContentTypes, event.py distributed with Plone 2.1.1 that
+  forces the Event to keep the Event vocabulary, even if you have repurposed
+  an Event in portal_types and given it a new Type name.  The bug is 
+  documented here on the Plone.org website: 
+
+  http://trac.plone.org/plone/ticket/5307
+
+and also is described on the CalendarX website here: 
+  
+  http://calendarx.org/issues/talkback/1135185404
+
+and must be patched on the filesystem.  In brief: 
+
+In YourZopeInstance/Products/ATContentType/content/event.py
+change the definition of 'getEventTypes' from
+
+        metatool = getToolByName(self, "portal_metadata")
+        events = metatool.listAllowedSubjects(content_type = "Event")
+        return events
+
+to
+
+        metatool = getToolByName(self, "portal_metadata")
+        my_type = self.getPortalTypeName()
+        events = metatool.listAllowedSubjects(content_type = my_type)
+        return events
+
+
+"Event" was hardcoded into the event.py, so that even repurposing it 
+  failed to get the Vocabulary info from portal_metadata, and there may
+  be other side effects.  FAILURE to fix this one means that the Resources 
+  Calendar exercise in the Manual will NOT work properly.
+
+    
+2.  Acquire the CalendarX-0.6.x.tar.gz file from sourceforge.  This unzips as 
+    a tar file, which untars as a single folder, called CalendarX-0.6.x.  
+
+3.  RENAME!  In your Zope INSTANCE, place this folder in your 
+    INSTANCE_HOME/Products/ folder and rename the folder to 
+    /Products/CalendarX instead of /Products/CalendarX-0.6.x.  
+
+4.  Restart Zope. 
+    Note: If you are Reinstalling CalendarX, read MIGRATE.txt in the docs.
+    There's really nothing to do if you haven't customized it at all, 
+    but nearly everyone does some customizing, at least for the property
+    sheets.
+    
+5.  Go to your Plone portal, and log in as a manager.  Go to plone_setup 
+    and Add New Products.  Find CalendarX in the list and check it, and 
+    click the Install button.  This is equivalent to navigating in the ZMI 
+    to your Plone instance, and using the portal_quickinstaller to install 
+    CalendarX.
+    
+6.  IN PLONE: Navigate to where you want a CalendarX instance, and add a 
+    CalendarX in the normal fashion.  Name it "calendar" or whatever you want. 
+    It creates an "empty" folder, but when you now navigate to it in Plone, 
+    it will display the Calendar, set to the default view (Month view).
+NOTE: CalendarX is *not* an ordinary Plone folder.  The folder_listing and
+    folder_contents have been disabled.  Do attempt to store Plone content 
+    inside your CalendarX instance.  Certain advanced features of CalendarX
+    require you to use this folderish behavior to store CalendarX scripts and
+    other files within it (such as having multiple calendars on one site, and
+    the use of subcalendars).  See step #9 below for more information.
+    
+7.  That's it.  Navigate in Plone to your calendar folder and the default 
+    (month) view should appear.  You may then publish (or not) your calendar
+    as you wish.
+    
+8. To customize your CalendarX, go to portal_skins/CalendarX, and customize 
+    any of the files there (property sheets, scripts, page templates, etc.).
+    For more information on customizing CalendarX, read the CUSTOM.txt file 
+    in the /docs folder, and each of the separate text documents that 
+    describe the attributes in each property sheet.
+
+9. To create more than one instance of CalendarX is easy... just add another
+   one from the dropdown list.  However, all your calendars will use the same
+   properties from the /portal_skins/custom or /portal_skins/CalendarX folders.
+   
+   To make each calendar different:
+   IN ZMI:  CUT all the customized objects that you need from the 
+     /portal_skins/custom folder, and PASTE them into your CalendarX folder.
+     Now your calendar can be customized locally and independently from any 
+     other calendars.  I like to use this approach anyway, even if I'm only
+     using ONE CalendarX instance in my Plone site, because it cleans up the
+     /custom folder for other uses.  To further customize it, find the object
+     in /portal_skins/CalendarX that you want, hit the Customize button, then 
+     CUT/PASTE it into your CalendarX instance, and then make your changes.
+     Only the objects that you want to customize need be CUT/PASTED to your
+     CalendarX instance.  All the other ones needed will be acquired from the
+     /portal_skins/CalendarX folder in a normal fashion.
+
+
+III. i18n: Internationalization instructions.  WE NEED TRANSLATIONS!
+CalendarX-0.6 branch has i18n capability.  There are now eleven translations 
+  (as of 0.6.4 release).  If you can help, please do!  Here's how: 
+
+1. Go to the i18n folder.  This is where the translations are stored.
+
+2. Choose one of the translated files as a starting point; any of them will do
+  for getting started.  
+
+3. Copy the file and rename it: here are the translations that are standard
+  in Plone that we don't have yet, and would LOVE to have for CalendarX so 
+  that we're compatible in all these.  And we would love to have even more
+  than these... as many as we have languages for folks using CalendarX!  So 
+  copy one of the translations we have, and translate all the terms into your
+  language of choice.
+
+Thirty-some translations and status:
+  calendarx-af.po      - needed 
+  calendarx-ar.po      - needed 
+  calendarx-bg.po      - needed 
+  calendarx-ca.po      - FINISHED 
+  calendarx-cs.po      - FINISHED 
+  calendarx-da.po      - FINISHED 
+  calendarx-de.po      - FINISHED 
+  calendarx-el.po      - needed 
+  calendarx-eo.po      - needed 
+  calendarx-es.po      - FINISHED 
+  calendarx-es-ar.po   - needed 
+  calendarx-es-es.po   - needed 
+  calendarx-et.po      - needed 
+  calendarx-eu.po      - needed 
+  calendarx-fa.po      - needed 
+  calendarx-fi.po      - needed 
+  calendarx-fr.po      - FINISHED 
+  calendarx-he.po      - needed 
+  calendarx-hr.po      - needed 
+  calendarx-hu.po      - needed 
+  calendarx-hy.po      - needed 
+  calendarx-it.po      - FINISHED 
+  calendarx-ja.po      - FINISHED 
+  calendarx-ka.po      - needed 
+  calendarx-ko.po      - needed 
+  calendarx-lt.po      - needed 
+  calendarx-nl.po      - FINISHED 
+  calendarx-nn.po      - needed 
+  calendarx-no.po      - needed 
+  calendarx-pl.po      - needed 
+  calendarx-pt.po      - needed 
+  calendarx-pt-br.po   - FINISHED 
+  calendarx-ro.po      - needed 
+  calendarx-ru.po      - needed 
+  calendarx-sv.po      - needed 
+  calendarx-tr.po      - needed 
+  calendarx-uk.po      - needed 
+  calendarx-zh.po      - needed 
+  calendarx-zh-cn.po   - needed 
+  calendarx-zh-hk.po   - needed 
+  calendarx-zh-tw.po   - needed 
+
+Other language .po files gladly accepted!  This is the list that is present
+  in Plone 2.0.5.  If more will be available for Plone 2.1, let's get those
+  all in here too.
+
+4. Translate all the strings and the few date and time formatting strings that
+  are present.  Also, if your translation should serve as a fallback 
+  translation, include those translations that should fallback here... follow
+  the other calendarx-xx.po files or (really) the examples in CMFPlone/i18n for  
+  a guideline.  
+  
+5. Test your translation:  put it in your /Products/CalendarX/i18n folder, and
+  restart your Zope.  Actually RESTART your Zope, don't just refresh the 
+  CalendarX product -- that's not enough, because the i18n initialization takes
+  place at Zope startup.  After the initial restart, you can test your new 
+  translations or modifications you make by going in your ZMI to the Control
+  Panel, select PlacelessTranslationService, find the po file you're working 
+  on click it and hit the Refresh Catalog button to update the translation 
+  catalog with your new work.  Then email your translated po files to lupa.
+  
+6. Check the results in your browser.  Set your browser's default language for
+  your desired translation and see the difference.  Also, if desired, you can
+  download PloneLanguageTool and install it, and use it to make a language 
+  switcher in your site... that makes it easy to test different translations
+  and see what they look like.  I use PLT on the Crashtest site where you can
+  try out CalendarX-0.6.x translations.
+  
+7. Pay particular attention to getting the formatting strings localized... do 
+  you want to say "April 2005" or "2005 Avril"?  There are more lots of these 
+  formatting strings... make them the way YOU think your users visiting in your
+  language translation would be comfortable seeing these strings.  Then be sure
+  to test these all out.  
+  
+
+
+
+IV.  Documentation available:
+Contents of the CalendarX.0.6.x /docs folder:
+        CREDITS.txt - some people who deserve our thanks.
+        CUSTOM.txt - description of how to customize CalendarX with skins.
+        CX_props_calendar_text.txt - instructions for the calendar properties
+        CX_props_css_text.txt - instructions for the CSS properties
+        CX_props_custom_text.txt - instructions for the Custom property sheet
+        CX_props_popup_text.txt - instructions for the popup properties
+        CX_props_addeventlink_text.txt - how to control the Add New Event link
+        CX_props_subcalendar_text.txt - instructions for subcalendar properties
+        HISTORY.txt - all the changes in this CalendarX branch so far. 
+        INSTALL.txt - this file, describing the installation.
+        LICENSE.txt - brief synopsis licensing for CalendarX (GPL).
+        LICENSE.GPL - a current copy of the General Public License.
+        MIGRATE.txt - a quick how-to on migrating/upgrading CalendarX.
+        OVERVIEW.txt - synopsis of what CalendarX is, and does.
+        README.txt - brief message identifying CalendarX.
+        TODO.txt - some things to finish before this branch becomes (stable).
+        VERSIONS.txt - explains version numbers used for CalendarX releases.
+        CalendarXManual-065-draft06.pdf - a manual with all the 
+          goodies from these documents, and some more besides.  
+
+        
+    
+
+V.  Caveats.
+0.  These caveats have been included here since the first releases of CalendarX
+    and I've never had excuse to need them.  But here they are.
+
+1.  For your health, and mine, I've tried to document nearly everything you 
+    need to accomplish significant things with CalendarX.  Please read all 
+    the documentation before you ask questions to the list or at CalendarX.org.
+    There's lots of it, even to the point of explaining each configurable 
+    attribute in the property sheets.  It is not, however, capable of explaining
+    all the possible things you can do with CalendarX.  Be creative, and share
+    your successes and failures with us at CalendarX.org.
+
+2.  Part of the code for CalendarX at this point in time comes from the 
+    previous products it builds on -- mainly PloneCalendar (see the README).
+    I know most of that code now, and have replaced large parts of it with 
+    my own.  But I can't vouch for everything it does yet.  Do with this
+    product what you will, but use it responsibly.
+
+3.  At this point, I have no idea how CalendarX may interact with or interfere
+    with any other Zope/Plone products or other software.  There are likely to 
+    be name overlaps between objects in this code and those in other apps, and
+    in a world with Spammish Acquisition, many things are possible.  I have 
+    seen no bad such interactions, although one potential user claimed to be 
+    totally unable to import the Fezzik folder (on the 0.2 branch) no matter 
+    how he tried (a month later, this user wrote back and said there are no 
+    problems now with the most recent version).  I think  this must have been 
+    an interaction with this particular Plone setup, but I have no idea.  I've 
+    tried it without any problems on several systems and operating systems, 
+    but I don't know what will happen on your site, because you may have 
+    customizations that do cause problems.  Forewarned should be four armed, 
+    but you never know.  In the meantime, do with this product what you will, 
+    and remember to use it responsibly.
+
+4.  This product has not been thoroughly tested and is likely to have bugs.  In 
+    fact, it doesn't even have a unit test suite for it yet.  You have been 
+    warned.  That said, I and many others use this product routinely in 
+    production Plone sites, and deliver versions of it to clients for use on 
+    their production sites.  Do with this product what you will, but use it 
+    responsibly.  Practice safe Plone.
+    
+5.  No animals were harmed in the creation of this Product, and no testing on
+    live animals was performed.  You should not attempt to use this Product in 
+    the manufacture or assembly of weapons of mass dysfunction, as it is likely
+    to function properly, thus causing failure of intended weapons. Any attempt 
+    to dissassemble or reverse engineer the functionality of this Product is 
+    strictly encouraged, and any successes in such endeavor should be shouted 
+    from the mountaintops.  Or at least let me know.
+    
++lupa+
+

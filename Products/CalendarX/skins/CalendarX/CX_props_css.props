@@ -1,0 +1,155 @@
+#version: 0.6.6.  added new property (calTableDataEventHighlightBackgroundColor)
+#  and hooked it up to calendar.js.dtml for rollover highlighting bugfix.
+#INSTRUCTIONS may be found at the bottom of this sheet
+#PROPS_CSS property sheet provides properties for the CSS sheets
+#START OF PROPERTIES
+
+title:string=css properties
+
+viewTabsBorderColor:string=#8cacbb
+
+viewTabsBackgroundColor:string=#dee7ec
+
+viewFontBaseSize:string=95%
+
+viewFontFamily:string="Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif
+
+viewTabsFontColor:string=#436976
+
+subjectBarBorderColor:string=#436976
+
+subjectBarBackgroundColor:string=#dee7ec
+
+subjectFontFamily:string="Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif
+
+subjectFontSize:string=97%
+
+subjectBarFontColor:string=#436976
+
+headerCenterFontSize:string=135%
+
+headerSideFontSize:string=93%
+
+headerFontFamily:string=Verdana, Helvetica, Arial, sans-serif
+
+headerFontColor:string=#436976
+
+#was 35px
+headerHeight:string=0px
+
+#was 15px
+headerMarginBottom:string=0px
+
+#was 5px
+headerMarginTop:string=0px
+
+#was 5px (added to calheader TD CSS in 0.6.1)
+headerPadding:string=3px
+
+continuingHeaderFontSize:string=90%
+
+continuingHeaderFontFamily:string=Verdana, Helvetica, Arial, sans-serif
+
+continuingOuterBorderColor:string=#B3CFD9
+
+continuingOuterBorderWidth:string=1px
+
+continuingHeaderBorderColor:string=#436976
+
+continuingHeaderBorderWidth:string=1px
+
+continuingHeaderBackgroundColor:string=#8CACBB
+
+continuingRowEventBackgroundColor:string=#DEE7EC
+
+continuingRowNoEventBackgroundColor:string=#F7F9FA
+
+continuingRowHeight:string=5px
+
+calBorderColor:string=#B3CFD9
+
+calBorderWidth:string=1px
+
+calTableRowOddBackgroundColor:string=#F7F9FA
+
+calTableRowEvenBackgroundColor:string=#DEE7EC
+
+calTableHeaderBackgroundColor:string=#8CACBB
+
+calTableHeaderBorderColor:string=#436976
+
+calTableHeaderBorderWidth:string=1px
+
+calTableHeaderFontColor:string=#FFFFFF
+
+calEventFontSize:string=85%
+
+calEventFontFamily:string=Verdana, Helvetica, Arial, sans-serif
+
+calEventPendingTextColor:string=#436976
+
+calEventPrivateTextColor:string=#821513
+
+calEventPublishedTextColor:string=#466A06
+
+calEventVisibleTextColor:string=#436976
+
+calTableDataFontColor:string=#000000
+
+calTableDataBorderColor:string=#DEE7EC
+
+calTableDataBorderWidth:string=1px
+
+calTableDataNoEventBackgroundColor:string=#F7F9FA
+
+calTableDataEventBackgroundColor:string=#DEE7EC
+
+calTableDataOutOfMonthBackgroundColor:string=#FFFFFF
+
+calTableDataOutOfMonthBorderColor:string=#F7F9FA
+
+calTableDataOutOfMonthBorderWidth:string=1px
+
+calTableDataSpanDayFontColor:string=#000000
+
+calTableDataHeightMonthView:string=105px
+
+calTableDataHeightDayView:string=35px
+
+calTableDataHeightWeekbydayView:string=105px
+
+calTableDataHeightWeekbyhourView:string=30px
+
+calTableDataFontSizeHour:string=130%
+
+calTableDataEventHighlightBackgroundColor:string=#FFE7C4
+
+
+
+#END OF PROPERTIES
+#INSTRUCTIONS FOR CONSTRUCTING ENTRIES
+#    a pound sign is a comment, these are all commented examples
+
+#a_string:string=this is a string
+
+#an_int:int=53
+
+#a_true_boolean:boolean=somestring
+
+#a_false_boolean:boolean=      #an empty string, or "FALSE"
+
+#some_lines:lines=4
+#line1
+#line2
+#line3
+#line4 but you don't use the # sign in front of the lines
+
+#some_text:text=5
+#this is line 1
+#and
+#this
+#is line 4
+#and line 5 but you don't use the # sign in front of the lines
+
+#a_blank_lines:lines=1     (for a blank lines field, use 1, not 0)
+#        (this is a line left blank for lines to read in)

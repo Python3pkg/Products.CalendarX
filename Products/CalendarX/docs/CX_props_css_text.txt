@@ -1,0 +1,256 @@
+CX_props_css_text.txt
+  CalendarX 0.6.6(stable)  January 03 2006
+  (last modified for CalendarX 0.6.6)
+by +lupa+ (lupaz on sf.net, lupa at zurven dot com)
+Released under the GPL (see LICENSE.txt)
+
+Instructions for properties in CX_props_css.
+
+Use the Properties tab to adjust the colors and fonts and 
+  such throughout the calendar.css and other CSS files.
+
+Default values (include below) are set to nearly match those of a 
+  stock Plone 2.0.x install.  Or if not match, at least nicely 
+  complement.  It isn't perfect, but overall things work OOTB.  
+  The font sizes are all in percentages instead of fixed sizes, 
+  so that the calendar fonts can resize with the rest of the Plone
+  site if the small Normal LARGE style-sheet widget is used.
+These properties have NOT been adjusted at all for Plone 2.1.  There has been
+  one small change in the calendar.css code, to add an explicit definition for
+  text-decoration to the <a> tag.  If you find any problems related to 
+  Plone 2.1 and this CSS, please email Lupa and we'll chat.
+Also added a new property (calTableDataEventHighlightBackgroundColor) 
+  in 0.6.6 and hooked several others up to be read by 
+  the calendar.js.dtml file for mouseover highlighting bugfix.
+
+=== List of Attributes ===
+
+title   string
+  Don't mess with this title.  Leave it alone.	[actually, I don't care.]
+
+
+**** Section 1: ****
+VIEW: These attributes control aspects of the "view" tabs, 
+  (month, week, day, etc. view template names) right at the top 
+  where you choose which view of the calendar is showing.
+
+viewTabsBorderColor   default = #8cacbb
+  View tabs border color.
+
+viewTabsBackgroundColor   default = #dee7ec
+  View tabs background color.
+
+viewFontBaseSize   default = 95% 
+  View tabs font size.  
+
+viewFontFamily   default = "Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif
+  View tabs font family.
+
+viewTabsFontColor   default = #436976
+  View tabs font color.
+
+
+**** Section 2: ****
+Subject Bar: These attributes control aspects of the subject bar, 
+  where the Private/Public and MetaCalendar Subject choices are
+  found.
+
+subjectBarBorderColor   default = #8cacbb
+  Color of the border around the subject bar, set in 
+  calendar.css.  Also goes around the My:Public choices.
+	
+subjectBarBackgroundColor   default = #dee7ec
+  Color of the background for subject bar and My:Public bar.
+
+subjectFontFamily   default = "Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif
+  Font family for the subject bar and My:Public bar.
+
+subjectFontSize   default = 97%
+  Font size for the subject bar and My:Public bar. 
+
+subjectBarFontColor   default = #436976
+  Font Color for the  for subject bar and My:Public bar.
+
+
+**** Section 3: ****
+Header: These attributes control aspects of the header area, 
+  where the previous and next date arrows, and the calendar date
+  are displayed, at the bottom and top of the calendar.  Code for
+  this is generated in the "prevnextcurrentlinks" macro.
+
+headerCenterFontSize   default = 135%
+  "July 2004" header font size.
+
+headerSideFontSize   default = 93%
+  "previous" and "next" links font size.
+
+headerFontFamily   default = Verdana, Helvetica, Arial, sans-serif
+  Font Family name for "prevnextcurrentlinks" macro (prev, next, date header, footer)
+
+headerFontColor   default = #436976
+  Color of the font for header. 
+
+headerHeight   default = 0px (formerly 35px)
+  Height added to base for "prevnextcurrentlinks" macro (prev, next, date header, footer)
+
+headerMarginBottom   default = 0px (formerly 15px)
+  Bottom margin pixels for "prevnextcurrentlinks" macro (prev, next, date header, footer)
+
+headerMarginTop   default = 0px  (formerly 5px)
+  Top margin pixels for "prevnextcurrentlinks" macro (prev, next, date header, footer)
+
+headerPadding   default = 3px
+  Padding size for "prevnextcurrentlinks" macro (prev, next, date header, footer)
+
+
+**** Section 4: ****
+Continuing: These attributes control aspects of the Continuing 
+  Events section, where events that start before or extend across
+  the entire period of view are shown.
+
+continuingHeaderFontSize   default = 90%
+  Continuing events box, header font size
+
+continuingHeaderFontFamily   default = Verdana, Helvetica, Arial, sans-serif
+  Continuing events box, header font family
+
+continuingOuterBorderColor   default = #B3CFD9
+  Continuing events box, outer border color
+
+continuingOuterBorderWidth    default = 1px
+  Continuing events box, outer border width
+
+continuingHeaderBorderColor   default = #436976
+  Continuing events box, inner border color
+
+continuingHeaderBorderWidth   default = 1px
+  Continuing events box, border width
+
+continuingHeaderBackgroundColor   default = #8CACBB
+  Continuing events box, background color
+
+continuingRowEventBackgroundColor   default = #DEE7EC
+  Continuing events box, color if an event is present
+
+continuingRowNoEventBackgroundColor   default = #F7F9FA
+  Continuing events box, color if no event
+
+continuingRowHeight   default = 5px
+  Continuing events box, row height, added to event bottom
+
+
+**** Section 5: ****
+Cal: These attributes control aspects of the Main Calendar display.
+
+***CONTROL OF THE MAIN CALENDAR
+calBorderColor   default = #B3CFD9
+  Main calendar, border color
+
+calBorderWidth  default = 1px
+  Main calendar, border width
+
+
+***CONTROL OF THE TR TAGS
+calTableRowOddBackgroundColor   default = #F7F9FA
+  Main calendar, for certain views where odd/even vary in color,
+  this controls the ODD row (in TR tags). 
+
+calTableRowEvenBackgroundColor   default = #DEE7EC
+  Main calendar, for certain views where odd/even vary in color,
+  this controls the EVEN row (in TR tags). 
+
+
+***CONTROL OF THE TH TAGS
+calTableHeaderBackgroundColor   default = #8CACBB
+  Main calendar, TH tags background color.
+
+calTableHeaderBorderColor   default = #436976
+  Main calendar,  TH tags border color.
+
+calTableHeaderBorderWidth   default = 1px
+  Main calendar,  TH tags border width.
+
+calTableHeaderFontColor   default = #FFFFFF
+  Main calendar,  TH tags font color.
+
+
+***CONTROL OF THE EVENT FONTS 
+calEventFontSize   default = 85%
+  Main calendar,  TH tags font size.
+
+calEventFontFamily   default = Verdana, Helvetica, Arial, sans-serif
+  Main calendar, font family for the event listings.
+
+calEventPendingTextColor   default = #436976
+  Main calendar, text color for the pending event listings.
+
+calEventPrivateTextColor   default = #821513
+  Main calendar, text color for the private event listings.
+
+calEventPublishedTextColor   default = #466A06
+  Main calendar, text color for the published event listings.
+
+calEventVisibleTextColor   default = #436976
+  Main calendar, text color for the visible event listings.
+
+
+***CONTROL OF THE TD TAGS (daily cells in the month view, etc)
+calTableDataFontColor   default = #000000
+  Main calendar, TD tag text color, but I don't know if it 
+  actually controls anything at this time.
+
+calTableDataBorderColor   default = #DEE7EC
+  Main calendar, TD tag border color.
+
+calTableDataBorderWidth   default = 1px
+  Main calendar, TD tag border width.
+
+calTableDataNoEventBackgroundColor   default = #F7F9FA
+  Main calendar, color when a cell has NO EVENT. 
+
+calTableDataEventBackgroundColor   default = #DEE7EC
+  Main calendar, color when a cell has an EVENT.  Also used in 
+  calendar.js.dtml for rollover highlighting return value.
+
+calTableDataOutOfMonthBackgroundColor   default = #FFFFFF
+  Main calendar, in the MONTH view when the day shown is NOT 
+  a part of the month, this controls the background color.  Also used in 
+  calendar.js.dtml for rollover highlighting return value.
+
+calTableDataOutOfMonthBorderColor   default = #F7F9FA
+  Main calendar, in the MONTH view when the day shown is NOT 
+  a part of the month, this controls the border color. 
+
+calTableDataOutOfMonthBorderWidth   default = 1px
+  Main calendar, in the MONTH view when the day shown is NOT 
+  a part of the month, this controls the border width.
+
+calTableDataSpanDayFontColor   default = #000000
+  Main calendar, in the MONTH view, text color of the date
+  (ie., "3" on June 3 cell).
+
+calTableDataHeightMonthView   default = 105px
+  Main calendar, in the MONTH view, this controls the empty 
+  height of a daily cell.
+
+calTableDataHeightDayView   default = 35px
+  Main calendar, in the DAY view, this controls the empty 
+  height of a daily cell.
+
+calTableDataHeightWeekbydayView   default = 105px
+  Main calendar, in the WEEKBYDAY view, this controls the empty 
+  height of a daily cell.
+
+calTableDataHeightWeekbyhourView   default = 30px
+  Main calendar, in the WEEKBYHOUR view, this controls the empty 
+  height of a daily cell.
+
+calTableDataFontSizeHour   default = 130%
+  Main calendar, in the DAY and WEEKBYHOUR views, this controls
+  the font size of the HOUR displayed (ie., "8am" or "13:00")
+
+calTableDataEventHighlightBackgroundColor   default = #FFE7C4
+  Main calendar, in the view when an event has a mouseover (rollover) event, 
+  this controls the rollover background color.  Read into 
+  calendar.js.dtml for this control.
+

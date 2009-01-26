@@ -1,0 +1,72 @@
+CX_props_subcalendar_text.txt
+  CalendarX 0.6.6(stable)  January 03 2006
+  (last modified for CalendarX 0.6.5)
+by +lupa+ (lupaz on sf.net, lupa at zurven dot com)
+Released under the GPL (see LICENSE.txt)
+
+NOTE: These instructions are greatly supplemented by Part V in this 
+  Manual, a Use Case describing subcalendar use for a Resource Scheduler.  
+  Even if you don't want a resource scheduler, I'd advise you to read it 
+  and/or try it out if you want to use CalendarX subcalendars.
+
+NOTE: Plone 2.1.1 has a bug that affects the use of CalendarX Resource
+  Scheduler.  Read about it (and the patch) in INSTALL.txt.
+
+Instructions for properties in CX_props_subcalendar.
+
+Subcalendars allow for interesting possibilities for special calendars, 
+  especially very busy ones.  A subcalendar is a folder inside (nested) in
+  a Main calendar folder.  I have only tried a single level of nesting (one 
+  main calendar with multiple subcalendars), and these controls focus on 
+  menu behavior reflecting that use case.
+The properties in this sheet control the basic behavior of subcalendars.  
+  The first two properties are used by the main calendar, and the 
+  second two are used by subcalendars.  These properties have been developed 
+  with a Resource Scheduling calendar application in mind, but other 
+  possibilities are certainly possible.  Your suggestions (and code) for 
+  more options are gratefully accepted.
+ALSO:  You will need to carefully consider what properties to use in your
+  CX_props_calendar property sheets for both the MAIN and SUB calendars.
+  Examine the Resource Scheduling calendar example provided in order to see 
+  what some of the possibilities are.  
+FINALLY:  Read the "Manual for CalendarX" document.  We provide a CASE STUDY 
+  of the use of Subcalendars to create a RESOURCE SCHEDULING calendar.  It 
+  will help you more fully grok subcalendars and their usefulness.
+  
+=== List of Attributes ===
+title   string   
+  Leave this title attribute alone.
+
+
+useSubCalendarSubjectMenu    boolean  
+For MAIN Calendars: Check this property to signal that (1) there are 
+  subcalendars below and (2) hence, use the special Subcalendar Menu for 
+  the Subject Links that allows you to both (either) filter on the 
+  subcalendars as well as click on the Subject (subcalendar name) to drill 
+  down and view that subcalendar alone.
+
+	
+listOfSubCalendars    lines
+  For MAIN Calendars: This is a list (one per line) of the names of the 
+  subcalendars.  The menu choices uses this list for display of links to the
+  subcalendars.
+
+
+isSubCalendar    boolean
+  For SUB Calendars:   Check this property if this calendar folder is a 
+  subcalendar.  This controls the style of menu displayed for subcalendars
+  versus non-subcalendars.
+
+
+nameOfSubCalendar    string
+  For SUB Calendars:   The name of this subcalendar.  This is displayed in the 
+  Subject Links area.
+
+
+=== CASE STUDY: A RESOURCE SCHEDULING CALENDAR ===
+[moved to "Manual for CalendarX" document as of v0.6.5)
+
+
+
+  
+  

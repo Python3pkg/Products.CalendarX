@@ -1,0 +1,110 @@
+#version 0.6.5: set earlyDayEventHour to 0 (normal midnight behavior).
+#INSTRUCTIONS may be found at the bottom of this sheet
+#PROPS_CALENDAR property sheet provides control of the calendar behavior
+#START OF PROPERTIES
+
+title:string=calendar properties
+
+dayOfWeekToStart:int=0
+
+defaultView:string=month
+
+useAdvancedQuery:boolean=
+
+dayViewStartHour:string=8
+
+dayViewEndHour:string=20
+
+earlyDayEventHour:string=0
+
+hoursDisplay:string=12ampm
+
+useHalfHours:boolean=
+
+numMonthsForMultiMonthView:string=3
+
+showHeaderTitleAndIcons:boolean=
+
+showHighlightFullEvent:boolean=
+
+showJumpToDateWidget:boolean=1
+
+useNumericMonthInJumpToDateWidget:boolean=
+
+showPublicPrivateLink:boolean=
+
+useMultiSubjects:boolean=1
+
+showSubjectBar:boolean=1
+
+useCalendarHelp:boolean=
+
+includeReviewStateVisible:boolean=
+
+showPendingLink:boolean=
+
+showPrivateEventsToGroupMembers:boolean=
+
+showOnlyEventsInMonth:boolean=
+
+labelEventsOnlyAtStart:boolean=1
+
+listOfSubjects:lines=5
+Appointment
+Convention
+Meeting
+Social Event
+Work
+
+restrictToThisListOfSubjects:boolean=
+
+eventTypes:lines=2
+Event
+AT Event
+
+restrictToThisListOfTypes:boolean=
+
+listOfPaths:lines=1
+/plonesites/plonesite1/staff
+
+restrictToThisListOfPaths:boolean=
+
+restrictToThisFolder:boolean=
+
+listOfSubjectTitles:lines=5
+Appointment
+Convention
+Meeting
+Social Event
+Work
+
+useSubjectTitles:boolean=
+
+
+#END OF PROPERTIES
+#INSTRUCTIONS FOR CONSTRUCTING ENTRIES
+#    a pound sign is a comment, these are all commented examples
+
+#a_string:string=this is a string
+
+#an_int:int=53
+
+#a_true_boolean:boolean=somestring
+
+#a_false_boolean:boolean=      #an empty string, or "FALSE"
+
+#some_lines:lines=4
+#line1
+#line2
+#line3
+#line4 but you don't use the # sign in front of the lines
+
+#some_text:text=5
+#this is line 1
+#and
+#this
+#is line 4
+#and line 5 but you don't use the # sign in front of the lines
+
+#a_blank_lines:lines=1     (for a blank lines field, use 1, not 0)
+#        (this is a line left blank for lines to read in)
