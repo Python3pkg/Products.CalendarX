@@ -57,7 +57,7 @@ from config import *
 
 DirectoryView.registerDirectory('skins', product_globals)
 DirectoryView.registerDirectory('skins/CalendarX',
-                                    product_globals)
+                                product_globals)
 
 ##code-section custom-init-head #fill in your manual code here
 ##/code-section custom-init-head
@@ -78,10 +78,10 @@ def initialize(context):
 
     cmfutils.ContentInit(
         PROJECTNAME + ' Content',
-        content_types      = content_types,
-        permission         = DEFAULT_ADD_CONTENT_PERMISSION,
-        extra_constructors = constructors,
-        fti                = ftis,
+        content_types=content_types,
+        permission=DEFAULT_ADD_CONTENT_PERMISSION,
+        extra_constructors=constructors,
+        fti=ftis,
         ).initialize(context)
 
     profile_registry.registerProfile(
@@ -95,4 +95,4 @@ def initialize(context):
 
     ##code-section custom-init-bottom #fill in your manual code here
     ##/code-section custom-init-bottom
-
+    return
