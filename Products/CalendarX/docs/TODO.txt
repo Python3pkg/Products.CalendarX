@@ -1,6 +1,6 @@
 TODO.txt 
-  CalendarX 0.9.0(dev)  January 06 2008
-  (last modified for CalendarX 0.9.0)
+  CalendarX 0.9.2(stable)  October 22 2009
+  (last modified for CalendarX 0.9.2)
 by +lupa+ (lupaz on sf.net, lupa at zurven dot com)
 Released under the GPL (see LICENSE.txt)
 
@@ -12,7 +12,7 @@ This ToDo list refers to goals for the current branch, and is not a more
   of CalendarX.
 
 
-ToDo list as seen at launch for CalendarX 0.9.0(dev)  
+ToDo list as seen at launch for CalendarX 0.9.2(stable)  
 1. rout the mouseover display bugs.  there are several where the calendar
   cells are not properly highlighted when you mouseover an event, especially
   events that span two days or two months or differences between the regular
@@ -20,8 +20,8 @@ ToDo list as seen at launch for CalendarX 0.9.0(dev)
   multimonth views.  non-critical (exist in 0.6.6 too) but frustrating.
 2. test everything else too
 3. document how to do everything in Plone 3 
-4. go back and check to make sure it works in 2.0? 2.1? 2.5!!!
-
+4. build an egg for Pypi
+5. get recurring events working (via vs.event)
 
 
 

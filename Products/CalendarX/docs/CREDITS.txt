@@ -1,6 +1,6 @@
 CREDITS.txt
-  CalendarX 0.9.0(dev)  January 06 2008
-  (last modified for CalendarX 0.9.0)
+  CalendarX 0.9.2(stable)  October 22 2009
+  (last modified for CalendarX 0.9.2)
 by +lupa+ (lupaz on sf.net, lupa at zurven dot com)
 Released under the GPL (see LICENSE.txt)
 
@@ -91,8 +91,10 @@ Diana Szczesuil, Scott Brown, Kurt Bendl, Bronwyn Carlisle, Souheil Chelfouh,
 Francis Lapique, Joshua Levy, Rik Belew, George Lee, BenO, Tess Bond, 
 Matt Phillips, Jürgen Plasser, John Wright, Nuno Henriques, Peter Anderson, 
 Mike Revoir, Aaron Bookvich, Ed Gordon, Tracy Reed, Dennis Jen, Colin Donald, 
-Vaishal Sheth, Sébastien Douche, Jens Nachtigall, Uwe Daub...
+Vaishal Sheth, Sébastien Douche, Jens Nachtigall, Uwe Daub, Hal Noble, 
+Jim Nelson, Andreas Kuntzagk, Mayank Mathur, Bob Black, Ritchie Harris, 
+Mark Phillips, Ranesh Taneja, Keith Schonrock III, John DeStefano, 
+Adrian Kohan...
 
-(I need to update this list, there have been new contributors since the 0.6.6 
-release in 2006.  I'll get this soon.)
+
 

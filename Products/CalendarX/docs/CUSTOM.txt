@@ -1,19 +1,37 @@
 CUSTOM.txt
-  CalendarX 0.9.0(dev)  January 06 2008
-  (last modified for CalendarX 0.6.5)
+  CalendarX 0.9.2(stable)  October 19 2009
+  (last modified for CalendarX 0.9.2)
 by +lupa+ (lupaz on sf.net, lupa at zurven dot com)
 Released under the GPL (see LICENSE.txt)
 
 
-THIS IS TOTALLY OUT OF DATE for 0.9.0+  There may be useful information
-here, but more likely there is misinformation.  The descriptions of 
-properties (attributes) is largely ok, but everything about property 
-sheets is old, gone, kaput... all the attributes are in Archetypes
-schemata now.  YOU HAVE BEEN WARNED.
+-I.  Very Brief Notes for customizing CalendarX 0.9 branch (added Oct 2009)
+
+Go to the "manage" tab of your calendar instance, when logged in as admin.
+Use the various tabs to set the options for your calendar.  For example, when
+you first start CalendarX it may not show the events because your workflow 
+uses different review states than what may be standard.  Click to the 
+"manage" tab of the CalendarX instance, use the dropdown to select the 
+"Calendar options", scroll down to the "List of review states to be 
+displayed" option, and fill out a list of review states, one per line, to 
+reflect your Plone site.  Some possibilities: 'published', 'pending', 
+'private', 'internal', 'external', 'internally_published', etc. 
+
+Read the other options to manage the look and feel and behavior of your
+CalendarX instance.  Most of the configurations are the same as they were
+in the 0.6 branch documentation, it's just that you can find them here now
+instead of in property sheets (nice change).
+
+
+THE REST IS FAIRLY OUT OF DATE for 0.9.0+  There is useful information
+here, but to some extent there is misinformation.  The descriptions of 
+properties (attributes) is largely fine and accurate, but everything 
+about property sheets is old, gone, kaput... all the attributes are 
+now in Archetypes schemata now.  YOU HAVE BEEN WARNED.
 
 
 
-Notes on customizing CalendarX 0.4 branch. (also 0.6 branch)
+Notes on customizing CalendarX 0.6 branch (and 0.4 branch). 
 
 I.  Quick Overview.
 II.  Tips. 

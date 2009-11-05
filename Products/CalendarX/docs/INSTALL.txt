@@ -1,11 +1,12 @@
 INSTALL.txt  
-  CalendarX 0.9.0(dev)  January 06 2008
-  (last modified for CalendarX 0.9.0)
+  CalendarX 0.9.2(stable)  October 22 2009
+  (last modified for CalendarX 0.9.2)
 by +lupa+ (lupaz on sf.net, lupa at zurven dot com)
 Released under the GPL (see LICENSE.txt)
 
 I.   Software requirements  (Updated for 0.9.0)
-II.  Instructions for Installation for the first time.  (0.9.0)
+II.  Using buildout to install from SVN  (0.9.2)
+IIb.  Older instructions for Installation for the first time.  (0.9.0)
 III. i18n: Internationalization instructions.  WE NEED TRANSLATIONS! (0.9.0)
 IV.  Documentation available. (0.9.0)
 V.   Caveats.   (0.9.0)
@@ -13,10 +14,10 @@ V.   Caveats.   (0.9.0)
 
 
 I.  Software requirements
-I'm not sure of requirements yet... but v0.9.0 is tested on: 
-  1. Plone 3.0.4+ (not yet tested in previous versions).
-  2. Python 2.4.4
-  3. Zope 2.10.5
+I'm not sure of requirements yet... but v0.9.2 is tested on: 
+  1. Plone 3.3.1 (not yet tested in previous versions).
+  2. Python 2.4.6
+  3. Zope 2.10.9
 Software Suggestions (NOT REQUIRED):
   1. AdvancedQuery [this is available at Dieter's site:
        http://www.dieter.handshake.de/pyprojects/zope/ ]
@@ -28,7 +29,54 @@ Software Suggestions (NOT REQUIRED):
 
 
     
-II.  Instructions for Installation for the first time.
+II.  Using buildout to install from SVN  (0.9.2)
+There is no official egg release for CalendarX yet.  There is one based on
+CalendarX-0.9.1 in the collective called "Products.CalendarX" but I am not
+responsible for that fork, and am not maintaining it.
+
+In my buildout (based on the stock buildout.cfg on a stock install of 
+Plone 3.3.1 for Mac OSX), there are two required things to get this branch
+of CalendarX out of SVN at Plone and ready to run on your Plone: 
+
+1. in your buildout.cfg, add the following 5 lines (I put mine near the 
+very bottom, next to last recipe)
+
+# This brings in CalendarX from the collective, puts it into /parts/productcheckouts in your instance folder
+[productcheckouts]
+recipe = infrae.subversion
+urls =
+   https://svn.plone.org/svn/collective/CalendarX/branches/plone-3-compatibility/ CalendarX
+
+
+2. In the section of buildout.cfg for [instance], find the 'products' 
+listing (probably after eggs and zcml), and add the TWO LINES at the 
+bottom of this (the rest is just there to show you where to put them):
+
+[instance]
+recipe = plone.recipe.zope2instance
+...
+products =
+   ${buildout:directory}/products
+   ${productdistros:location}
+# This tells buildout to be sure and precompile and use any products found here (where CalendarX is)
+   ${productcheckouts:location}
+
+
+Explanation: The first part is a recipe for bringing in the CalendarX code
+from svn.plone.org.  It puts it into /parts/productcheckouts in your
+instance.  The second part tells buildout to compile it and make it one
+of your Plone products ready to be installed via quick_installer or with 
+the setup Add Products section in your Plone instance.
+
+run ./bin/buildout -v to refresh your buildout, and bring in CalendarX
+restart Zope
+add your CalendarX as a product in Plone
+add a CalendarX instance in your Plone wherever you want it
+configure with the 'manage' tab (lots of options) and go.
+
+
+
+IIb.  Instructions for Installation for the first time.
 *NOTE* this was written for Plone 3.0.4 and CalendarX-0.9.0(dev). Untested
   for any previous versions.  See installation instructions included with
   earlier versions for installation in earlier Plones. 

@@ -35,10 +35,13 @@ Contents:
 10.  copyright - Powered by CalendarX link.
 11.  subjectlinks - shows choices for Subject categories, plus other widgets.
 -->
-<!-- HISTORY for 0.9.1 (code base is 0.9.0)
+<!-- HISTORY for 0.9.2 (code base is 0.9.1)
+bugfix: PrevNextCurrentLinks has JumpToDateWidget that was hardcoded to range(2000:2010) 
+  ending in two months! Made this run -4 to +6 years from current year.
 bugfix: subjectlinks: i18n label: label_sublinks_backtoresources fixed from
   erroneous label_sublinks_show_backtoresources.
 bugfix: subcalendars broke subjectlinks macro badly.  mostly fixed now, i think.
+bugfix: eventlister, mMeventlister - class: defaulted to "eventPublished" instead of to classstate, fixed.
 -->
 
 
@@ -163,7 +166,7 @@ bugfix: subcalendars broke subjectlinks macro badly.  mostly fixed now, i think.
       <input tal:attributes="type string:hidden; name string:currentDate; value python:url_quote(currentDate.Date());" /> 
       <input tal:attributes="type string:hidden; name string:xmy; value python:xmy;" /> 
       <input tal:attributes="type string:hidden; name string:xsub; value python:xsub;" /> 
-      <select name="jumpyear"> <option tal:repeat="year python:range(2000,2010)" tal:attributes="selected python:year == currentDate.year() or nothing; value python:year;" tal:content="python:year">the year</option> </select>
+      <select name="jumpyear"> <option tal:repeat="year python:range(currentDate.year()-4,currentDate.year()+6)" tal:attributes="selected python:year == currentDate.year() or nothing; value python:year;" tal:content="python:year">the year</option> </select>
       <select name="jumpmonth" tal:condition="python:here.getCXAttribute('useNumericMonthInJumpToDateWidget')"> 
                                 <option tal:repeat="month python:range(1,13)" 
                                         tal:attributes="selected python:month == currentDate.month() or nothing; value python:month" 
@@ -355,7 +358,7 @@ bugfix: subcalendars broke subjectlinks macro badly.  mostly fixed now, i think.
                         <div class="eventlisting">
                           <a href="#" onmouseover="" onmouseout=""  
                                tal:attributes="href eventurl;  
-                                               class python: test(useETCSS,classeventtype,test(useSubjCSS,classsubject,'eventPublished'));  
+                                               class python: test(useETCSS,classeventtype,test(useSubjCSS,classsubject,classstate));
                                                onmouseover string:mouseOverEvent(${jsStart}, ${jsEnd}, '${eventID}');  
                                                onmouseout string:mouseOutEvent(${jsStart}, ${jsEnd}, '${eventID}')">  
                             <metal:block tal:repeat="subject event/Subject"
@@ -380,7 +383,7 @@ bugfix: subcalendars broke subjectlinks macro badly.  mostly fixed now, i think.
                         <div class="eventlisting">
                           <a href="#" onmouseover="" onmouseout=""  
                                tal:attributes="href eventurl;  
-                                               class python: test(useETCSS,classeventtype,test(useSubjCSS,classsubject,'eventPublished'));  
+                                               class python: test(useETCSS,classeventtype,test(useSubjCSS,classsubject,classstate));  
                                                onmouseover string:mMmouseOverEvent(${jsArray}, '${eventID}');  
                                                onmouseout string:mMmouseOutEvent(${jsArray}, '${eventID}')">  
                             <metal:block tal:repeat="subject event/Subject"
@@ -621,5 +624,3 @@ bugfix: subcalendars broke subjectlinks macro badly.  mostly fixed now, i think.
 
 </body>
 </html>
-
-
