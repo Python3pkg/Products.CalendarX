@@ -12,35 +12,35 @@ History:
 v0.9.2(stable)
   Code base: v0.9.1(dev)
   Status:  Stable release. All tested features work, one outstanding bug
-    reported in the tracker (at Plone.org), some minor display bugs 
+    reported in the tracker (at Plone.org), some minor display bugs
     listed in docs/TODO.txt
 why: 0.9 branch is to introduce Plone 3 compatibility.  Period.
-bugfix: CX_props_macros.pt: PrevNextCurrentLinks has JumpToDateWidget that 
-  was hardcoded to range(2000:2010) ending soon! Now this runs -4 to +6 
+bugfix: CX_props_macros.pt: PrevNextCurrentLinks has JumpToDateWidget that
+  was hardcoded to range(2000:2010) ending soon! Now this runs -4 to +6
   years from current year instead.
-bugfix: CX_props_macros.pt: eventlister, mMeventlister macros: The class: 
+bugfix: CX_props_macros.pt: eventlister, mMeventlister macros: The class:
   defaulted to "eventPublished" instead of to classstate, fixed.
 bugfix: CalendarXFolder.py: added 'createObject?type_name=Event' as default
   value for createObjectOnClickCommand.
-improvement: CalendarXFolder.py: added as default the following values: 
-  'published,external,internal,internally_published' for the 
+improvement: CalendarXFolder.py: added as default the following values:
+  'published,external,internal,internally_published' for the
   listOfReviewStatesDisplayed properties.
-docs: updated INSTALL.txt to include buildout instructions for pulling 
+docs: updated INSTALL.txt to include buildout instructions for pulling
   CalendarX from SVN at plone.org.  An egg is in the future.
-  
+
 
 
 v0.9.1(alpha)
   Code base: v0.9.0(dev)
   Status:  Alpha release. All tested features work, one outstanding bug
-    reported in the tracker (at Plone.org), some minor display bugs 
+    reported in the tracker (at Plone.org), some minor display bugs
     listed in docs/TODO.txt
 why: 0.9 branch is to introduce Plone 3 compatibility.  Period.
 bugfix: Events with NO category (subject) are shown when you show a calendar
-  for the first time (where View All is checked, but none of the other 
-  categories are checked), but after that it is nearly impossible to display 
-  events with NO category chosen.  This is an OLD bug.  
-thefix: getDictCommon.py: checks to see if xsubALL is in the request and set  
+  for the first time (where View All is checked, but none of the other
+  categories are checked), but after that it is nearly impossible to display
+  events with NO category chosen.  This is an OLD bug.
+thefix: getDictCommon.py: checks to see if xsubALL is in the request and set
   to 'ALL' -- if it is, it sets xsub to 'ALL' before sending xsub to the query.
   Now by default, the View All checkbox WILL display events with NO category
   chosen.  To see ONLY those events with selected categories, you must hit the
@@ -51,39 +51,39 @@ new: CalendarXFolder.py: Added a new attribute listOfSubCalendarIDs that is
   necessary in order to properly use subcalendars.
 mod: CalendarXFolder.py: Fixed several mislabeled attributes, and changed
   the order of some of them to more closely match the order and descriptions
-  in the 0.6.6 release.  Dropped "Topic" from schemata name for subcalendars, 
+  in the 0.6.6 release.  Dropped "Topic" from schemata name for subcalendars,
   now is "Sub Calendar Properties".
-mod: CX_props_macros.pt: Bugfix.  i18n msgid mislabeled as 
-  label_sublinks_show_backtoresources changed to 
+mod: CX_props_macros.pt: Bugfix.  i18n msgid mislabeled as
+  label_sublinks_show_backtoresources changed to
   label_sublinks_backtoresources (around line 475).
 mod: CX_props_macros.pt: Bugfix.  Wrapped several more tal:conditions around
   spans to eliminate possible "tuple index out of range" errors coming from
   the python:test() usage. Needed to get the subcalendars working properly.
 mod: CX_props_macros.pt: Significant rewriting needed down in the subjectlinks
   macro to get the subcalendars working.  Sheesh.
-mod: getDictCommon.py: checks for nameOfSubCalendar, uses that instead of the 
+mod: getDictCommon.py: checks for nameOfSubCalendar, uses that instead of the
   id if it is available for the header at the top of subcalendars.
-mod: CX_props_macros.pt: Bugfix.  useMultiSubjects attribute works fine, but 
+mod: CX_props_macros.pt: Bugfix.  useMultiSubjects attribute works fine, but
   if you unchecked it, the subjectlinks macro broke.  Fixed.
-new: CalendarXFolder.py: Added a new attribute listOfReviewStatesDisplayed 
-  where you can add other review states (such as 'pending' or 'external') and 
+new: CalendarXFolder.py: Added a new attribute listOfReviewStatesDisplayed
+  where you can add other review states (such as 'pending' or 'external') and
   these will be appended onto the other states to display in your calendar.
-mod: getEventsBeforeZC.py, getEventsBetweenZC.py, getEventsBeforeAQ.py, 
+mod: getEventsBeforeZC.py, getEventsBetweenZC.py, getEventsBeforeAQ.py,
   getEventsBetweenAQ.py: modified the review_state query to accommodate the
   new listOfReviewStatesDisplayed attribute.
-mod: CalendarXFolder.py: TYPO, bugfix: memberSubfolderPath attribute in the 
+mod: CalendarXFolder.py: TYPO, bugfix: memberSubfolderPath attribute in the
   Add Event Link Properties schemata was misspelled as memberSubFolderPath.
-  Also updated the description to point out that if there is no member home 
-  folder, but this attribute is selected, then it will default back to a 
+  Also updated the description to point out that if there is no member home
+  folder, but this attribute is selected, then it will default back to a
   folder of this name but in the PORTAL ROOT, not in a member home folder.
 mod: getAddNewEventURL.py: bugfix.  There is no member home folder now by
-  default, and so the call to getHomeUrl() returned None, but was not 
+  default, and so the call to getHomeUrl() returned None, but was not
   trapped for that.  Now it is, and so if there is no member home folder, but
-  this attribute is selected, then it will default back to a folder of this 
-  name but in the PORTAL ROOT, not in a member home folder.  
-new: added i18n/calendarx-sv.po file, contributed over a year ago by Martin 
+  this attribute is selected, then it will default back to a folder of this
+  name but in the PORTAL ROOT, not in a member home folder.
+new: added i18n/calendarx-sv.po file, contributed over a year ago by Martin
   Eliasson.  I added (probably very wrongly) a guestimate of the translation
-  of "manage" for the new manage tab, which didn't exist when Martin 
+  of "manage" for the new manage tab, which didn't exist when Martin
   originally sent this to me.
 
 
@@ -94,9 +94,9 @@ why: 0.9 branch is to introduce Plone 3 compatibility.  Period.
 mod: CalendarXFolder.py: Much reworking here to convert it to Archetypes.
   Pushed all the CX_props sheets into schemata (the hard work of this was
   done by folks at the PSU CalendarX Patch Sprint in Dec 2007 and checked
-  into the Collective as the /plone3-compatibility branch).  I added the 
-  CSS properties to finish it.  Also fixed default from False to 0 for 
-  earlyDayEventHour attribute, which fixed some day and weekbyhour view 
+  into the Collective as the /plone3-compatibility branch).  I added the
+  CSS properties to finish it.  Also fixed default from False to 0 for
+  earlyDayEventHour attribute, which fixed some day and weekbyhour view
   errors.
 mod: CX_props_macros.pt: Bugfix.  i18n bug shows up in Plone 3 because having
   tal:content and an i18n string together produces a conflict.  Now only has
@@ -104,111 +104,111 @@ mod: CX_props_macros.pt: Bugfix.  i18n bug shows up in Plone 3 because having
 mod: weekbyhour.pt: Bugfix.  Found that the i18n for the bottom day titles
   was incompletely setup, causing them to remain i18n-less.  Line 245 call
   to display month was missing a suffix '_3'.  Fixed.
-mod: weekbyday.css: Bugfix.  Removed CSS rule for TD class="hour" that was 
+mod: weekbyday.css: Bugfix.  Removed CSS rule for TD class="hour" that was
   both wrong and superfluous (no such usage in the weekbyday template).
 new: showDefaultView.py.  This simple script simply redirects to the view
-  specified in the defaultView attribute.  Used when you head toward the 
+  specified in the defaultView attribute.  Used when you head toward the
   calendar without adding /month or /day or whatever view you want at the end.
 mod: CalendarXFolder.py: added aliases to point default view to the new
   showDefaultView.py redirector script.
-mod: CX_props_macros.pt: added a "manage" tab that gives easy access to 
-  editing the calendar properties.  only shows up for logged-in users with 
+mod: CX_props_macros.pt: added a "manage" tab that gives easy access to
+  editing the calendar properties.  only shows up for logged-in users with
   "Manage portal content" permission for the calendar instance.
-mod: po files, added "label_managetab" msgid and (my own, doubtful) 
+mod: po files, added "label_managetab" msgid and (my own, doubtful)
   translations for each language, except for Japanese (I didn't translate
   that one).  Write me with better ones, or better yet, check them into
   svn at the collective and email me that you've done so.
-mod: CX_props_macros.pt: Something has changed, probably in Zope 2.10 or 
+mod: CX_props_macros.pt: Something has changed, probably in Zope 2.10 or
   possibly more recent Python versions.  I used to be able to do this:
     tal:content="python:test(usesubtitles,subtitles[n-1],subby)"
   and it would NOT evaluate subtitles[n-1] unless usesubtitles was True.
-  However, now it throws a tuple index out of range error, even if 
-  usesubtitles is False. So I'm reworking all the tal:content calls 
-  that use this sort of testing.  The main ones are fixed, allowing us 
-  to use the Subject Bar again :-).  
+  However, now it throws a tuple index out of range error, even if
+  usesubtitles is False. So I'm reworking all the tal:content calls
+  that use this sort of testing.  The main ones are fixed, allowing us
+  to use the Subject Bar again :-).
 still to do: fix more darned tuple index errors... I'm not seeing any of them
   show up, but I know that the code doesn't have the checks that it needs yet.
 still to do: fix the damned mouseover highlighting errors
-still to do: Possible problems with restrictToThisListOfSubjects, where View 
-  All categories highlights all subjects, but doesn't then display events with 
+still to do: Possible problems with restrictToThisListOfSubjects, where View
+  All categories highlights all subjects, but doesn't then display events with
   subject other than those checked, or does if it isn't restricted?  Check pls.
 still to do: find the other po files given to me long ago, and put them in.
-  Don't forget the "label_managetab" msgid.  
+  Don't forget the "label_managetab" msgid.
 still to do: explore the new /tests added by the Sprinters.  I haven't learned
-  the use of testing in Plone yet, although I did learn it this summer in 
+  the use of testing in Plone yet, although I did learn it this summer in
   some other systems.  I'll get to that next and maybe soon we'll actually have
   a meaningful test suite for CalendarX!
 
 
-v0.6.6(stable) 
+v0.6.6(stable)
   Code base: v0.6.5(stable)
-  Status:  Stable release, no known bugs, tests as valid XHTML 
+  Status:  Stable release, no known bugs, tests as valid XHTML
     Transitional 1.0 at w3c.  Four small bugfixes from 0.6.5: (1) error using
-    restrictToThisListOfSubjects, (2) repeated event icons shown for some 
+    restrictToThisListOfSubjects, (2) repeated event icons shown for some
     events with multiple Subjects selected, (3) unnecessary span tags within
-    certain CSS spans in some views, and (4) CSS for rollover highlighting not 
-    properly set in calendar.js.  Bugfix #4 also required addition of one new 
-    property in the CX_props_css and some changes to the calendar.js file so 
+    certain CSS spans in some views, and (4) CSS for rollover highlighting not
+    properly set in calendar.js.  Bugfix #4 also required addition of one new
+    property in the CX_props_css and some changes to the calendar.js file so
     that it reads properties for highlighting cells properly (see below).
-mod: getEventsBetweenZC.py: changed q_xsub initialization to an empty 
+mod: getEventsBetweenZC.py: changed q_xsub initialization to an empty
   list ([]) instead of zero (0) to avoid error on restrictToThisListOfSubjects.
-mod: getEventsBeforeZC.py: changed q_xsub initialization to an empty 
+mod: getEventsBeforeZC.py: changed q_xsub initialization to an empty
   list ([]) instead of zero (0) to avoid error on restrictToThisListOfSubjects.
-mod: CX_props_macros.pt: Eventlister and MMEventlister macros: removed the 
-  offensive tal:repeat="subject event/Subject" command that was in place for 
+mod: CX_props_macros.pt: Eventlister and MMEventlister macros: removed the
+  offensive tal:repeat="subject event/Subject" command that was in place for
   useEventTypeIcons option.  Bug caused multiple showing of the EventTypeIcon
-  if an event had multiple Subjects selected... which is only appropriate for 
+  if an event had multiple Subjects selected... which is only appropriate for
   use with the useSubjectIcons property.
 mod: CX_props_macros.pt: prevnextcurrentlinks: added tal:omit-tag="" to join
   all the i18n components into the control of one class="center" span.
-mod: weekbyday.pt: added tal:omit-tag="" to join all the i18n components 
+mod: weekbyday.pt: added tal:omit-tag="" to join all the i18n components
   into the control of one class="day" span.
-mod: weekbyhour.pt: added tal:omit-tag="" to join all the i18n components 
+mod: weekbyhour.pt: added tal:omit-tag="" to join all the i18n components
   into the control of one class="day" span.
 mod: CX_props_css.props: added calTableDataEventHighlightBackgroundColor
-  property to allow changing the highlighted color of the table cell when 
+  property to allow changing the highlighted color of the table cell when
   user mouseovers an event.
 mod: calendar.js has been renamed calendar.065.js
-new: calendar.js.dtml: this is the old calendar.js file, but converted to a 
+new: calendar.js.dtml: this is the old calendar.js file, but converted to a
   Filesystem DTML Method so that it can read in values from the CX_props_css
-  property sheet.  In the skins, it still looks like it is named calendar.js 
-  (and it is), but on the filesystem it is called calendar.js.dtml. This now 
-  reads the following properties in from CX_props_css.props: 
+  property sheet.  In the skins, it still looks like it is named calendar.js
+  (and it is), but on the filesystem it is called calendar.js.dtml. This now
+  reads the following properties in from CX_props_css.props:
     calTableDataEventHighlightBackgroundColor for rollover highlighting color
     calTableDataNoEventBackgroundColor for empty calendar cells
     calTableDataEventBackgroundColor for non-empty calendar cells
     calTableDataOutOfMonthBackgroundColor for out of month calendar cells
 NOTE: by default, the new calendar.js.dtml will be used instead of the older
   calendar.js (renamed to calendar.065.js).  To use the old calendar.js, without
-  reading values from the property sheet, change each of the view templates in 
+  reading values from the property sheet, change each of the view templates in
   the header information from reading "calendar.js" to reading "calendar.065.js"
   and everything should work fine, just as in version 0.6.5 of this software.
 
 
 
 History:
-v0.6.5(stable) 
+v0.6.5(stable)
   Code base: v0.6.4(RC1)
-  Status:  Stable release, no known bugs, tests as valid XHTML 
+  Status:  Stable release, no known bugs, tests as valid XHTML
     Transitional 1.0 at w3c.  Very few changes from RC1.
 BUGNOTE: Plone 2.1.1, ATContentTypes, event.py has a bug that needs
   to be patched in order for the Resource Calendar tutorial to work.
-  Bug report is here: http://trac.plone.org/plone/ticket/5037 , and 
+  Bug report is here: http://trac.plone.org/plone/ticket/5037 , and
   it is described in the updated Manual for CalendarX.  I don't know
   whether the fix will be applied to Plone 2.1.2, due out soon.
 mod: fix several i18n po files that had DOS carriage returns.
 mod: minor French translation changes.
-mod: fix Japanese translation that accidentally included fallback 
+mod: fix Japanese translation that accidentally included fallback
   instructions that covered English.  This had no effect on earlier
-  versions, but on some installs of Plone 2.1.1 this caused the 
+  versions, but on some installs of Plone 2.1.1 this caused the
   Japanese translations to appear on browsers set to English.
 mod: refresh.txt: slight change in text wording.
 mod: removed DOS carriage returns from several scripts.  These caused
-  errors (!) on systems running Python v2.4, but simply were an 
+  errors (!) on systems running Python v2.4, but simply were an
   annoyance on earlier Python systems.  Affected: getDictMonth.py,
   getEventsBetweenZC.py, getMonthName.py, getNameOfPeriods.py.
-mod: calendar.css.dtml: added a definition for a generic <a> tag to 
-  force text-decoration: none;  This was not needed in Plone 2.0.5 
+mod: calendar.css.dtml: added a definition for a generic <a> tag to
+  force text-decoration: none;  This was not needed in Plone 2.0.5
   but is needed with the CSS changes that accompany Plone 2.1.x.
 docs: mods to CX_props_addeventlink_text.txt to provide proper WARNINGS
   about the possibility of misconfiguring these options.
@@ -216,7 +216,7 @@ docs: mods to CX_props_calendar_text.txt to provide more info about
   limitations of the earlyHour (late night) events processing.
 docs: CUSTOM.txt to improve directions and sync with the revised Manual.
 docs: revised Manual (CalendarXManual-065-draft06.pdf).
-mod: CX_props_macros.pt: minor changes in the prevnextcurrentlinks macro so 
+mod: CX_props_macros.pt: minor changes in the prevnextcurrentlinks macro so
   that XHTML validation is preserved when the JumpToDate widget is not used.
 mod: CX_props_macros.pt: prevnextcurrentlinks_nojump macro added and is called
   instead of prevnextcurrentlinks macro at the BOTTOM of each view to avoid the
@@ -229,32 +229,32 @@ mod: all the views, changed the call to prevnextcurrentlink macro at the bottom
 mod: getAddNewEventURL.py: added a check on the getHomeURL() call used. Now if
   there is no Home folder (/Members/username, typically) for the user, and the
   option is selected to use the Home folder, then CalendarX will set the portal
-  root as the expected folder.  Not great, but not an error.  MAKE SURE YOU 
+  root as the expected folder.  Not great, but not an error.  MAKE SURE YOU
   configure your AddNewEventURL settings appropriately for your users and check
   to make sure that it works.
 mod: CX_props_calendar.pt: changed default for the earlyDayEventHour property
   to 0 (midnight) to match earlier calendar behavior.  Just set this to 3 (for
-  3am) or some appropriate value to get it working again for the day and 
+  3am) or some appropriate value to get it working again for the day and
   weekbyhour views.
-  
+
 
 History:
-v0.6.4(RC1) 
+v0.6.4(RC1)
   Code base: v0.6.3(beta)
-  Status (first RC):  Works great!  No known bugs, tests as valid XHTML 
+  Status (first RC):  Works great!  No known bugs, tests as valid XHTML
     Transitional 1.0 at w3c.  Bugfix release with one new property and
     one new script.  Many small changes/bugfixes in the handling of later
-    and earlier events on the Day and Weekbyhour views, making it much 
+    and earlier events on the Day and Weekbyhour views, making it much
     better/smarter than the 0.4 branch behavior.
-mod: day.pt and weekbyhour.pt: Bug reported that displays events starting in 
-  the second half-hour as starting in the first half hour.  This bug was 
-  introduced by supposed fixes in the 0.6.3 release.  Now it tests for both 
-  onTheHour and useHalfHours when calculating the "end" DateTime object in the 
+mod: day.pt and weekbyhour.pt: Bug reported that displays events starting in
+  the second half-hour as starting in the first half hour.  This bug was
+  introduced by supposed fixes in the 0.6.3 release.  Now it tests for both
+  onTheHour and useHalfHours when calculating the "end" DateTime object in the
   main calendar view area (for each cell).  And it works.
-mod: getDictMonth.py: bugfix in startForContinuing events that caused some 
-  events that crossed month boundaries to either not show properly or 
+mod: getDictMonth.py: bugfix in startForContinuing events that caused some
+  events that crossed month boundaries to either not show properly or
   misbehave in other ways.  startForContinuing was improperly defined.
-mod: month.pt: Bugfix in eventsBefore with showHighlightFullEvent for events 
+mod: month.pt: Bugfix in eventsBefore with showHighlightFullEvent for events
   not in the month [changes in the main calendar area].  This couples with the
   getDictMonth changes.  Old bug, never reported, probably exists in 0.4 branch
   as well, but affects just a few special events.
@@ -263,18 +263,18 @@ mod: getEventDictWeekbyhour.py:  changed the calculation of jsStart so that the
   hour events (early morning) showed up on the previous day.  that makes sense
   sometimes, but is more often confusing.
 problem: early morning events (like a 6:30 Meeting) don't show up on the proper
-  day unless the startHour is set before that time.  Should be a property to 
-  set so that you can control when late events for the previous day stop and 
+  day unless the startHour is set before that time.  Should be a property to
+  set so that you can control when late events for the previous day stop and
   early events for the next day begin (earlyDayEventHour: default = 3am).
 new: earlyDayEventHour property to fix problem
-mod: CX_props_calendar.props: earlyDayEventHour added 
-mod: getDictDay.py: add startForEarly as a DateTime set to the startdate 
+mod: CX_props_calendar.props: earlyDayEventHour added
+mod: getDictDay.py: add startForEarly as a DateTime set to the startdate
   adjusted to earlyDayEventHour.  changed eveEnd to equal startForEarly of the
   next day minus one minute.
 mod: day.pt: change continuing events list comprehensions to use new
-  startForEarly, and added bigQE query to make it work.  no change needed for 
-  later events since we modded eveEnd in getDictDay.py.  
-mod: getContLaterEventsWBH.py: changes to continuing events and later events 
+  startForEarly, and added bigQE query to make it work.  no change needed for
+  later events since we modded eveEnd in getDictDay.py.
+mod: getContLaterEventsWBH.py: changes to continuing events and later events
   to use the startForEarly property so that early events are included in the
   continuing events block, and are sorted by new listSortByStart.py
 problem: changes to continuing events behavior yields some unsorted lists of
@@ -282,39 +282,39 @@ problem: changes to continuing events behavior yields some unsorted lists of
 new: listSortByStart.py: sorts a list of events.  used in day and weekbyhour
   views when gathering the continuing events add the new early events.
 mod: getEventDictDay.py: changed the behavior of jsStart so that Early events
-  highlight the continuingEvents block. 
-mod: day.pt: changed id of continuingEvents block to dayviewstarthour to 
+  highlight the continuingEvents block.
+mod: day.pt: changed id of continuingEvents block to dayviewstarthour to
   multiply it by periodFactor. made no difference before, but now that we are
   highlighting this block, it needs a proper id.
-mod: weekbyhour.pt: set id of TH tags for each day so that it can be 
-  highlighted by the early events someday (previously not highlighted for any 
+mod: weekbyhour.pt: set id of TH tags for each day so that it can be
+  highlighted by the early events someday (previously not highlighted for any
   events, and not implementing this right now).  also changed id of
-  continuingEvents block to weekviewstarthour to multiply it by periodFactor. 
-  made no difference before, but now that we are highlighting this block, it 
+  continuingEvents block to weekviewstarthour to multiply it by periodFactor.
+  made no difference before, but now that we are highlighting this block, it
   needs a proper id.
 mod: getEventDictWeekbyhour.py: changed to use earlyHour so that early events
   highlight the continuing events block.
 mod: getEventDictMMonth.py: Fixed a bug where events that crossed over a month
   into the month AFTER the last month still were trying to highlight into that
   month, yielding a list out of range error.  now tests for that situation to
-  exclude those events from the crossover highlighting calculations in the 
+  exclude those events from the crossover highlighting calculations in the
   jsCrossoverFlag flag.
-mod: multimonth.pt: add nummonths to the parameters sent to 
-  getEventDictMMonth.py for use in the bugfix above. 
-mod: weekbyhour.pt: change definitions for stForQuery, enForQuery so that the 
-  bigQ query will recover ALL the events of the week from midnight to midnight, 
+mod: multimonth.pt: add nummonths to the parameters sent to
+  getEventDictMMonth.py for use in the bugfix above.
+mod: weekbyhour.pt: change definitions for stForQuery, enForQuery so that the
+  bigQ query will recover ALL the events of the week from midnight to midnight,
   not just from startHour to endHour.  changes defined in getDictWeekbyhour.
 mod: getDictWeekbyhour.py: added stForQuery and enForQuery so that the query
   goes from midnight at the beginning of the week until earlyHour in the wee
   hours of the first day of the following week, to catch those pesky trailing
   late late events.
-  
-  
+
+
 
 History:
-v0.6.3(beta) 
+v0.6.3(beta)
   Code base: v0.6.2(alpha)
-  Status (first beta):  Works great!  No known bugs, tests as valid XHTML 
+  Status (first beta):  Works great!  No known bugs, tests as valid XHTML
     Transitional 1.0 at w3c.  Several bugfixes (all known ones, and a couple
     minor, unreported ones discovered en route). Includes three new translations
     and a UI enhancement: Javascript controller added to the Category chooser
@@ -322,99 +322,99 @@ v0.6.3(beta)
     work well, this is a very usable release.
 new: po files for Czech, Danish and Dutch translations.
 mod: ALL po files modified by +lupa+ to enable proper usage of the month of May
-  in languages where "May" has more than three characters.  In the 0.6.2 
-  release, any attempt to use a 3-char abbreviated month name came out as the 
-  full month name because of this.  
-mod: CX_props_macros.pt: prevnextcurrentlinks: modded the getMonthName function 
-  call in the JumpToDate widget to properly handle use of 3-char month 
+  in languages where "May" has more than three characters.  In the 0.6.2
+  release, any attempt to use a 3-char abbreviated month name came out as the
+  full month name because of this.
+mod: CX_props_macros.pt: prevnextcurrentlinks: modded the getMonthName function
+  call in the JumpToDate widget to properly handle use of 3-char month
   abbreviations (see po file mods above).
 mod: weekbyhour.pt: mod to the Day listings across the top of the calendar view
   to properly handle 3-char month names (see po file mods above).
 mod: CX_props_macros.pt: subjectlinks: added code to use an onclick JS method
   (fixCategories) to add better UI experience when clicking on View All.  Now
-  the behavior is that View All toggles all the other category choices on and 
+  the behavior is that View All toggles all the other category choices on and
   off, and if View All is selected and one of the other Categories is clicked,
   the View All choice becomes unchecked immediately.  This has been a requested
   feature since the Multiple Selection widget was first introduced, but I never
   knew enough Javascript to want to learn to do this (and no one else offered
   code for it).  Now I do know enough, and here we are.
-mod: calendar.js: added a new "fixCategories" function that is used by the 
+mod: calendar.js: added a new "fixCategories" function that is used by the
   subjectlinks macro to control the UI enhancement mentioned above.
 mod: all view templates (day, weekbyhour, weekbyday, month, multimonth, help):
   added a line:   context python:here;   which fixes a possible Name Error when
   installing CalendarX on older Zope (like 2.6.x ish).
 mod: day.pt: squashed a bug on line 161 that caused problems with events not
   showing up for the half-hour views.
-mod: day.pt: added tal:omit-tag="" to a span around the eventlisting to fix 
+mod: day.pt: added tal:omit-tag="" to a span around the eventlisting to fix
   a minor XHTML validation problem.
 mod: CX_props_calendar.pt: useHalfHours default value changed to blank (false)
-  so that half-hour periods are NOT the default style for Day and WeekByHour 
-  views.  Using half-hours is not necessary for most installations and it 
+  so that half-hour periods are NOT the default style for Day and WeekByHour
+  views.  Using half-hours is not necessary for most installations and it
   slows view rendering down somewhat.
-mod: getEventDictWeekbyhour.py: fixed the value of periodsInView by 
-  subtracting 1.  Also changed a misspelling of the script name in the 
+mod: getEventDictWeekbyhour.py: fixed the value of periodsInView by
+  subtracting 1.  Also changed a misspelling of the script name in the
   parameter block at the top of the script.
 mod: getEventDictDay.py: fixed the value of periodsInView by subtracting 1.
 mod: getEventDictMMonth.py: several lines of code added to fix the rollover
   highlighting bug where events that span a month boundary failed to highlight
-  properly into the trailing month.  Now it works fine, although the 
+  properly into the trailing month.  Now it works fine, although the
   highlighting extends only into a second month... any events that span portions
   of three months will only show highlighting in the first two months.
 mod: getNumOfDays.py: changes to fix code comments.  No code changes.
-mod: getDictCommon.py: removed some cruft and a couple of fairly naked 
+mod: getDictCommon.py: removed some cruft and a couple of fairly naked
   Try/Except clauses, and some sloppy coding, thanks to an eagle-eyed user
   (yes you, Johannes).  There is still cruft around, but at least it's a start.
-mod:  day.pt, weekbyday.pt, weekbyhour.py, getEventDictWeekbyday.py, 
-  getEventDictWeekbyhour.py,  getEventDictDay.py:  a bugfix for day and week 
-  views: we now pass the currentDate as a parameter from the view templates 
-  into the getEventDictXXX scripts.  This fixes the "birthday bug" reported by 
-  Johannes Ammon, where the Jump To Date widget value was not being read by 
-  the script.  It shouldn't be; we already have determined that value, and now 
+mod:  day.pt, weekbyday.pt, weekbyhour.py, getEventDictWeekbyday.py,
+  getEventDictWeekbyhour.py,  getEventDictDay.py:  a bugfix for day and week
+  views: we now pass the currentDate as a parameter from the view templates
+  into the getEventDictXXX scripts.  This fixes the "birthday bug" reported by
+  Johannes Ammon, where the Jump To Date widget value was not being read by
+  the script.  It shouldn't be; we already have determined that value, and now
   we pass it in.  The bug only seemed to affect the day view, but it could well
   have impacted the week views as well, so it is now moot.  Month and multimonth
   views are unaffected.
-   
+
 
 History:
-v0.6.2(alpha) 
+v0.6.2(alpha)
   Code base: v0.6.1(alpha)
-  Status (third alpha):  Works well, with one known minor display bug in the 
-    multimonth view documented below. Several bugfixes, plus i18n extended to 
-    include seven language po files with the addition of two (es and ca, 
-    Spanish and Catalan), and a re-translation of parts of the German po file. 
-    Please create more po files and submit your translations to us!  I hope to 
-    make another release with this bug fixed soon so that I can make a beta 
+  Status (third alpha):  Works well, with one known minor display bug in the
+    multimonth view documented below. Several bugfixes, plus i18n extended to
+    include seven language po files with the addition of two (es and ca,
+    Spanish and Catalan), and a re-translation of parts of the German po file.
+    Please create more po files and submit your translations to us!  I hope to
+    make another release with this bug fixed soon so that I can make a beta
     release of the 0.6 branch as soon as possible.  Meanwhile, this is a really
     usable i18n version of CalendarX.
   new: po files for calendarx-es.po and calendarx-ca.po.
   mod: calendarx-de.po re-translated by Johann.
-  bugfix: getDictCommon.py  bug: day.pt isn't showing next day properly.  
+  bugfix: getDictCommon.py  bug: day.pt isn't showing next day properly.
     changed lines 101-103 appropriately (copy-paste helmet malfunction, sorry).
     And cleaned out unnecessary comments here and there.
-  bugfix: getDictDay.py  bug: continuing events show ones that start at the 
+  bugfix: getDictDay.py  bug: continuing events show ones that start at the
     beginning of the day (ex. 8am events show as both continuing and normal
     events with default config).  this bug also present in 0.4.15 (just noticed
     this).  fix is use startDate, instead of ADDING one minute.  also some
-    cleaning of remarks, etc. 
+    cleaning of remarks, etc.
   mod: getNumOfPeriods.py  cleaned up some variable names for clarity.
   bugfix: getEventDictDay.py  bug: continuing events didn't calculate rollover
     parameters jsStart and jsEnd correctly.  now they seem to.  also a change
     for later events (multiply by periodsFactor).  finally, fixed the regular
     events jsStart and jsEnd too.
   bugfix: day.pt  added bigQL query for later events, mods to make it work. and
-    fixed the handling of halfhours in the start, end datetimes so that it 
+    fixed the handling of halfhours in the start, end datetimes so that it
     actually DOES query on the half hours and not just on the hours. Sheesh!
     My lysdexia gets in the way timesomes.  Ok, now the day view WORKS.
-  bugfix: day.pt  later events in the day view SHOULD be those that start in 
+  bugfix: day.pt  later events in the day view SHOULD be those that start in
     the late evening (after 8pm in the default configuration) and wee hours of
-    the next day... as long as they end before the start of the next day, so 
+    the next day... as long as they end before the start of the next day, so
     that they would NOT be considered continuing events of the next day.
-    But currently that's the not quite the behavior... so I'm changing this in 
-    query for laterevents to only call events that (1) start after end of 
-    this viewable day and (2) start before the next viewable day and (3) end 
-    before the beginning of the next viewable day.  NOTE: this means that 
-    wee hour events (like a party on July 8 from 1am to 3am) will show up 
-    on the Later Events section of the day before (July 7) and not on July 8, 
+    But currently that's the not quite the behavior... so I'm changing this in
+    query for laterevents to only call events that (1) start after end of
+    this viewable day and (2) start before the next viewable day and (3) end
+    before the beginning of the next viewable day.  NOTE: this means that
+    wee hour events (like a party on July 8 from 1am to 3am) will show up
+    on the Later Events section of the day before (July 7) and not on July 8,
     unless July 8 has very early start time set in the CX_props_calendar
     property sheet.
   bugfix: weekbyhour.pt  Needed a couple more changes to handle halfhours
@@ -423,64 +423,64 @@ v0.6.2(alpha)
     and later events to calculate jsStart, jsEnd properly to fix rollover
     highlighting.
   BUG: multimonth view: Events that extend across month boundaries ONLY show
-    the rollover highlighting in the month where they start, and NOT in the 
-    following months as they should.  This bug will be fixed in a future 
+    the rollover highlighting in the month where they start, and NOT in the
+    following months as they should.  This bug will be fixed in a future
     release of CalendarX (0.6.3 hopefully).
   bugfix: multimonth.pt.  Minor changes to help fix rollover highlighting.  Now
-    calls a different eventlisting macro (mMeventlisting).  
-  bugfix: calendar.js   Created several new functions to handle passing of 
+    calls a different eventlisting macro (mMeventlisting).
+  bugfix: calendar.js   Created several new functions to handle passing of
     arrays of td ids to highlight and unhighlight.  The old versions just used
-    jsStart and jsEnd to control highlighting, which limits you to one 
-    contiguous block of integers.  Now you can send an array of as many start, 
+    jsStart and jsEnd to control highlighting, which limits you to one
+    contiguous block of integers.  Now you can send an array of as many start,
     end pairs as you like.  The multimonth view uses this now, but I only am
-    sending it one pair (so it could be used in the other views too).  But 
-    in the upcoming fix, I will use it to handle multiple highlighting blocks 
+    sending it one pair (so it could be used in the other views too).  But
+    in the upcoming fix, I will use it to handle multiple highlighting blocks
     that are not necessarily contiguous (the BUG described above).
   bugfix: CX_props_macros.pt: new macro called mMeventlisting which replaces
     the eventlisting macro for the multimonth view only.  This version is only
-    different in that it uses a specially modified mMmouseOverEvent and 
-    mMmouseOutEvent call in calendar.js, and sends jsArray instead of jsStart 
+    different in that it uses a specially modified mMmouseOverEvent and
+    mMmouseOutEvent call in calendar.js, and sends jsArray instead of jsStart
     and jsEnd.
   new: getEventDictMMonth.py  0.6.1 used the month version of this script, but
     there was definitely a need for an independent version, hence this addition.
-    In particular, it sends jsArray to the calendar.js library, rather than 
+    In particular, it sends jsArray to the calendar.js library, rather than
     jsStart and jsEnd that the other views use.
-  bugfix: getDictMultimonth.py  Just a little bit of code cleanup, nothing 
+  bugfix: getDictMultimonth.py  Just a little bit of code cleanup, nothing
     major.
   puzzle: I didn't fix the multimonth rollover completely because it would have
-    been an ugly hack to do so.  Instead I am releasing 0.6.2 with the bug 
-    still in place, but restricted to only events that overlap two or more 
+    been an ugly hack to do so.  Instead I am releasing 0.6.2 with the bug
+    still in place, but restricted to only events that overlap two or more
     months, and it is only a minor display bug... the multimonth view is usable
-    otherwise.  I'm pursuing a new approach toward fixing this bug that may 
+    otherwise.  I'm pursuing a new approach toward fixing this bug that may
     help ALL the views become faster and have better separation of logic and
-    content. 
-    
-  
+    content.
+
+
 
 History:
-v0.6.1(alpha) 
+v0.6.1(alpha)
   Code base: v0.6.0(alpha)
   Status (second alpha):  i18n extended to include five language po files with
     more entries and more comments (de,en,fr,it,jp).  Please create more po
-    files and submit your translations to us!  Changed behavior of xsub from 
+    files and submit your translations to us!  Changed behavior of xsub from
     that of the 0.4 branch.  New multimonth view to allow multiple months (up
-    to 12) to be shown on one page.  Modded the weekbyhour and day views to 
+    to 12) to be shown on one page.  Modded the weekbyhour and day views to
     allow use of half-hour increments as well as one-hour increments.  Modded
     the arrangement of calheader so that JumpToDate widget is out of the way,
     and changed some CSS settings to help with that.  Couple of small bugfixes
     and maybe a few other things here and there that I changed and didn't
     document...
-  new: multimonth.pt: minor tweaks to a month view to now show several months 
+  new: multimonth.pt: minor tweaks to a month view to now show several months
     at one time, in sequence.  Next/Prev months still move it forward one month
-    at a time.  Default is 3 months... if you want to change its name in the 
-    tabs from "3 months" to something else, then change the language files, 
+    at a time.  Default is 3 months... if you want to change its name in the
+    tabs from "3 months" to something else, then change the language files,
     where it is called "label_multimonth".  Then reindex the language files
-    for CalendarX or else you won't see your label change (or just restart 
+    for CalendarX or else you won't see your label change (or just restart
     Zope to reindex ALL your po translation files).
   new: multimonth.css.html, getDictMultimonth.py, getEventDictMultimonth.py:
     all in support of multimonth.pt view.  Validates as proper XHTML format
     too (glad I checked, it didn't at first).
-  new: getNumPeriods.py, getNumWeeksInMonthToShow.py to support halfhours 
+  new: getNumPeriods.py, getNumWeeksInMonthToShow.py to support halfhours
     and multimonths.
   new: getContLaterEventsWBH.py: this is a script that is backported from 0.5
     branch to help optimize the WeekByHour view queries.
@@ -488,49 +488,49 @@ v0.6.1(alpha)
   new: calendarx-jp.po:  mostly complete. needs a few mod translations.
   mod: calendarx-fr.po:  mostly complete. needs a few mod translations.
   mod: calendarx-de.po:  mostly complete. needs a few mod translations.
-  mod: calendarx-en.po:  complete.  slightly redone in several places, so 
+  mod: calendarx-en.po:  complete.  slightly redone in several places, so
     all other translations should be re-examined for completeness and tested.
   mod: CX_props_macros.pt for translation changes, and some other changes,
     including new macros.  See change notes within that file.
   mod: getEventsBetweenZC.py, getEventsBeforeZC.py, getEventsBetweenAQ.py,
-    getEventsBeforeAQ.py:  Changed the behavior of xsub so that choosing a 
+    getEventsBeforeAQ.py:  Changed the behavior of xsub so that choosing a
     subject in addition to the 'View All' will override the 'View All' choice
     and show only the selected subjects.  This makes more sense to the user,
     and should be a bit less frustrating.  Would be nice to have some JScript
     logic that shows this (uncheck 'View All' when another selection is made).
-  mod: day.pt, weekbyhour.pt, getDictCommon.py, getDictDay.py, 
+  mod: day.pt, weekbyhour.pt, getDictCommon.py, getDictDay.py,
     getEventDictDay.py, getEventDictWeekbyhour.py, getDictWeekbyhour.py,
     to support halfhours.
-  mod: calendar.css.html, CX_props_calendar.props, CX_props_css.props, 
+  mod: calendar.css.html, CX_props_calendar.props, CX_props_css.props,
     to support changes in the header, looks better now, some comments added,
     and one new property: headerPadding.
-  mod: CX_props_calendar.props: new properties added: useHalfHours, 
+  mod: CX_props_calendar.props: new properties added: useHalfHours,
     numMonthsForMultiMonthView, and showHeaderTitleAndIcons.
   mod: speedups in all views and corresponding getDictViewname.py scripts.  For
     each one, I now call the getEventsBefore query only once (because it is
-    expensive to call in every single cell of the calendar) and instead use a 
+    expensive to call in every single cell of the calendar) and instead use a
     much faster list comprehension to parse for events.  This is a backported
-    strategy from the 0.5 branch to speed this up a good bit.  
-  bugfix: getEventIcons.py: mod to trap AttributeError for bad icon name, and 
-    cause it to return icon = '', thereby showing NO icon instead of error msg  
-  bugfix: calendar.css.html:  mods to the calinfo and inforow divs so that 
-    switching to LARGE TEXT mode doesn't cause text blocks to override each 
-    other... all it really took was changing the box width to "20em" instead 
+    strategy from the 0.5 branch to speed this up a good bit.
+  bugfix: getEventIcons.py: mod to trap AttributeError for bad icon name, and
+    cause it to return icon = '', thereby showing NO icon instead of error msg
+  bugfix: calendar.css.html:  mods to the calinfo and inforow divs so that
+    switching to LARGE TEXT mode doesn't cause text blocks to override each
+    other... all it really took was changing the box width to "20em" instead
     of "250px" because em is relative to the font-size, instead of being fixed.
-  bugfix: CX_props_macros.pt: popuptextbox macro: changed the Subject so that 
+  bugfix: CX_props_macros.pt: popuptextbox macro: changed the Subject so that
     it puts a space between each subject.  So now it shows "This, That, Other"
-    instead of "This,That,Other"... this way the subject line will use the 
+    instead of "This,That,Other"... this way the subject line will use the
     whitespace to wrap appropriately within the popup box.
 
 
 History:
-v0.6.0(alpha) 
+v0.6.0(alpha)
   Code base: v0.4.15b(stable)
   Status (first alpha):  i18n folder added and basic i18n features added to
-    macros as a first step toward full i18n of the stable 0.4 branch.  
+    macros as a first step toward full i18n of the stable 0.4 branch.
     Addition of these changes to the 0.5 branch will follow.
-  new: i18n folder  
-  new: calendarx.pot: Listing of all the msgids.  The msgstrs mostly blank to 
+  new: i18n folder
+  new: calendarx.pot: Listing of all the msgids.  The msgstrs mostly blank to
     allow default values from the page templates to come through.  Beginning
     to use format strings for the date-time strings because it's a good idea,
     formatting of date-time strings is not uniform across boundaries.  Also
@@ -541,25 +541,25 @@ v0.6.0(alpha)
     the calendarx.pot defaults)
   mod: CX_props_macros.pt: many small changes to accomodate i18n, in nearly
     every macro.
-  mod: weekbyhour.pt: some i18n changes for day headings and "Continuing" and 
+  mod: weekbyhour.pt: some i18n changes for day headings and "Continuing" and
     "Later events" labels. Probably not complete.
-  mod: weekbyday.pt: some i18n changes for day headings and "Continuing" and 
+  mod: weekbyday.pt: some i18n changes for day headings and "Continuing" and
     "Later events" labels. Probably not complete.
-  mod: day.pt: some i18n changes for event headings and "Continuing" and 
+  mod: day.pt: some i18n changes for event headings and "Continuing" and
     "Later events" labels. Probably not complete.
-  mod: month.pt: some i18n changes for "Continuing" and "Later events" 
+  mod: month.pt: some i18n changes for "Continuing" and "Later events"
     labels. Probably not complete.
-  mod: getEventsBeforeZC.py, and the other three such scripts.  Added a three 
-    line mod that shows "private" events for group members who have been 
+  mod: getEventsBeforeZC.py, and the other three such scripts.  Added a three
+    line mod that shows "private" events for group members who have been
     given appropriate privilege to see them.  This improves the Group calendar
     functionality.
-  mod: CX_props_calendar.pt: new property "showPrivateEventsToGroupMembers" 
-    (default=False) that when turned on will allow private group events to be 
-    shown. To use, share your private events (with the Sharing tab) with one 
-    of your groups by making them proxy owner of the event.  Then the events 
+  mod: CX_props_calendar.pt: new property "showPrivateEventsToGroupMembers"
+    (default=False) that when turned on will allow private group events to be
+    shown. To use, share your private events (with the Sharing tab) with one
+    of your groups by making them proxy owner of the event.  Then the events
     they are proxy owners of can show up on the calendar.
   mod: getDictCommon.py: i18n change for allEventsChangeString (return a label
-    instead of the string, then get the string from the po file, even for 
+    instead of the string, then get the string from the po file, even for
     English).
   todo: a few more i8n mods, especially formats for dates, times.
 

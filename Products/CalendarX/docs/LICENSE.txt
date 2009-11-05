@@ -1,14 +1,14 @@
-LICENSE.txt 
+LICENSE.txt
   CalendarX 0.9.0(dev)  January 06 2008
   (last modified for CalendarX 0.4.1)
 by +lupa+ (lupaz on sf.net, lupa at zurven dot com)
 Released under the GPL (see LICENSE.txt)
 
 CalendarX builds from several programs and products with GPL licenses.  It is
-designed to run on the Plone CMS (also GPL), which in turn builds on the 
-Content Management Framework (CMF) and the ZOPE Application Server, which 
+designed to run on the Plone CMS (also GPL), which in turn builds on the
+Content Management Framework (CMF) and the ZOPE Application Server, which
 are both released under the ZPL.  Portions of CalendarX that are more
-or less completely original are copyright 2004 by Lupa Zurven, and are 
+or less completely original are copyright 2004 by Lupa Zurven, and are
 largely marked as such in the source code comments.
 
 This program is free software; you can redistribute it and/or modify
