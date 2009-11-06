@@ -1,8 +1,10 @@
+=========
 Changelog
 =========
 
-0.9.1 - Unreleased
+0.9.3 - 2009-11-06
 ------------------
 
-* Initial release
+* Eggification
 
+See older history in Products/CalendarX/docs/HISTORY.txt

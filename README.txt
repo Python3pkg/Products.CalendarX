@@ -1,5 +1,6 @@
-Introduction
-============
+==================
+Products.CalendarX
+==================
 
 This product restructured from http://svn.plone.org/svn/collective/CalendarX
 to follow the buildout structure.
@@ -19,6 +20,7 @@ and will include :
 
 * ZCA views in place of CMF skin layers
 * More unit tests
+* Using jQuery where possible to keep JS small.
 
 Contributors are welcome.
 
