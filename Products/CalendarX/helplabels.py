@@ -164,3 +164,6 @@ would make no sense (to me) to have the event labeled, but not highlighted.  So
 make sureyou use these together. No harm if you don't, but it won't behave the
 way you might have expected. It pays to read the documentation."""
 
+HELP_LISTOFSUBJECTS = u"""List of the subjects in your CalendarX, for use in
+creating the macro that displays them on your calendar."""
+

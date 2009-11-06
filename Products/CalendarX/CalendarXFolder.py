@@ -52,7 +52,7 @@ schema = Schema((
                           default=hl.HELP_USEADVANCEDQUERY)
             ),
         schemata="Calendar Options",
-        default=False,
+		default=True,
 	),
 
     StringField(
@@ -138,7 +138,8 @@ schema = Schema((
     BooleanField(
         name='showHighlightFullEvent',
         widget=BooleanWidget(
-            label="Show full event highlight",
+            label=_(u'label_showHighlightFullEvent',
+                    default=u"Show full event highlight"),
             description=_(u'help_showHighlightFullEvent'
                           default=hl.HELP_SHOWHILIGHTFULLEVENT)
             ),
@@ -260,6 +261,7 @@ schema = Schema((
                           default=hl.HELP_LISTOFREVIEWSTATESDISPLAYED)
             ),
         schemata="Calendar Options",
+		default= ('published','external','internal','internally_published'),
 	),
 
     BooleanField(
@@ -286,13 +288,14 @@ schema = Schema((
         default=True,
 	),
 
-    # ZZZ here
+
     LinesField(
         name='listOfSubjects',
         widget=LinesWidget(
-            label="List of subjects",
-            description="List of the subjects in your CalendarX, for use in	creating the macro that displays them on your calendar.",
-            i18n_domain="CalendarX"
+            label=_(u'label_listOfSubjects'
+                    default=u"List of subjects"),
+            description=_(u'help_listOfSubjects',
+                          default=hl.HELP_LISTOFSUBJECTS)
             ),
         schemata="Calendar Options",
 	),
