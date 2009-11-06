@@ -44,6 +44,7 @@ import Products.CMFPlone.interfaces
 import os
 import os.path
 from Globals import package_home
+from zope.i18nmessageid import MessageFactory
 from Products.Archetypes import listTypes
 from Products.Archetypes.atapi import *
 from Products.Archetypes.utils import capitalize
@@ -54,6 +55,8 @@ from Products.CMFPlone.utils import ToolInit
 from Products.GenericSetup import EXTENSION
 from Products.GenericSetup import profile_registry
 from config import *
+
+CXMessageFactory = MessageFactory(I18N_DOMAIN)
 
 DirectoryView.registerDirectory('skins', product_globals)
 DirectoryView.registerDirectory('skins/CalendarX',

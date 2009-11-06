@@ -1,18 +1,28 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.9.1'
+def _textFromPath(*names):
+    here = os.path.dirname(os.path.abspath(__file__))
+    path = os.path.join(here, *names)
+    return open(path, 'r').read().strip()
+
+version = _textFromPath('Products', 'CalendarX', 'version.txt')
+long_description = '\n\n'.join(
+    (_textFromPath('README.txt'),
+     _textFromPath('docs', 'HISTORY.txt')
+     ))
 
 setup(name='Products.CalendarX',
       version=version,
-      description="CalendarX is a customizable, open source metacalendar application written for the Plone content management system on top of Zope and Python.",
-      long_description=open("README.txt").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
+      description=("CalendarX is a customizable, open source metacalendar "
+                   "application written for the Plone content management "
+                   "system on top of Zope and Python."),
+      long_description=long_description,
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
-        "Framework :: Plone",
-        "Programming Language :: Python",
-        "Topic :: Software Development :: Libraries :: Python Modules",
+          "Framework :: Plone",
+          "Programming Language :: Python",
+          "Topic :: Software Development :: Libraries :: Python Modules",
         ],
       keywords='plone calendar',
       author='Lupa Zurven',
