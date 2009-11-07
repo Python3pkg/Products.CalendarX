@@ -1,8 +1,9 @@
-LICENSE.txt
-  CalendarX 0.9.0(dev)  January 06 2008
-  (last modified for CalendarX 0.4.1)
-by +lupa+ (lupaz on sf.net, lupa at zurven dot com)
-Released under the GPL (see LICENSE.txt)
+CREDITS.txt  
+-----------
+* CalendarX 0.9.5(stable)  November 7 2009
+* (last modified for CalendarX 0.4.1)
+* by +lupa+ (lupaz on sf.net, lupa at zurven dot com)
+* Released under the GPL (see LICENSE.txt)
 
 CalendarX builds from several programs and products with GPL licenses.  It is
 designed to run on the Plone CMS (also GPL), which in turn builds on the
