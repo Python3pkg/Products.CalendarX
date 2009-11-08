@@ -1,19 +1,24 @@
-HISTORY.txt  
------------
+=======
+History
+=======
+
 * CalendarX 0.9.5(stable)  November 7 2009
 * (last modified for CalendarX 0.9.5)
 * by +lupa+ (lupaz on sf.net, lupa at zurven dot com)
 * Released under the GPL (see LICENSE.txt)
 
-CalendarX by Lupa Zurven (lupa at zurven dot com)
-  A metacalendar for Plone.
+CalendarX by Lupa Zurven (lupa at zurven dot com) A metacalendar for Plone.
 
+v0.9.5(stable)
+==============
 
-History:
---------
+* Refactored documentation to ReST.
+  [lupa]
+
 
 v0.9.3(stable)
---------------
+==============
+
 * Code base: v0.9.2(stable)
 * Status:  Stable release. All tested features work, one outstanding bug
   reported in the tracker (at Plone.org), some minor display bugs
@@ -21,9 +26,9 @@ v0.9.3(stable)
 * eggification: thanks to glenfant!
 
 
-
 v0.9.2(stable)
---------------
+==============
+
 * Code base: v0.9.1(dev)
 * Status:  Stable release. All tested features work, one outstanding bug
   reported in the tracker (at Plone.org), some minor display bugs
@@ -45,7 +50,8 @@ v0.9.2(stable)
 
 
 v0.9.1(alpha)
--------------
+=============
+
 * Code base: v0.9.0(dev)
 * Status:  Alpha release. All tested features work, one outstanding bug
   reported in the tracker (at Plone.org), some minor display bugs
@@ -103,7 +109,8 @@ v0.9.1(alpha)
 
 
 v0.9.0(dev)
------------
+===========
+
 * Code base: v0.6.6(stable)
 * Status:  Pre-alpha dev release. Seems to work, at least enough to test.
 * why: 0.9 branch is to introduce Plone 3 compatibility.  Period.
@@ -135,10 +142,8 @@ v0.9.0(dev)
   that one).  Write me with better ones, or better yet, check them into
   svn at the collective and email me that you've done so.
 * mod: CX_props_macros.pt: Something has changed, probably in Zope 2.10 or
-  possibly more recent Python versions.  I used to be able to do this::
-
-    tal:content="python:test(usesubtitles,subtitles[n-1],subby)"
-
+  possibly more recent Python versions.  I used to be able to do this
+  ``tal:content="python:test(usesubtitles,subtitles[n-1],`subby)"``
   and it would NOT evaluate subtitles[n-1] unless usesubtitles was True.
   However, now it throws a tuple index out of range error, even if
   usesubtitles is False. So I'm reworking all the tal:content calls
@@ -156,7 +161,4 @@ v0.9.0(dev)
   the use of testing in Plone yet, although I did learn it this summer in
   some other systems.  I'll get to that next and maybe soon we'll actually have
   a meaningful test suite for CalendarX!
-
-
-[for pre v0.9.0 History, see HISTORY.txt files with those releases.]
 

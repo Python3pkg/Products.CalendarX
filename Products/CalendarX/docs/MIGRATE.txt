@@ -1,13 +1,12 @@
-MIGRATE.txt  
------------
+=========
+Migrating
+=========
+
 * CalendarX 0.9.5(stable)  November 7 2009
 * (last modified for CalendarX 0.9.0)
 * by +lupa+ (lupaz on sf.net, lupa at zurven dot com)
 * Released under the GPL (see LICENSE.txt)
 
-
-Upgrading to 0.9 branch versions of CalendarX (updated 0.9.5)
--------------------------------------------------------------
-
-There is no migration process.  Yet.
-
+Please have a look in ZMI to the "Upgrades" tab of the "portal_setup" of your
+Plone site and see if upgrade steps for Products.CalendarX is available. And run
+it.

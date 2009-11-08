@@ -1,5 +1,7 @@
-OVERVIEW.txt
-------------
+========
+Overview
+========
+
 * CalendarX 0.9.5(stable)  November 7 2009
 * (last modified for CalendarX 0.9.0)
 * by +lupa+ (lupaz on sf.net, lupa at zurven dot com)
@@ -7,7 +9,8 @@ OVERVIEW.txt
 
 
 Pretty current summary of CalendarX functionality
--------------------------------------------------
+=================================================
+
 * Plone 3 compatible
 * i18n: English, French, German, Italian, Japanese, Dutch, Danish, Czech,
   Spanish, Catalan, Portuguese-Brazilian and Swedish are the current
@@ -50,17 +53,15 @@ Pretty current summary of CalendarX functionality
 
 
 
-Planned features for future branches:
--------------------------------------
+Planned features for future branches
+====================================
+
 * Group calendar support (minimal support now available).
 * Repeat events.
 * iCal export and import.  Does export now, sorta, if you use ATCT Events.
-  But we'd like full calendar export that supports the other options you've 
+  But we'd like full calendar export that supports the other options you've
   chosen, like how you've filtered your events for display.
 
-
-
-CalendarX builds on a proud tradition of other Zope/Plone products, and
-  gathers strength through the tremendous efforts of its users
-  (see CREDITS.txt).
+CalendarX builds on a proud tradition of other Zope/Plone products, and gathers
+strength through the tremendous efforts of its users (see CREDITS.txt).
 
