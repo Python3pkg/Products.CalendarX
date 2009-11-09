@@ -17,11 +17,22 @@ website for more complete wishlist ideas for the future of CalendarX.
 ToDo list as seen at launch for CalendarX 0.9.5(stable)
 =======================================================
 
-1. rout the mouseover display bugs.  there are several where the calendar cells
-   are not properly highlighted when you mouseover an event, especially events
-   that span two days or two months or differences between the regular events
-   and the ones in the "continuing" listing on weekbyhour and multimonth views.
-   non-critical (exist in 0.6.6 too) but frustrating.
-2. test everything else too
-3. document how to do everything in Plone 3
-4. get recurring events working (via vs.event)
+* Remove without pity definitively all that's marked as deprecated.
+
+* rout the mouseover display bugs.  there are several where the calendar cells
+  are not properly highlighted when you mouseover an event, especially events
+  that span two days or two months or differences between the regular events and
+  the ones in the "continuing" listing on weekbyhour and multimonth views.
+  non-critical (exist in 0.6.6 too) but frustrating.
+
+* test everything else too
+
+* document how to do everything in Plone 3
+
+* get recurring events working (via vs.event)
+
+* use standard Plone color codes (dtml vars) when relevant.
+
+* use Products.ColorField in place of hex strings in edit forms
+
+* use standard Plone vocabularies where applicable (workflow states, ...)
