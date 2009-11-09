@@ -613,9 +613,10 @@ schema = Schema((
         name='showPOPSubject',
         default=True,
         widget=BooleanWidget(
-            label="Show Pop Subject",
-            description="Whether to show the Subject of the event",
-            i18n_domain="CalendarX"
+            label=_(u'label_showPOPSubject',
+                    default=u"Show Pop Subject"),
+            description=_(u'help_showPOPSubject',
+                          default=u"Whether to show the Subject of the event")
             ),
         schemata="Pop up Properties",
 	),
@@ -623,9 +624,12 @@ schema = Schema((
     BooleanField(
         name='showPOPStart',
         widget=BooleanWidget(
-            label="Show Pop Start",
-            description="Whether to show the Start date and time of the event",
-            i18n_domain="CalendarX"
+            label=_(u'label_showPOPStart',
+                    default=u"Show Pop Start"),
+            description=_(
+                u'help_showPOPStart',
+                default=u"Whether to show the Start date and time of the event"
+                )
             ),
         schemata="Pop up Properties",
         default=False
@@ -634,9 +638,12 @@ schema = Schema((
     BooleanField(
         name='showPOPEnd',
         widget=BooleanWidget(
-            label="Show Pop End",
-            description="Whether to show the End date and time of event",
-            i18n_domain="CalendarX"
+            label=_(u'label_showPOPEnd',
+                    default=u"Show Pop End"),
+            description=_(
+                u'help_showPOPEnd',
+                default=u"Whether to show the End date and time of event"
+                )
             ),
         schemata="Pop up Properties",
         default=False
@@ -645,9 +652,13 @@ schema = Schema((
     BooleanField(
         name='showPOPCreator',
         widget=BooleanWidget(
-            label="Show Pop Creator",
-            description="Whether to show the Creator (Plone username) for this event",
-            i18n_domain="CalendarX"
+            label=_(u'label_showPOPCreator',
+                    default=u"Show Pop Creator"),
+            description=_(
+                u'help_showPOPCreator',
+                default=(u"Whether to show the Creator (Plone username) for "
+                         u"this event")
+                )
             ),
         schemata="Pop up Properties",
         default=False
@@ -656,9 +667,12 @@ schema = Schema((
     BooleanField(
         name='showPOPCreated',
         widget=BooleanWidget(
-            label="Show Pop Created",
-            description="Whether to show the Created date of the event",
-            i18n_domain="CalendarX"
+            label=_(u'label_showPOPCreated',
+                    default=u"Show Pop Created"),
+            description=_(
+                u'help_showPOPCreated',
+                default=u"Whether to show the Created date of the event"
+                )
             ),
         schemata="Pop up Properties",
         default=False
@@ -667,9 +681,13 @@ schema = Schema((
     BooleanField(
         name='showPOPModified',
         widget=BooleanWidget(
-            label="Show Pop Modified",
-            description="Whether to show the Modified date of the event, when the last time this event was edited",
-            i18n_domain="CalendarX"
+            label=_(u'label_showPOPModified',
+                    default=u"Show Pop Modified"),
+            description=_(
+                u'help_showPOPModified',
+                default=(u"Whether to show the Modified date of the event, "
+                         u"when the last time this event was edited")
+                )
             ),
         schemata="Pop up Properties",
         default=False
@@ -678,9 +696,13 @@ schema = Schema((
     BooleanField(
         name='showPOPState',
         widget=BooleanWidget(
-            label="Show Pop State",
-            description="Whether to show the review State of the event, such as published, visible, etc.",
-            i18n_domain="CalendarX"
+            label=_(u'label_showPOPState',
+                    default=u"Show Pop State"),
+            description=_(
+                u'help_showPOPState',
+                default=(u"Whether to show the review State of the event, "
+                         u"such as published, visible, etc.")
+                )
             ),
         schemata="Pop up Properties",
         default=False
@@ -690,9 +712,11 @@ schema = Schema((
         name='showPOPDescription',
         default=True,
         widget=BooleanWidget(
-            label="Show Pop Description",
-            description="Whether to show the Description of the event",
-            i18n_domain="CalendarX"
+            label=_(u'label_showPOPDescription',
+                    default=u"Show Pop Description"),
+            description=_(
+                u'help_showPOPDescription',
+                default=u"Whether to show the Description of the event")
             ),
         schemata="Pop up Properties",
 	),
@@ -702,9 +726,10 @@ schema = Schema((
     BooleanField(
         name='showAddEventLink',
         widget=BooleanWidget(
-            label="Show Add Event Link?",
-            description="Check this to include an Add New Event link in the SubjectLinks bar. Controls for this link are below.	 If more than one of the boolean controls below are checked, the ones below will take priority over the ones above.	 For example, if both useANEFolder and useRolesAndFolders are checked, but the current user does not have one of the specified Roles, then the link target will fall back to the specified ANEFolderPath.  The order of these priorities is determined by the code in the Python script getAddNewEventURL.	If no match is found, then a blank string will be returned to the macro, and a condition there will cause NO Add New Event link to be shown.  This way you can restrict display of this link to only certain users or to users with certain roles.	The first two choices (useMemberFolder and useANEFolder) are shown to all Authenticated users, if selected.",
-            i18n_domain="CalendarX"
+            label=_(u'label_showAddEventLink',
+                    default=u"Show Add Event Link?"),
+            description=_(u'help_showAddEventLink',
+                          default=hl.HELP_SHOWADDEVENTLINK)
             ),
         schemata='Add Event Link Properties',
         default=False
@@ -713,9 +738,10 @@ schema = Schema((
     BooleanField(
         name='useCreateObjectOnClick',
         widget=BooleanWidget(
-            label="Use Create Object On Click",
-            description="Together, these two properties tell the link to instantiate a new Event object in the target folder.  Check this if you want to have the link automatically initiate editing of a new event for the user.	Uncheck this property if you want the Add New Event link to simply take the user to a target folder without starting a new Event object automatically.",
-            i18n_domain="CalendarX"
+            label=_(u'label_useCreateObjectOnClick',
+                    default=u"Use Create Object On Click"),
+            description=_(u'help_useCreateObjectOnClick',
+                          default=hl.HELP_USECREATEOBJECTONCLICK)
             ),
         schemata='Add Event Link Properties',
         default=True
@@ -724,9 +750,10 @@ schema = Schema((
     StringField(
         name='createObjectOnClickCommand',
         widget=StringWidget(
-            label="Create Object On Click Command",
-            description="The createObjectOnClickCommand string is the command that is carried in the query string of the link's URL target if you are using the useCreateObjectOnClick property.  The default string is: createObject?type_name=Event which will create a new Event object in the target folder of the link. If you have a different event type that you would like to create, replace the meta_name Event with the appropriate meta_name of your desired event type. If you use this feature, it is advisable to also set your portal to use the portal_factory for initiating Events, so that if a user clicks on the link to start a new event but then decides not to finish it, the event will not be abandoned half-finished.	 Portal_factory will simply create a temporary version and then delete it if left unfinished by the user.",
-            i18n_domain="CalendarX"
+            label=_(u'label_createObjectOnClickCommand',
+                    default=u"Create Object On Click Command"),
+            description=_(u'help_createObjectOnClickCommand',
+                          default=hl.HELP_CREATEOBJECTONCLICKCOMMAND)
             ),
         schemata='Add Event Link Properties',
 	),
@@ -734,9 +761,10 @@ schema = Schema((
     BooleanField(
         name='useMemberFolder',
         widget=BooleanWidget(
-            label="Use Member Folder",
-            description="Check this so that the link will take users to their default Member folder where they can add Events. *WARNING* If your users do not have a default Member folder, or if it is located somewhere funny (not in mysite/Members/username) then this option may cause an error for your users.",
-            i18n_domain="CalendarX"
+            label=_(u'label_useMemberFolder',
+                    default=u"Use Member Folder"),
+            description=_(u'help_useMemberFolder',
+                          default=hl.HELP_USEMEMBERFOLDER)
             ),
         schemata='Add Event Link Properties',
         default=True
@@ -745,9 +773,10 @@ schema = Schema((
     BooleanField(
         name='useMemberSubfolder',
         widget=BooleanWidget(
-            label="Use Member Subfolder",
-            description="NOTE: ONLY WORKS IF THERE EXISTS A MEMBER'S HOME FOLDER: THERE IS NONE BY DEFAULT IN PLONE 3.0+.  Check this property if you want events to be instantiated in a subfolder of a user's Member folder.  For example, if all your users are musicians in bands (or groupies perhaps) and they post their band gigs on the calendar, then you might want all the events to be saved in a specific subfolder, such as /Members/username/gigs.",
-            i18n_domain="CalendarX"
+            label=_(u'label_useMemberSubfolder',
+                    default=u"Use Member Subfolder"),
+            description=_(u'help_useMemberSubfolder',
+                          default=hl.HELP_USEMEMBERSUBFOLDER)
             ),
         schemata='Add Event Link Properties',
         default=False
@@ -756,9 +785,10 @@ schema = Schema((
     StringField(
         name='memberSubfolderPath',
         widget=StringWidget(
-            label="Member Subfolder Path",
-            description="NOTE: ONLY WORKS IF THERE EXISTS A MEMBER'S HOME FOLDER: THERE IS NONE BY DEFAULT IN PLONE 3.0+.  The proper format for the target folder is relative to the /Members/username folder and should start with a slash, e.g.: /gigs NOTE:  ONLY use this if you are certain that users WILL have the named subfolder in their user folder.	Otherwise it will return 404, page not found error, or default to a folder of this name in the portal root, which is not perhaps what you were wanting.",
-            i18n_domain="CalendarX"
+            label=_(u'label_memberSubfolderPath',
+                    default="Member Subfolder Path"),
+            description=_(u'help_memberSubfolderPath',
+                          default=hl.HELP_MEMBERSUBFOLDERPATH)
             ),
         schemata='Add Event Link Properties',
         default="/subfoldername"
@@ -767,9 +797,13 @@ schema = Schema((
     BooleanField(
         name='useANEFolder',
         widget=BooleanWidget(
-            label="Use a Named Folder",
-            description="Together, these allow you to specify a single folder that will be the target of the link.",
-            i18n_domain="CalendarX"
+            label=_(u'label_useANEFolder',
+                    default=u"Use a Named Folder"),
+            description=_(
+                u'help_useANEFolder',
+                default=(u"Together, these allow you to specify a single "
+                         u"folder that will be the target of the link.")
+                )
             ),
         schemata='Add Event Link Properties',
         default=False
@@ -778,20 +812,33 @@ schema = Schema((
     StringField(
         name='ANEFolderPath',
         widget=StringWidget(
-            label="Named Folder Path",
-            description="The proper format for the target folder is relative to the portal_root and should start with a slash, e.g.: /somefolderintheroot/thefolderforevents",
-            i18n_domain="CalendarX"
+            label=_(u'label_ANEFolderPath',
+                    default=u"Named Folder Path"),
+            description=_(
+                u'help_ANEFolderPath',
+                default=(u"The proper format for the target folder is relative "
+                         u"to the portal_root and should start with a slash, "
+                         u"e.g.: /somefolderintheroot/thefolderforevents")
+                )
             ),
+        # FIXME: We should use a reference browser widget for this.
         schemata='Add Event Link Properties',
         default="/thecalendar/thefolderofevents"
 	),
 
     BooleanField(
         name='useUsersAndFolders',
-        widget=BooleanWidget(
-            label="Use Users and Folders",
-            description="Together, these allow you to specify a combination of a username and a corresponding single folder that will be the target of the link for that specific user.",
-            i18n_domain="CalendarX"
+        Widget=BooleanWidget(
+            label=_(u'label_useUsersAndFolders',
+                    default=u"Use Users and Folders"),
+            description=_(
+                u'help_useUsersAndFolders',
+                default=(
+                    u"Together, these allow you to specify a combination of a "
+                    u"username and a corresponding single folder that will be "
+                    u"the target of the link for that specific user."
+                    )
+                )
             ),
         schemata='Add Event Link Properties',
         default=False,
@@ -800,9 +847,10 @@ schema = Schema((
     LinesField(
         name='listOfUsersAndFolders',
         widget=LinesWidget(
-            label="List of Users and Folders",
-            description="The proper format for each line is as follows: username|folderpath where the pipe character (a vertical slash) is used as a separator between the username and folder path.  The proper format for the target folder is relative to the portal_root and should start with a slash, e.g.: /somefolderintheroot/thefolderforevents. An example with two possible role|folder lines: lupa|/calendar/specialevents davos|/calendar/drearyevents If no matching username is found, the priority rules described above will take over to find a suitable target for the user.",
-            i18n_domain="CalendarX"
+            label=_(u'label_listOfUsersAndFolders',
+                    default=u"List of Users and Folders"),
+            description=_(u'help_listOfUsersAndFolders',
+                          default=hl.HELP_LISTOFUSERSANDFOLDERS)
             ),
         schemata='Add Event Link Properties',
         default="",
@@ -811,9 +859,16 @@ schema = Schema((
     BooleanField(
         name='useRolesAndFolders',
         widget=BooleanWidget(
-            label="Use Roles and Folders",
-            description="Together, these allow you to specify a combination of a Role and a corresponding single folder that will be the target of the link for all users with that Role.",
-            i18n_domain="CalendarX"
+            label=_(u'label_useRolesAndFolders',
+                    default=u"Use Roles and Folders"),
+            description=_(
+                u'help_useRolesAndFolders',
+                default=(
+                    u"Together, these allow you to specify a combination of "
+                    u"a Role and a corresponding single folder that will be "
+                    u"the target of the link for all users with that Role."
+                    )
+                )
             ),
         schemata='Add Event Link Properties',
         default=False,
@@ -822,9 +877,10 @@ schema = Schema((
     LinesField(
         name='listOfRolesAndFolders',
         widget=LinesWidget(
-            label="List of Roles and Folders",
-            description="The proper format for each line is as follows: rolename|folderpath. where the pipe character (a vertical slash) is used as a separator between the role name and folder path.	The proper format for the target folder is relative to the portal_root and should start with a slash, e.g.: /somefolderintheroot/thefolderforevents. An example with two possible role|folder lines: Manager|/calendar/specialevents Member|/calendar/ordinaryevents The lookup stops when a matching role is found for the user.  For example, if the Manager logs in, the link for the Manager will target the folder called specialevents, even though the Manager is also (likely) a Member of the site.  If no matching role is found, the priority rules described above will take over to find a suitable target for the user.",
-            i18n_domain="CalendarX"
+            label=_(u'label_listOfRolesAndFolders',
+                    default=u"List of Roles and Folders"),
+            description=_(u'help_listOfRolesAndFolders',
+                          default=hl.HELP_LISTOFROLESANDFOLDERS)
             ),
         schemata='Add Event Link Properties',
         default="",
@@ -835,42 +891,56 @@ schema = Schema((
     StringField(
         name='viewTabsBorderColor',
         widget=StringWidget(
-            label="View tabs border color",
-            description='VIEW: These attributes control aspects of the "view" tabs, (month, week, day, etc. view template names) right at the top where you choose which view of the calendar is showing.  View tabs border color.',
-            i18n_domain="CalendarX"
+            label=_(u'label_viewTabsBorderColor',
+                    default=u"View tabs border color"),
+            description=_(
+                u'help_viewTabsBorderColor',
+                default=(
+                    u'VIEW: These attributes control aspects of the "view" '
+                    u'tabs, (month, week, day, etc. view template names) right '
+                    u'at the top where you choose which view of the calendar '
+                    u'is showing.  View tabs border color.'
+                    )
+                )
             ),
         schemata='CSS Properties',
+        # FIXME: use Products.ColorField
         default="#8cacbb"
 	),
 
     StringField(
         name='viewTabsBackgroundColor',
         widget=StringWidget(
-            label="View tabs background color",
-            description="View tabs background color",
-            i18n_domain="CalendarX"
+            label=_(u'label_viewTabsBackgroundColor',
+                    default=u"View tabs background color"),
+            description=_(u'help_viewTabsBackgroundColor',
+                          default=u"View tabs background color")
             ),
         schemata='CSS Properties',
+        # FIXME: use Products.ColorField
         default="#dee7ec"
 	),
 
     StringField(
         name='viewFontBaseSize',
         widget=StringWidget(
-            label="View tabs font size",
-            description="View tabs font size",
-            i18n_domain="CalendarX"
+            label=_(u'label_viewFontBaseSize',
+                    default=u"View tabs font size"),
+            description=_(u'help_viewFontBaseSize',
+                          default=u"View tabs font size")
             ),
         schemata='CSS Properties',
+        # FIWME: use a slider widget
         default="95%"
 	),
 
     StringField(
         name='viewFontFamily',
         widget=StringWidget(
-            label="View tabs font family",
-            description="View tabs font family",
-            i18n_domain="CalendarX"
+            label=_(u'label_viewFontFamily',
+                    default=u"View tabs font family"),
+            description=_(u'help_viewFontFamily',
+                          default=u"View tabs font family")
             ),
         schemata='CSS Properties',
         default='"Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif'
@@ -879,42 +949,59 @@ schema = Schema((
     StringField(
         name='viewTabsFontColor',
         widget=StringWidget(
-            label="View tabs font color",
-            description="View tabs font color",
-            i18n_domain="CalendarX"
+            label=_(u'label_viewTabsFontColor',
+                    default=u"View tabs font color"),
+            description=_(u'help_viewTabsFontColor',
+                          default=u"View tabs font color")
             ),
         schemata='CSS Properties',
+        # FIXME: use Products.ColorField
         default="#436976"
 	),
 
     StringField(
         name='subjectBarBorderColor',
         widget=StringWidget(
-            label="Color of the border around the subject bar",
-            description='Subject Bar: These attributes control aspects of the subject bar, where the Private/Public and MetaCalendar Subject choices are found.',
-            i18n_domain="CalendarX"
+            label=_(u'label_subjectBarBorderColor',
+                    default=u"Color of the border around the subject bar"),
+            description=_(
+                u'help_subjectBarBorderColor',
+                default=(
+                    u'Subject Bar: These attributes control aspects of the '
+                    u'subject bar, where the Private/Public and MetaCalendar '
+                    u'Subject choices are found.'
+                    )
+                )
             ),
         schemata='CSS Properties',
+        # FIXME: use Products.ColorField
         default="#436976"
 	),
 
     StringField(
         name='subjectBarBackgroundColor',
         widget=StringWidget(
-            label="Color of the background for subject bar and My:Public bar",
-            description="",
-            i18n_domain="CalendarX"
+            label=_(u'label_subjectBarBackgroundColor',
+                    default=(
+                        u"Color of the background for subject bar and "
+                        u"My:Public bar"
+                        ))
+            description=_(u'help_subjectBarBackgroundColor',
+                          default=u"")
             ),
         schemata='CSS Properties',
+        # FIXME: use Products.ColorField
         default="#dee7ec"
 	),
 
     StringField(
         name='subjectFontFamily',
         widget=StringWidget(
-            label="Font family for the subject bar and My:Public bar",
-            description="",
-            i18n_domain="CalendarX"
+            label=_(u'label_subjectFontFamily',
+                    default=(u"Font family for the subject bar and My:Public "
+                             u"bar")),
+            description=_(u'help_subjectFontFamily',
+                          default=u"")
             ),
         schemata='CSS Properties',
         default='"Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif'
@@ -923,9 +1010,10 @@ schema = Schema((
     StringField(
         name='subjectFontSize',
         widget=StringWidget(
-            label="Font size for the subject bar and My:Public bar",
-            description="",
-            i18n_domain="CalendarX"
+            label=_(u'label_subjectFontSize',
+                    default=u"Font size for the subject bar and My:Public bar"),
+            description=_(u'help_subjectFontSize',
+                          default=u"")
             ),
         schemata='CSS Properties',
         default="97%"
@@ -934,20 +1022,23 @@ schema = Schema((
     StringField(
         name='subjectBarFontColor',
         widget=StringWidget(
-            label="Font Color for the subject bar and My:Public bar",
-            description="",
-            i18n_domain="CalendarX"
+            label=_(u'label_subjectBarFontColor',
+                    default=u"Font Color for the subject bar and My:Public bar"),
+            description=_(u'help_subjectBarFontColor',
+                          default=u"")
             ),
         schemata='CSS Properties',
+        # FIXME: use Products.ColorField
         default="#436976"
 	),
 
     StringField(
         name='headerCenterFontSize',
         widget=StringWidget(
-            label='Header font size (e.g. "July 2009")',
-            description='Header: These attributes control aspects of the header area, where the previous and next date arrows, and the calendar date are displayed, at the bottom and top of the calendar.  Code for this is generated in the "prevnextcurrentlinks" macro.',
-            i18n_domain="CalendarX"
+            label=_(u'label_headerCenterFontSize',
+                    default=u'Header font size (e.g. "July 2009")'),
+            description=_(u'help_headerCenterFontSize',
+                          default=hl.HELP_HEADERCENTERFONTSIZE)
             ),
         schemata='CSS Properties',
         default="135%"
@@ -956,9 +1047,10 @@ schema = Schema((
     StringField(
         name='headerSideFontSize',
         widget=StringWidget(
-            label='"previous" and "next" links font size',
-            description="",
-            i18n_domain="CalendarX"
+            label=_(u'label_headerSideFontSize',
+                    default=u'"previous" and "next" links font size'),
+            description=_(u'help_headerSideFontSize',
+                          default=u"")
             ),
         schemata='CSS Properties',
         default="93%"
@@ -967,9 +1059,12 @@ schema = Schema((
     StringField(
         name='headerFontFamily',
         widget=StringWidget(
-            label='Font Family name for "prevnextcurrentlinks" macro',
-            description="(prev, next, date header, footer)",
-            i18n_domain="CalendarX"
+            label=_(
+                u'label_headerFontFamily',
+                default=(u'Font Family name for "prevnextcurrentlinks" macro')
+                )
+            description=_(u'help_headerFontFamily',
+                          default=u"(prev, next, date header, footer)")
             ),
         schemata='CSS Properties',
         default='Verdana, Helvetica, Arial, sans-serif'
@@ -978,20 +1073,25 @@ schema = Schema((
     StringField(
         name='headerFontColor',
         widget=StringWidget(
-            label="Color of the font for header",
-            description="(prev, next, date header, footer)",
-            i18n_domain="CalendarX"
+            label=_(u'label_headerFontColor',
+                    default=u"Color of the font for header"),
+            description=_(u'help_headerFontColor',
+                          default=u"(prev, next, date header, footer)")
             ),
         schemata='CSS Properties',
+        # FIXME: use Products.ColorField
         default="#436976"
 	),
 
     StringField(
         name='headerHeight',
         widget=StringWidget(
-            label='Height added to base for "prevnextcurrentlinks" macro',
-            description="(prev, next, date header, footer)",
-            i18n_domain="CalendarX"
+            label=_(
+                u'label_headerHeight',
+                default=u'Height added to base for "prevnextcurrentlinks" macro'
+                ),
+            description=_(u'help_headerHeight',
+                          default=u"(prev, next, date header, footer)")
             ),
         schemata='CSS Properties',
         default="0px"
@@ -1000,9 +1100,12 @@ schema = Schema((
     StringField(
         name='headerMarginBottom',
         widget=StringWidget(
-            label='Bottom margin pixels for "prevnextcurrentlinks" macro',
-            description="(prev, next, date header, footer)",
-            i18n_domain="CalendarX"
+            label=_(
+                u'label_headerMarginBottom',
+                default=u'Bottom margin pixels for "prevnextcurrentlinks" macro'
+                ),
+            description=_(u'help_headerMarginBottom',
+                          default=u"(prev, next, date header, footer)")
             ),
         schemata='CSS Properties',
         default="0px"
@@ -1011,9 +1114,11 @@ schema = Schema((
     StringField(
         name='headerMarginTop',
         widget=StringWidget(
-            label='Top margin pixels for "prevnextcurrentlinks" macro',
-            description="(prev, next, date header, footer)",
-            i18n_domain="CalendarX"
+            label=_(
+                u'label_headerMarginTop',
+                default=u'Top margin pixels for "prevnextcurrentlinks" macro'),
+            description=_(u'help_headerMarginTop',
+                          default=u"(prev, next, date header, footer)")
             ),
         schemata='CSS Properties',
         default="0px"
@@ -1022,9 +1127,10 @@ schema = Schema((
     StringField(
         name='headerPadding',
         widget=StringWidget(
-            label='Padding size for "prevnextcurrentlinks" macro',
-            description="(prev, next, date header, footer)",
-            i18n_domain="CalendarX"
+            label=_(u'label_headerPadding',
+                    default=u'Padding size for "prevnextcurrentlinks" macro'),
+            description=_(u'help_headerPadding',
+                          default=u"(prev, next, date header, footer)")
             ),
         schemata='CSS Properties',
         default="3px"
@@ -1033,9 +1139,17 @@ schema = Schema((
     StringField(
         name='continuingHeaderFontSize',
         widget=StringWidget(
-            label="Continuing events box, header font size",
-            description='Continuing: These attributes control aspects of the Continuing Events section, where events that start before or extend across the entire period of view are shown.',
-            i18n_domain="CalendarX"
+            label=_(u'label_continuingHeaderFontSize',
+                    default=u"Continuing events box, header font size"),
+            description=_(
+                u'help_continuingHeaderFontSize',
+                default=(
+                    u'Continuing: These attributes control aspects of the '
+                    u'Continuing Events section, where events that start '
+                    u'before or extend across the entire period of view are '
+                    u'shown.'
+                    )
+                )
             ),
         schemata='CSS Properties',
         default="90%"
@@ -1044,9 +1158,10 @@ schema = Schema((
     StringField(
         name='continuingHeaderFontFamily',
         widget=StringWidget(
-            label="Continuing events box, header font family",
-            description="",
-            i18n_domain="CalendarX"
+            label=_(u'label_continuingHeaderFontFamily',
+                    default=u"Continuing events box, header font family"),
+            description=_(u'help_continuingHeaderFontFamily',
+                          default=u"")
             ),
         schemata='CSS Properties',
         default="Verdana, Helvetica, Arial, sans-serif"
@@ -1055,20 +1170,23 @@ schema = Schema((
     StringField(
         name='continuingOuterBorderColor',
         widget=StringWidget(
-            label="Continuing events box, outer border color",
-            description="",
-            i18n_domain="CalendarX"
+            label=_(u'label_continuingOuterBorderColor',
+                    default=u"Continuing events box, outer border color"),
+            description=_(u'help_continuingOuterBorderColor',
+                          default=u"")
             ),
         schemata='CSS Properties',
+        # FIXME: Use Products.ColorField
         default="#B3CFD9"
 	),
 
     StringField(
         name='continuingOuterBorderWidth',
         widget=StringWidget(
-            label="Continuing events box, outer border width",
-            description="",
-            i18n_domain="CalendarX"
+            label=_(u'label_continuingOuterBorderWidth',
+                    default=u"Continuing events box, outer border width"),
+            description=_(u'help_continuingOuterBorderWidth',
+                          default=u"")
             ),
         schemata='CSS Properties',
         default="1px"
@@ -1077,20 +1195,23 @@ schema = Schema((
     StringField(
         name='continuingHeaderBorderColor',
         widget=StringWidget(
-            label="Continuing events box, inner border color",
-            description="",
-            i18n_domain="CalendarX"
+            label=_(u'label_continuingHeaderBorderColor',
+                    default=u"Continuing events box, inner border color"),
+            description=_(u'help_continuingHeaderBorderColor',
+                          default=u"")
             ),
         schemata='CSS Properties',
+        # FIXME: Use Products.ColorField
         default="#436976"
 	),
 
     StringField(
         name='continuingHeaderBorderWidth',
         widget=StringWidget(
-            label="Continuing events box, border width",
-            description="",
-            i18n_domain="CalendarX"
+            label=_(u'label_continuingHeaderBorderWidth',
+                    default=u"Continuing events box, border width"),
+            description=_(u'help_continuingHeaderBorderWidth',
+                          default=u"")
             ),
         schemata='CSS Properties',
         default="1px"
@@ -1099,42 +1220,53 @@ schema = Schema((
     StringField(
         name='continuingHeaderBackgroundColor',
         widget=StringWidget(
-            label="Continuing events box, background color",
-            description="",
-            i18n_domain="CalendarX"
+            label=_(u'label_continuingHeaderBackgroundColor',
+                    default=u"Continuing events box, background color"),
+            description=_(u'help_continuingHeaderBackgroundColor',
+                          default=u"")
             ),
         schemata='CSS Properties',
+        # FIXME: Use Products.ColorField
         default="#8CACBB"
 	),
 
     StringField(
         name='continuingRowEventBackgroundColor',
         widget=StringWidget(
-            label="Continuing events box, color if an event is present",
-            description="",
-            i18n_domain="CalendarX"
+            label=_(u'label_continuingRowEventBackgroundColor',
+                    default=u"Continuing events box, color if an event is present"),
+            description=_(u'help_continuingRowEventBackgroundColor',
+                          default=u"")
             ),
         schemata='CSS Properties',
+        # FIXME: Use Products.ColorField
         default="#DEE7EC"
 	),
 
     StringField(
         name='continuingRowNoEventBackgroundColor',
         widget=StringWidget(
-            label="Continuing events box, color if no event",
-            description="",
-            i18n_domain="CalendarX"
+            label=_(u'label_continuingRowNoEventBackgroundColor',
+                    default=u"Continuing events box, color if no event"),
+            description=_(u'help_continuingRowNoEventBackgroundColor',
+                          default=u"")
             ),
         schemata='CSS Properties',
+        # FIXME: Use Products.ColorField
         default="#F7F9FA"
-	),
+        ),
 
     StringField(
         name='continuingRowHeight',
         widget=StringWidget(
-            label="Continuing events box, row height, added to event bottom",
-            description="",
-            i18n_domain="CalendarX"
+            label=_(
+                u'label_continuingRowHeight',
+                default=(
+                    u"Continuing events box, row height, added to event bottom"
+                    )
+                )
+            description=_(u'help_continuingRowHeight',
+                          default=u"")
             ),
         schemata='CSS Properties',
         default="5px"
@@ -1143,20 +1275,28 @@ schema = Schema((
     StringField(
         name='calBorderColor',
         widget=StringWidget(
-            label="Main calendar, border color",
-            description='Cal: These attributes control aspects of the Main Calendar display.',
-            i18n_domain="CalendarX"
+            label=_(u'label_calBorderColor',
+                    default=u"Main calendar, border color"),
+            description=_(
+                u'help_calBorderColor',
+                default=(
+                    u'Cal: These attributes control aspects of the Main '
+                    u'Calendar display.'
+                    )
+                )
             ),
         schemata='CSS Properties',
+        # FIXME: Use Products.ColorField
         default="#B3CFD9"
 	),
 
     StringField(
         name='calBorderWidth',
         widget=StringWidget(
-            label="Main calendar, border width",
-            description="",
-            i18n_domain="CalendarX"
+            label=_(u'label_calBorderWidth',
+                    default=u"Main calendar, border width"),
+            description=_(u'help_calBorderWidth',
+                          default=u"")
             ),
         schemata='CSS Properties',
         default="1px"
@@ -1165,53 +1305,72 @@ schema = Schema((
     StringField(
         name='calTableRowOddBackgroundColor',
         widget=StringWidget(
-            label="Odd row background color for TR tags",
-            description="Main calendar, for certain views where odd/even vary in color, this controls the ODD row (in TR tags).",
-            i18n_domain="CalendarX"
+            label=_(u'label_calTableRowOddBackgroundColor',
+                    default=u"Odd row background color for TR tags"),
+            description=_(
+                u'help_calTableRowOddBackgroundColor',
+                default=(
+                    u"Main calendar, for certain views where odd/even vary in "
+                    u"color, this controls the ODD row (in TR tags)."
+                    )
+                )
             ),
         schemata='CSS Properties',
+        # FIXME: Use Products.ColorField
         default="#F7F9FA"
 	),
 
     StringField(
         name='calTableRowEvenBackgroundColor',
         widget=StringWidget(
-            label="Even row background color for TR tags",
-            description="Main calendar, for certain views where odd/even vary in color, this controls the EVEN row (in TR tags)",
-            i18n_domain="CalendarX"
+            label=_(u'label_calTableRowEvenBackgroundColor',
+                    default=u"Even row background color for TR tags"),
+            description=_(
+                u'help_calTableRowEvenBackgroundColor',
+                default=(
+                    u"Main calendar, for certain views where odd/even vary in "
+                    u"color, this controls the EVEN row (in TR tags)"
+                    )
+                )
             ),
         schemata='CSS Properties',
+        # FIXME: Use Products.ColorField
         default="#DEE7EC"
 	),
 
     StringField(
         name='calTableHeaderBackgroundColor',
         widget=StringWidget(
-            label="Background color for TH tags",
-            description="Main calendar, TH tags background color.",
-            i18n_domain="CalendarX"
+            label=_(u'label_calTableHeaderBackgroundColor',
+                    default=u"Background color for TH tags"),
+            description=_(u'help_calTableHeaderBackgroundColor',
+                          default=u"Main calendar, TH tags background color.")
             ),
         schemata='CSS Properties',
+        # FIXME: Use Products.ColorField
         default="#8CACBB"
 	),
 
     StringField(
         name='calTableHeaderBorderColor',
         widget=StringWidget(
-            label="Border color for TH tags",
-            description="Main calendar,  TH tags border color.",
-            i18n_domain="CalendarX"
+            label=_(u'label_calTableHeaderBorderColor',
+                    default=u"Border color for TH tags"),
+            description=_(u'help_calTableHeaderBorderColor',
+                          default=u"Main calendar,  TH tags border color.")
             ),
         schemata='CSS Properties',
+        # FIXME: Use Products.ColorField
         default="#436976"
 	),
 
     StringField(
         name='calTableHeaderBorderWidth',
         widget=StringWidget(
-            label="Border width for TH tags",
-            description="Main calendar,  TH tags border width.",
-            i18n_domain="CalendarX"
+            label=_(u'label_calTableHeaderBorderWidth',
+                    default=u"Border width for TH tags"),
+            description=_(u'help_calTableHeaderBorderWidth',
+                          default=u"Main calendar,  TH tags border width.")
             ),
         schemata='CSS Properties',
         default="1px"
@@ -1220,20 +1379,25 @@ schema = Schema((
     StringField(
         name='calTableHeaderFontColor',
         widget=StringWidget(
-            label="Font color for TH tags",
-            description="Main calendar,  TH tags font color.",
-            i18n_domain="CalendarX"
+            label=_(u'label_calTableHeaderFontColor',
+                    default=u"Font color for TH tags"),
+            description=_(u'help_calTableHeaderFontColor',
+                          default=u"Main calendar,  TH tags font color.")
             ),
         schemata='CSS Properties',
+        # FIXME: Use Products.ColorField
         default="#FFFFFF"
 	),
 
     StringField(
         name='calEventFontSize',
         widget=StringWidget(
-            label="Event font size",
-            description="Main calendar, font size for the event listings.",
-            i18n_domain="CalendarX"
+            label=_(u'label_calEventFontSize',
+                    default=u"Event font size"),
+            description=_(
+                u'help_calEventFontSize',
+                default=u"Main calendar, font size for the event listings."
+                )
             ),
         schemata='CSS Properties',
         default="85%"
@@ -1242,9 +1406,11 @@ schema = Schema((
     StringField(
         name='calEventFontFamily',
         widget=StringWidget(
-            label="Event font family",
-            description="Main calendar, font family for the event listings.",
-            i18n_domain="CalendarX"
+            label=_(u'label_calEventFontFamily',
+                    default=u"Event font family"),
+            description=_(
+                u'help_calEventFontFamily',
+                default=u"Main calendar, font family for the event listings.")
             ),
         schemata='CSS Properties',
         default="Verdana, Helvetica, Arial, sans-serif"
@@ -1253,75 +1419,105 @@ schema = Schema((
     StringField(
         name='calEventPendingTextColor',
         widget=StringWidget(
-            label="Pending event text color",
-            description='Main calendar, text color for the pending event listings.',
-            i18n_domain="CalendarX"
+            label=_(u'label_calEventPendingTextColor',
+                    default=u"Pending event text color"),
+            description=_(
+                u'help_calEventPendingTextColor',
+                default=(u'Main calendar, text color for the pending event '
+                         u'listings.')
+                )
             ),
         schemata='CSS Properties',
+        # FIXME: Use Products.ColorField
         default='#436976'
 	),
 
     StringField(
         name='calEventPrivateTextColor',
         widget=StringWidget(
-            label="Private event text color",
-            description='Main calendar, text color for the private event listings.',
-            i18n_domain="CalendarX"
+            label=_(u'label_calEventPrivateTextColor',
+                    default=u"Private event text color"),
+            description=_(
+                u'help_calEventPrivateTextColor',
+                default=(
+                    u'Main calendar, text color for the private event listings.'
+                    )
+                )
             ),
         schemata='CSS Properties',
+        # FIXME: Use Products.ColorField
         default='#821513'
 	),
 
     StringField(
         name='calEventPublishedTextColor',
         widget=StringWidget(
-            label="Published event text color",
-            description='Main calendar, text color for the published event listings.',
-            i18n_domain="CalendarX"
+            label=_(u'label_calEventPublishedTextColor',
+                    default=u"Published event text color"),
+            description=_(
+                u'help_calEventPublishedTextColor',
+                default=(u'Main calendar, text color for the published event '
+                         u'listings.')
+                )
             ),
         schemata='CSS Properties',
+        # FIXME: Use Products.ColorField
         default='#466A06'
 	),
 
     StringField(
         name='calEventVisibleTextColor',
         widget=StringWidget(
-            label="Visible event text color",
-            description='Main calendar, text color for the visible event listings.',
-            i18n_domain="CalendarX"
+            label=_(u'label_calEventVisibleTextColor',
+                    default=u"Visible event text color"),
+            description=_(
+                u'help_calEventVisibleTextColor',
+                default=(
+                    u'Main calendar, text color for the visible event listings.'
+                    )
+                )
             ),
         schemata='CSS Properties',
+        # FIXME: Use Products.ColorField
         default='#436976'
 	),
 
     StringField(
         name='calTableDataFontColor',
         widget=StringWidget(
-            label="Font color for daily calendar cell",
-            description='Main calendar, TD tag text color, but is overridden by other CSS rules, mainly.',
-            i18n_domain="CalendarX"
+            label=_(u'label_calTableDataFontColor',
+                    default=u"Font color for daily calendar cell"),
+            description=_(
+                u'help_calTableDataFontColor',
+                default=(u'Main calendar, TD tag text color, but is overridden '
+                         u'by other CSS rules, mainly.')
+                )
             ),
         schemata='CSS Properties',
+        # FIXME: Use Products.ColorField
         default='#000000'
 	),
 
     StringField(
         name='calTableDataBorderColor',
         widget=StringWidget(
-            label="Border color for daily calendar cell",
-            description='Main calendar, TD tag border color.',
-            i18n_domain="CalendarX"
+            label=_(u'label_calTableDataBorderColor',
+                    default=u"Border color for daily calendar cell"),
+            description=_(u'help_calTableDataBorderColor',
+                          default=u'Main calendar, TD tag border color.')
             ),
         schemata='CSS Properties',
+        # FIXME: Use Products.ColorField
         default='#DEE7EC'
 	),
 
     StringField(
         name='calTableDataBorderWidth',
         widget=StringWidget(
-            label="Border width for daily calendar cell",
-            description='Main calendar, TD tag border width.',
-            i18n_domain="CalendarX"
+            label=_(u'label_calTableDataBorderWidth',
+                    default=u"Border width for daily calendar cell"),
+            description=_(u'help_calTableDataBorderWidth',
+                          default=u'Main calendar, TD tag border width.')
             ),
         schemata='CSS Properties',
         default='1px'
@@ -1330,53 +1526,89 @@ schema = Schema((
     StringField(
         name='calTableDataNoEventBackgroundColor',
         widget=StringWidget(
-            label="Background color for daily calendar cell with no event",
-            description='Main calendar, color when a cell has NO EVENT.',
-            i18n_domain="CalendarX"
+            label=_(u'label_calTableDataNoEventBackgroundColor',
+                    default=(u"Background color for daily calendar cell with"
+                             u"no event")),
+            description=_(
+                u'help_calTableDataNoEventBackgroundColor',
+                default=u'Main calendar, color when a cell has NO EVENT.')
             ),
         schemata='CSS Properties',
+        # FIXME: Use Products.ColorField
         default='#F7F9FA'
 	),
 
     StringField(
         name='calTableDataEventBackgroundColor',
         widget=StringWidget(
-            label="Background color for daily calendar cell with Events",
-            description="Main calendar, color when a cell has an EVENT.  Also used in calendar.js.dtml for rollover highlighting return value.",
-            i18n_domain="CalendarX"
+            label=_(
+                u'label_calTableDataEventBackgroundColor',
+                default=u"Background color for daily calendar cell with Events"
+                ),
+            description=_(
+                u'help_calTableDataEventBackgroundColor',
+                default=(
+                    u"Main calendar, color when a cell has an EVENT.  Also "
+                    u"used in calendar.js.dtml for rollover highlighting "
+                    u"return value."
+                    )
+                )
             ),
         schemata='CSS Properties',
+        # FIXME: Use Products.ColorField
         default="#DEE7EC"
 	),
 
     StringField(
         name='calTableDataOutOfMonthBackgroundColor',
         widget=StringWidget(
-            label="Background color for out-of-month calendar cell",
-            description='Main calendar, in the MONTH view when the day shown is NOT a part of the month, this controls the background color.  Also used in calendar.js.dtml for rollover highlighting return value.',
-            i18n_domain="CalendarX"
+            label=_(u'label_calTableDataOutOfMonthBackgroundColor',
+                    default=u"Background color for out-of-month calendar cell"),
+            description=_(
+                u'help_calTableDataOutOfMonthBackgroundColor',
+                default=(
+                    u'Main calendar, in the MONTH view when the day shown is '
+                    u'NOT a part of the month, this controls the background '
+                    u'color.  Also used in calendar.js.dtml for rollover '
+                    u'highlighting return value.'
+                    )
+                )
             ),
         schemata='CSS Properties',
+        # FIXME: Use Products.ColorField
         default='#FFFFFF'
 	),
 
     StringField(
         name='calTableDataOutOfMonthBorderColor',
         widget=StringWidget(
-            label="Border color for out-of-month calendar cell",
-            description='Main calendar, in the MONTH view when the day shown is NOT a part of the month, this controls the border color.',
-            i18n_domain="CalendarX"
+            label=_(u'label_calTableDataOutOfMonthBorderColor',
+                    default=u"Border color for out-of-month calendar cell"),
+            description=_(
+                u'help_calTableDataOutOfMonthBorderColor',
+                default=(
+                    u'Main calendar, in the MONTH view when the day shown is '
+                    u'NOT a part of the month, this controls the border color.'
+                    )
+                )
             ),
         schemata='CSS Properties',
+        # FIXME: Use Products.ColorField
         default='#F7F9FA'
 	),
 
     StringField(
         name='calTableDataOutOfMonthBorderWidth',
         widget=StringWidget(
-            label="Border width for out-of-month calendar cell",
-            description='Main calendar, in the MONTH view when the day shown is NOT a part of the month, this controls the border width.',
-            i18n_domain="CalendarX"
+            label=_(u'label_calTableDataOutOfMonthBorderWidth',
+                    default=u"Border width for out-of-month calendar cell"),
+            description=_(
+                u'help_calTableDataOutOfMonthBorderWidth',
+                default=(
+                    u'Main calendar, in the MONTH view when the day shown is '
+                    u'NOT a part of the month, this controls the border width.'
+                    )
+                )
             ),
         schemata='CSS Properties',
         default='1px'
@@ -1385,20 +1617,34 @@ schema = Schema((
     StringField(
         name='calTableDataSpanDayFontColor',
         widget=StringWidget(
-            label="Font color for date in month view daily calendar cell",
-            description='Main calendar, in the MONTH view, text color of the date (ie., "3" on June 3 cell).',
-            i18n_domain="CalendarX"
+            label=_(
+                u'label_calTableDataSpanDayFontColor',
+                default=u"Font color for date in month view daily calendar cell"
+                ),
+            description=_(
+                u'help_calTableDataSpanDayFontColor',
+                default=(
+                    u'Main calendar, in the MONTH view, text color of the '
+                    u'date (ie., "3" on June 3 cell).')
+                )
             ),
         schemata='CSS Properties',
+        # FIXME: Use Products.ColorField
         default='#000000'
 	),
 
     StringField(
         name='calTableDataHeightMonthView',
         widget=StringWidget(
-            label="Empty height of daily calendar cell in Month view",
-            description='Main calendar, in the MONTH view, this controls the empty height of a daily cell.',
-            i18n_domain="CalendarX"
+            label=_(
+                u'label_calTableDataHeightMonthView',
+                default=u"Empty height of daily calendar cell in Month view"
+                ),
+            description=_(
+                u'help_calTableDataHeightMonthView',
+                default=(u'Main calendar, in the MONTH view, this controls the '
+                         u'empty height of a daily cell.')
+                )
             ),
         schemata='CSS Properties',
         default='105px'
@@ -1407,9 +1653,13 @@ schema = Schema((
     StringField(
         name='calTableDataHeightDayView',
         widget=StringWidget(
-            label="Empty height of daily calendar cell in Day view",
-            description='Main calendar, in the DAY view, this controls the empty height of a daily cell.',
-            i18n_domain="CalendarX"
+            label=_(u'label_calTableDataHeightDayView',
+                    default=u"Empty height of daily calendar cell in Day view"),
+            description=_(
+                u'help_calTableDataHeightDayView',
+                default=(u'Main calendar, in the DAY view, this controls the '
+                         u'empty height of a daily cell.')
+                )
             ),
         schemata='CSS Properties',
         default='35px'
@@ -1418,9 +1668,19 @@ schema = Schema((
     StringField(
         name='calTableDataHeightWeekbydayView',
         widget=StringWidget(
-            label="Empty height of daily calendar cell in WeekByDay view",
-            description='Main calendar, in the WEEKBYDAY view, this controls the empty height of a daily cell.',
-            i18n_domain="CalendarX"
+            label=_(
+                u'label_calTableDataHeightWeekbydayView',
+                default=(
+                    u"Empty height of daily calendar cell in WeekByDay view"
+                    )
+                ),
+            description=_(
+                u'help_calTableDataHeightWeekbydayView',
+                default=(
+                    u'Main calendar, in the WEEKBYDAY view, this controls the '
+                    u'empty height of a daily cell.'
+                    )
+                )
             ),
         schemata='CSS Properties',
         default='105px'
@@ -1429,9 +1689,14 @@ schema = Schema((
     StringField(
         name='calTableDataHeightWeekbyhourView',
         widget=StringWidget(
-            label="Empty height of daily hour cell in WeekByHour view",
-            description='Main calendar, in the WEEKBYHOUR view, this controls the empty height of a daily cell.',
-            i18n_domain="CalendarX"
+            label=_(
+                u'label_calTableDataHeightWeekbyhourView',
+                default=u"Empty height of daily hour cell in WeekByHour view"),
+            description=_(
+                u'help_calTableDataHeightWeekbyhourView',
+                default=(u'Main calendar, in the WEEKBYHOUR view, this '
+                         u'controls the empty height of a daily cell.')
+                )
             ),
         schemata='CSS Properties',
         default='30px'
@@ -1440,9 +1705,16 @@ schema = Schema((
     StringField(
         name='calTableDataFontSizeHour',
         widget=StringWidget(
-            label="Font size for hour in daily calendar cell",
-            description='Main calendar, in the DAY and WEEKBYHOUR views, this controls the font size of the HOUR displayed (ie., "8am" or "13:00")',
-            i18n_domain="CalendarX"
+            label=_(u'label_calTableDataFontSizeHour',
+                    default=u"Font size for hour in daily calendar cell"),
+            description=_(
+                u'help_calTableDataFontSizeHour',
+                default=(
+                    u'Main calendar, in the DAY and WEEKBYHOUR views, this '
+                    u'controls the font size of the HOUR displayed (ie., '
+                    u'"8am" or "13:00")'
+                    )
+                )
             ),
         schemata='CSS Properties',
         default='130%'
@@ -1451,17 +1723,26 @@ schema = Schema((
     StringField(
         name='calTableDataEventHighlightBackgroundColor',
         widget=StringWidget(
-            label="Background color for event rollover in daily calendar cell",
-            description='Main calendar, in the view when an event has a mouseover (rollover) event, this controls the rollover background color.  Read into calendar.js.dtml for this control.',
-            i18n_domain="CalendarX"
+            label=_(u'label_calTableDataEventHighlightBackgroundColor',
+                    default=(u"Background color for event rollover in daily "
+                             u"calendar cell"))
+            description=_(
+                u'help_calTableDataEventHighlightBackgroundColor',
+                default=(
+                    u'Main calendar, in the view when an event has a mouseover '
+                    u'(rollover) event, this controls the rollover background '
+                    u'color.  Read into calendar.js.dtml for this control.'
+                    )
+                )
             ),
         schemata='CSS Properties',
+        # FIXME: Use Products.ColorField
         default='#FFE7C4'
 	),
 
 	## End of Schema Properties  ##
 
-),
+    ),
 )
 
 CalendarXFolder_schema = BaseFolder.schema.copy() + schema.copy()
@@ -1473,7 +1754,7 @@ class CalendarXFolder(BaseFolder):
     security = ClassSecurityInfo()
     __implements__ = (BaseFolder.__implements__, (),)
 
-	# This name appears in the 'add' box
+    # This name appears in the 'add' box
     archetype_name = 'CalendarX'
 
     meta_type = 'CalendarXFolder'

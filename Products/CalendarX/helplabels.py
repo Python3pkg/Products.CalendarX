@@ -225,3 +225,82 @@ HELP_LISTOFSUBCALENDARS = u"""For MAIN Calendars: This is a list (one per line)
 of names (or nicknames) of the subcalendars. The menu choices uses this list for
 display of links to the subcalendars. USE THE SAME ORDER AS IN THE List of
 SubCalendar IDs ABOVE."""
+
+HELP_SHOWADDEVENTLINK = u"""Check this to include an Add New Event link in the
+SubjectLinks bar. Controls for this link are below. If more than one of the
+boolean controls below are checked, the ones below will take priority over the
+ones above. For example, if both useANEFolder and useRolesAndFolders are
+checked, but the current user does not have one of the specified Roles, then the
+link target will fall back to the specified ANEFolderPath. The order of these
+priorities is determined by the code in the Python script getAddNewEventURL. If
+no match is found, then a blank string will be returned to the macro, and a
+condition there will cause NO Add New Event link to be shown. This way you can
+restrict display of this link to only certain users or to users with certain
+roles. The first two choices (useMemberFolder and useANEFolder) are shown to all
+Authenticated users, if selected."""
+
+HELP_USECREATEOBJECTONCLICK = u"""Together, these two properties tell the link
+to instantiate a new Event object in the target folder.  Check this if you want
+to have the link automatically initiate editing of a new event for the
+user. Uncheck this property if you want the Add New Event link to simply take
+the user to a target folder without starting a new Event object
+automatically."""
+
+HELP_CREATEOBJECTONCLICKCOMMAND = u"""The createObjectOnClickCommand string is
+the command that is carried in the query string of the link's URL target if you
+are using the useCreateObjectOnClick property.  The default string is:
+createObject?type_name=Event which will create a new Event object in the target
+folder of the link. If you have a different event type that you would like to
+create, replace the meta_name Event with the appropriate meta_name of your
+desired event type. If you use this feature, it is advisable to also set your
+portal to use the portal_factory for initiating Events, so that if a user clicks
+on the link to start a new event but then decides not to finish it, the event
+will not be abandoned half-finished. Portal_factory will simply create a
+temporary version and then delete it if left unfinished by the user."""
+
+HELP_USEMEMBERFOLDER = u"""Check this so that the link will take users to their
+default Member folder where they can add Events. *WARNING* If your users do not
+have a default Member folder, or if it is located somewhere funny (not in
+mysite/Members/username) then this option may cause an error for your users."""
+
+HELP_USEMEMBERSUBFOLDER = u"""NOTE: ONLY WORKS IF THERE EXISTS A MEMBER'S HOME
+FOLDER: THERE IS NONE BY DEFAULT IN PLONE 3.0+.  Check this property if you want
+events to be instantiated in a subfolder of a user's Member folder.  For
+example, if all your users are musicians in bands (or groupies perhaps) and they
+post their band gigs on the calendar, then you might want all the events to be
+saved in a specific subfolder, such as /Members/username/gigs."""
+
+HELP_MEMBERSUBFOLDERPATH = u"""NOTE: ONLY WORKS IF THERE EXISTS A MEMBER'S HOME
+FOLDER: THERE IS NONE BY DEFAULT IN PLONE 3.0+.  The proper format for the
+target folder is relative to the /Members/username folder and should start with
+a slash, e.g.: /gigs NOTE: ONLY use this if you are certain that users WILL have
+the named subfolder in their user folder. Otherwise it will return 404, page not
+found error, or default to a folder of this name in the portal root, which is
+not perhaps what you were wanting."""
+
+HELP_LISTOFUSERSANDFOLDERS = u"""The proper format for each line is as follows:
+username|folderpath where the pipe character (a vertical slash) is used as a
+separator between the username and folder path.  The proper format for the
+target folder is relative to the portal_root and should start with a slash,
+e.g.: /somefolderintheroot/thefolderforevents. An example with two possible
+role|folder lines: lupa|/calendar/specialevents davos|/calendar/drearyevents If
+no matching username is found, the priority rules described above will take over
+to find a suitable target for the user."""
+
+HELP_LISTOFROLESANDFOLDERS = u"""The proper format for each line is as follows:
+rolename|folderpath. where the pipe character (a vertical slash) is used as a
+separator between the role name and folder path. The proper format for the
+target folder is relative to the portal_root and should start with a slash,
+e.g.: /somefolderintheroot/thefolderforevents. An example with two possible
+role|folder lines: Manager|/calendar/specialevents
+Member|/calendar/ordinaryevents The lookup stops when a matching role is found
+for the user.  For example, if the Manager logs in, the link for the Manager
+will target the folder called specialevents, even though the Manager is also
+(likely) a Member of the site.  If no matching role is found, the priority rules
+described above will take over to find a suitable target for the user."""
+
+HELP_HEADERCENTERFONTSIZE = u'''Header: These attributes control aspects of the
+header area, where the previous and next date arrows, and the calendar date are
+displayed, at the bottom and top of the calendar.  Code for this is generated in
+the "prevnextcurrentlinks" macro.'''
+
