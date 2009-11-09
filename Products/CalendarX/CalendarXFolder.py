@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# $Id$
+
 """A folderish object with views for displaying Event contents in calendar form"""
 
 __author__ = 'Lupa Zurven <lupa@zurven.com>'
@@ -261,7 +264,9 @@ schema = Schema((
                           default=hl.HELP_LISTOFREVIEWSTATESDISPLAYED)
             ),
         schemata="Calendar Options",
-		default= ('published','external','internal','internally_published'),
+        # FIXME: this may be computed from workflows associated to event types
+        # or from a plone.app.vocabulary.
+        default= ('published','external','internal','internally_published'),
 	),
 
     BooleanField(
@@ -297,15 +302,17 @@ schema = Schema((
             description=_(u'help_listOfSubjects',
                           default=hl.HELP_LISTOFSUBJECTS)
             ),
+        # FIXME: The widget should provide a list of available subjects.
         schemata="Calendar Options",
 	),
 
     BooleanField(
         name='restrictToThisListOfSubjects',
         widget=BooleanWidget(
-            label="Restrict to this list of subjects",
-            description="Display only those subjects listed above",
-            i18n_domain="CalendarX"
+            label=_(u'label_restrictToThisListOfSubjects',
+                    default=u"Restrict to this list of subjects"),
+            description=_(u'help_restrictToThisListOfSubjects',
+                          default=u"Display only those subjects listed above")
             ),
         schemata="Calendar Options",
         default=False
@@ -314,19 +321,24 @@ schema = Schema((
     LinesField(
         name='eventTypes',
         widget=LinesWidget(
-            label="List of event types",
-            description="A list of the portal_types to display in the calendar.",
-            i18n_domain="CalendarX"
+            label=-(u'label_eventTypes',
+                    default=u"List of event types"),
+            description=_(u'help_eventTypes',
+                          default=(u"A list of the portal_types to display "
+                                   u"in the calendar."))
             ),
+        # FIXME: the list could be retrived from types that implement IEvent, or
+        # IATEvent
         schemata="Calendar Options",
 	),
 
     BooleanField(
         name='restrictToThisListOfTypes',
         widget=BooleanWidget(
-            label="Restrict to this list of types",
-            description="Display only those types listed above",
-            i18n_domain="CalendarX"
+            label=_(u'label_restrictToThisListOfTypes',
+                    default=u"Restrict to this list of types"),
+            description=_(u'help_restrictToThisListOfTypes',
+                          default=u"Display only those types listed above")
             ),
         schemata="Calendar Options",
         default=False
@@ -335,19 +347,23 @@ schema = Schema((
     LinesField(
         name='listOfPaths',
         widget=LinesWidget(
-            label="List of paths",
-            description="A list of the paths to look for events.",
-            i18n_domain="CalendarX",
+            label=_(u'label_listOfPaths',
+                    default=u"List of paths"),
+            description=_(u'help_listOfPaths',
+                          default=u"A list of the paths to look for events.")
             ),
+        # FIXME: use a referencebrowserwidget
         schemata="Calendar Options",
 	),
 
     BooleanField(
         name='restrictToThisListOfPaths',
         widget=BooleanWidget(
-            label="Restrict to only these paths",
-            description="Display only events found in the paths above.",
-            i18n_domain="CalendarX"
+            label=_(u'label_restrictToThisListOfPaths',
+                    default=u"Restrict to only these paths"),
+            description=_(u'help_restrictToThisListOfPaths',
+                          default=(u"Display only events found in the paths "
+                                   u"above."))
             ),
         schemata="Calendar Options",
         default=False
@@ -356,10 +372,13 @@ schema = Schema((
     BooleanField(
         name='restrictToThisFolder',
         widget=BooleanWidget(
-            label="Restrict to this folder",
-            description="Display only events found within or beneath the parent folder of this CalendarX instance.",
-            i18n_domain="CalendarX"
-		),
+            label=_(u'label_restrictToThisFolder',
+                    default=u"Restrict to this folder"),
+            description=_(u'help_restrictToThisFolder',
+                          default=(u"Display only events found within or "
+                                   u"beneath the parent folder of this "
+                                   "CalendarX instance."))
+            ),
         schemata="Calendar Options",
         default=False
 	),
@@ -367,9 +386,11 @@ schema = Schema((
     LinesField(
         name='listOfSubjectTitles',
         widget=LinesWidget(
-            label="List of subject titles",
-            description="Provide a list of shorter titles for each of your subjects.",
-            i18n_domain="CalendarX",
+            label=_(u'label_listOfSubjectTitles',
+                     default=u"List of subject titles"),
+            description=_(u'help_listOfSubjectTitles',
+                          default=(u"Provide a list of shorter titles for "
+                                   u"each of your subjects."))
             ),
         schemata="Calendar Options",
 	),
@@ -377,9 +398,10 @@ schema = Schema((
     BooleanField(
         name='useSubjectTitles',
         widget=BooleanWidget(
-            label="Use subject titles",
-            description="Display the subject title defined above.",
-            i18n_domain="CalendarX"
+            label=_(u'label_useSubjectTitles',
+                    default=u"Use subject titles"),
+            description=_(u'help_useSubjectTitles',
+                          default=u"Display the subject title defined above.")
             ),
         schemata="Calendar Options",
         default=False
@@ -390,9 +412,12 @@ schema = Schema((
     BooleanField(
         name='useSubjectIcons',
         widget=BooleanWidget(
-            label="Use Subject Icons",
-            description="If checked, this will cause the views to choose an icon for each event based on the Subject names found in the list.",
-            i18n_domain="CalendarX"
+            label=_(u'label_useSubjectIcons',
+                    default=u"Use Subject Icons"),
+            description=_(u'help_useSubjectIcons',
+                          default=(u"If checked, this will cause the views "
+                                   u"to choose an icon for each event based "
+                                   u"on the Subject names found in the list."))
             ),
         schemata='Event Display Properties',
         default=False
@@ -401,9 +426,10 @@ schema = Schema((
     LinesField(
         name='listOfSubjectIcons',
         widget=LinesWidget(
-            label="Subject Icons",
-            description="The list consists of a lines attribute where each line consists of a Subject and an icon ID, separated by a pipe ( | ) character.	For example: Work|event_work_icon.gif where Work is the subject. Your subject names should (must!) match the actual subjects you use for your events, or this method will not work well.  Actually, it will just pull the default event_icon.gif from the Plone skin if there is any problem finding a matching subject name or icon ID. This property is handy for making your events more visibly recognizable in your calendar page. The default icon size is 16x16 pixels, with some white (or clear) pixel space on the right and left sides.	I haven't tested it with larger icons, but keeping to a modest size might be a good idea. Add your event icons into your /portal_skins/custom folder, or put them directly into your calendar instance folder for (slightly) better performance.",
-            i18n_domain="CalendarX"
+            label=_(u'label_listOfSubjectIcons',
+                    default=u"Subject Icons")
+            description=_(u'help_listOfSubjectIcons',
+                          default=hl.HELP_LISTOFSUBJECTICONS)
             ),
         schemata='Event Display Properties',
 	),
@@ -411,9 +437,12 @@ schema = Schema((
     BooleanField(
         name='useSubjectCSSClasses',
         widget=BooleanWidget(
-            label="Use Subject CSS Classes",
-            description="If checked, this will cause the views to choose a CSS class for each event based on the Subject names found in the list.",
-            i18n_domain="CalendarX"
+            label=_(u'label_useSubjectCSSClasses',
+                    default=u"Use Subject CSS Classes"),
+            description=_(u'help_useSubjectCSSClasses',
+                          default=(u"If checked, this will cause the views to "
+                                   u"choose a CSS class for each event based "
+                                   u"on the Subject names found in the list."))
             ),
         schemata='Event Display Properties',
         default=False
@@ -422,9 +451,10 @@ schema = Schema((
     LinesField(
         name='listOfSubjectCSSClasses',
         widget=LinesWidget(
-            label="Subject CSS Classes",
-            description="The list consists of a lines attribute where each line consists of a Subject and a CSS class name, separated by a pipe ( | ) character.  For example: US Holiday|event_usholiday where Work is the subject, and event_usholiday is the CSS class name. Your subject names should (must!) match the actual subjects you use for your events, or this method will not work well.	 Actually, it will just pull the default event_published CSS class from the Plone skin if there is any problem finding a matching subject name or icon ID. This nicely allows you to apply styles like font color to your event listings according to the Subject of the event.	 Put your custom styles into your calendar.css stylesheet, or into a customized version of the ploneCustom.css stylesheet if you prefer (the sample ones I've created for default use are found in calendar.css). Additionally, if you want the Subjects in the Subject listing at the top of the calendar to reflect these same CSS classes, you have to add these too. Example ones (for Appointment, etc.) are in calendar.css for you to customize. *** ONE MORE NOTE about these.	Make sure in your listOfSubjectCSSClasses and listOfSubjectIcons lines properties that you use the actual SUBJECT name and not any Subject nicknames you might use for display (as defined in the listOfSubjectTitles property in CX_props_calendar. Those labels won't work here, only the actual subject will work. *** AND ONE MORE NOTE.  The following two properties (useEventTypeIcons and useEventTypeCSSClasses) take precedence over useSubjectTypeIcons and useSubjectCSSClasses if, for unknown reasons, BOTH have been selected. There's no real reason to select both... only one can work at a time, and I chose to make the EventType ones take priority.  Go figure.",
-            i18n_domain="CalendarX"
+            label=_(u'label_listOfSubjectCSSClasses',
+                    default=u"Subject CSS Classes"),
+            description=_(u'help_listOfSubjectCSSClasses',
+                          default=hl.HELP_LISTOFSUBJECTCSSCLASSES)
             ),
         schemata='Event Display Properties',
 	),
@@ -432,9 +462,12 @@ schema = Schema((
     BooleanField(
         name='useEventTypeIcons',
         widget=BooleanWidget(
-            label="Use Event Type Icons",
-            description="If checked, this will cause the views to choose an icon for each event based on the Event Type (portal_type).",
-            i18n_domain="CalendarX"
+            label=_(u'label_useEventTypeIcons',
+                    default=u"Use Event Type Icons"),
+            description=_(u'help_useEventTypeIcons',
+                          default=(u"If checked, this will cause the views to "
+                                   u"choose an icon for each event based on "
+                                   u"the Event Type (portal_type)."))
             ),
         schemata='Event Display Properties',
         default=False
@@ -443,9 +476,10 @@ schema = Schema((
     LinesField(
         name='listOfEventTypeIcons',
         widget=LinesWidget(
-            label="Event Type Icons",
-            description="The list consists of a lines attribute where each line consists of an Event Type and an icon ID, separated by a pipe ( | ) character.	For example: Event|event_icon.gif where Event is the portal_type.",
-            i18n_domain="CalendarX"
+            label=_(u'label_listOfEventTypeIcons',
+                    default=u"Event Type Icons"),
+            description=_(u'help_listOfEventTypeIcons',
+                          default=hl.HELP_LISTOFEVENTTYPEICONS)
             ),
         schemata='Event Display Properties',
 	),
@@ -453,9 +487,12 @@ schema = Schema((
     BooleanField(
         name='useEventTypeCSSClasses',
         widget=BooleanWidget(
-            label="Use Event Type CSS Classes",
-            description="If checked, this will cause the views to choose a CSS class for each event based on the Event Type (portal_type).",
-            i18n_domain="CalendarX"
+            label=_(u'label_useEventTypeCSSClasses',
+                    default=u"Use Event Type CSS Classes"),
+            description=_(u'help_useEventTypeCSSClasses',
+                          default=(u"If checked, this will cause the views to "
+                                   u"choose a CSS class for each event based "
+                                   u"on the Event Type (portal_type)."))
             ),
         schemata='Event Display Properties',
         default=False
@@ -464,23 +501,25 @@ schema = Schema((
     LinesField(
         name='listOfEventTypeCSSClasses',
         widget=LinesWidget(
-            label="Event Type CSS Classes",
-            description="The list consists of a lines attribute where each line consists of a Subject and a CSS class name, separated by a pipe ( | ) character.  For example: AT Event|atevent_class where AT Event is the portal_type, and atevent_class is the CSS class name.",
-            i18n_domain="CalendarX"
+            label=_(u'label_listOfEventTypeCSSClasses',
+                    default=u"Event Type CSS Classes"),
+            description=_(u'help_listOfEventTypeCSSClasses',
+                          default=hl.HELP_LISTOFEVENTTYPECSSCLASSES)
             ),
         schemata='Event Display Properties',
 	),
 
-	## End of Event Display Properties ##
+    ## End of Event Display Properties ##
 
-	## Sub Topic Calendar Properties (CX_props_subcalendar_text) ##
+    ## Sub Topic Calendar Properties (CX_props_subcalendar_text) ##
 
     BooleanField(
         name='useSubCalendarSubjectMenu',
         widget=BooleanWidget(
-            label="Sub Calendar Menu",
-            description="For MAIN Calendars: Check this property to signal that (1) there are subcalendars below and (2) hence, use the special SubCalendar Menu for the Subject Links that allows you to both (either) filter on the subcalendars as well as click on the Subject (subcalendar name) to drill down and view that subcalendar alone.",
-            i18n_domain="CalendarX"
+            label=_(u'label_useSubCalendarSubjectMenu',
+                    default=u"Sub Calendar Menu"),
+            description=_(u'help_useSubCalendarSubjectMenu',
+                          default=hl.HELP_USESUBCALENDARSUBJECTMENU)
             ),
         schemata="Sub Calendar Properties",
         default=False
@@ -489,54 +528,68 @@ schema = Schema((
     LinesField(
         name='listOfSubCalendarIDs',
         widget=LinesWidget(
-            label="List of SubCalendar IDs",
-            description="For MAIN Calendars: This is a list (one per line) of the IDs of the subcalendars.  The menu choices uses this list for the URL links to subcalendars.",
-            i18n_domain="CalendarX"
+            label=_(u'label_listOfSubCalendarIDs',
+                    default=u"List of SubCalendar IDs"),
+            description=_(u'help_listOfSubCalendarIDs',
+                          default=(u"For MAIN Calendars: This is a list (one "
+                                   u"per line) of the IDs of the subcalendars. "
+                                   u"The menu choices uses this list for the "
+                                   u"URL links to subcalendars."))
             ),
+        # FIXME: Use a reference browser widget
         schemata="Sub Calendar Properties",
-        default="",
 	),
 
     LinesField(
         name='listOfSubCalendars',
         widget=LinesWidget(
-            label="List of SubCalendar Names",
-            description="For MAIN Calendars: This is a list (one per line) of names (or nicknames) of the subcalendars.  The menu choices uses this list for display of links to the subcalendars. USE THE SAME ORDER AS IN THE List of SubCalendar IDs ABOVE.",
-            i18n_domain="CalendarX"
-            ),
+            label=_(u'label_listOfSubCalendars',
+                    default=u"List of SubCalendar Names"),
+            description=_(u'help_listOfSubCalendars',
+                          default=hl.HELP_LISTOFSUBCALENDARS)
+                ),
         schemata="Sub Calendar Properties",
         default="",
-	),
+        ),
 
     BooleanField(
         name='isSubCalendar',
         widget=BooleanWidget(
-            label="Sub Calendar",
-            description="For SUB Calendars:   Check this property if this CalendarX folder is a subcalendar.  This controls the style of menu displayed for subcalendars versus non-subcalendars.",
-            i18n_domain="CalendarX"
+            label=_(u'label_isSubCalendar',
+                    default=u"Sub Calendar"),
+            description=_(u'help_isSubCalendar',
+                          default=(u"For SUB Calendars: Check this property if "
+                                   u"this CalendarX folder is a subcalendar. "
+                                   u"This controls the style of menu displayed "
+                                   u"for subcalendars versus non-subcalendars."))
             ),
         schemata="Sub Calendar Properties",
         default=False
-	),
+        ),
 
     StringField(
         name='nameOfSubCalendar',
         widget=StringWidget(
-            label="Name of Sub Calendar",
-            description="For SUB Calendars:   The name of this subcalendar.  This is displayed in the Subject Links area on the subcalendar (and is NOT used on the Main calendar).",
-            i18n_domain="CalendarX"
+            label=_(u'label_nameOfSubCalendar',
+                    default=u"Name of Sub Calendar"),
+            description=_(u'help_nameOfSubCalendar',
+                          default=(u"For SUB Calendars: The name of this "
+                                   u"subcalendar. This is displayed in the "
+                                   u"Subject Links area on the subcalendar "
+                                   u"(and is NOT used on the Main calendar)."))
             ),
         schemata="Sub Calendar Properties",
-	),
+        ),
 
     ## End of Sub Calendar Properties (CX_props_subcalendar_text) ##
 
     BooleanField(
         name='showPOPTitle',
         widget=BooleanWidget(
-            label="Show Pop Title",
-            description="Whether to show the Title of the event",
-            i18n_domain="CalendarX"
+            label=_(u'label_showPOPTitle',
+                    default=u"Show Pop Title"),
+            description=_(u'help_showPOPTitle',
+                          default=u"Whether to show the Title of the event")
             ),
         schemata="Pop up Properties",
         default=False
@@ -545,9 +598,12 @@ schema = Schema((
     BooleanField(
         name='showPOPType',
         widget=BooleanWidget(
-            label="Show Pop Type",
-            description="Whether to show the Type string, telling what type of event object is showing up in the calendar",
-            i18n_domain="CalendarX"
+            label=_(u'label_showPOPType',
+                    default=u"Show Pop Type"),
+            description=_(
+                u'help_showPOPType',
+                default=(u"Whether to show the Type string, telling what type "
+                         u"of event object is showing up in the calendar"))
             ),
         schemata="Pop up Properties",
         default=False
@@ -574,6 +630,7 @@ schema = Schema((
         schemata="Pop up Properties",
         default=False
 	),
+
     BooleanField(
         name='showPOPEnd',
         widget=BooleanWidget(
@@ -584,6 +641,7 @@ schema = Schema((
         schemata="Pop up Properties",
         default=False
 	),
+
     BooleanField(
         name='showPOPCreator',
         widget=BooleanWidget(

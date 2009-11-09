@@ -167,3 +167,61 @@ way you might have expected. It pays to read the documentation."""
 HELP_LISTOFSUBJECTS = u"""List of the subjects in your CalendarX, for use in
 creating the macro that displays them on your calendar."""
 
+HELP_LISTOFSUBJECTICONS = """The list consists of a lines attribute where each
+line consists of a Subject and an icon ID, separated by a pipe ( | ) character.
+For example: Work|event_work_icon.gif where Work is the subject. Your subject
+names should (must!) match the actual subjects you use for your events, or this
+method will not work well. Actually, it will just pull the default
+event_icon.gif from the Plone skin if there is any problem finding a matching
+subject name or icon ID. This property is handy for making your events more
+visibly recognizable in your calendar page. The default icon size is 16x16
+pixels, with some white (or clear) pixel space on the right and left sides. I
+haven't tested it with larger icons, but keeping to a modest size might be a
+good idea. Add your event icons into your /portal_skins/custom folder, or put
+them directly into your calendar instance folder for (slightly) better
+performance."""
+
+HELP_LISTOFSUBJECTCSSCLASSES = """The list consists of a lines attribute where
+each line consists of a Subject and a CSS class name, separated by a pipe ( | )
+character. For example: US Holiday|event_usholiday where Work is the subject,
+and event_usholiday is the CSS class name. Your subject names should (must!)
+match the actual subjects you use for your events, or this method will not work
+well. Actually, it will just pull the default event_published CSS class from the
+Plone skin if there is any problem finding a matching subject name or icon ID.
+This nicely allows you to apply styles like font color to your event listings
+according to the Subject of the event. Put your custom styles into your
+calendar.css stylesheet, or into a customized version of the ploneCustom.css
+stylesheet if you prefer (the sample ones I've created for default use are found
+in calendar.css). Additionally, if you want the Subjects in the Subject listing
+at the top of the calendar to reflect these same CSS classes, you have to add
+these too. Example ones (for Appointment, etc.) are in calendar.css for you to
+customize. *** ONE MORE NOTE about these. Make sure in your
+listOfSubjectCSSClasses and listOfSubjectIcons lines properties that you use the
+actual SUBJECT name and not any Subject nicknames you might use for display (as
+defined in the listOfSubjectTitles property in CX_props_calendar. Those labels
+won't work here, only the actual subject will work. *** AND ONE MORE NOTE. The
+following two properties (useEventTypeIcons and useEventTypeCSSClasses) take
+precedence over useSubjectTypeIcons and useSubjectCSSClasses if, for unknown
+reasons, BOTH have been selected. There's no real reason to select both... only
+one can work at a time, and I chose to make the EventType ones take priority. Go
+figure."""
+
+HELP_LISTOFEVENTTYPEICONS = u"""The list consists of a lines attribute where
+each line consists of an Event Type and an icon ID, separated by a pipe ( | )
+character. For example: Event|event_icon.gif where Event is the portal_type."""
+
+HELP_LISTOFEVENTTYPECSSCLASSES = u"""The list consists of a lines attribute
+where each line consists of a Subject and a CSS class name, separated by a pipe
+( | ) character. For example: AT Event|atevent_class where AT Event is the
+portal_type, and atevent_class is the CSS class name."""
+
+HELP_USESUBCALENDARSUBJECTMENU = u"""For MAIN Calendars: Check this property to
+signal that (1) there are subcalendars below and (2) hence, use the special
+SubCalendar Menu for the Subject Links that allows you to both (either) filter
+on the subcalendars as well as click on the Subject (subcalendar name) to drill
+down and view that subcalendar alone."""
+
+HELP_LISTOFSUBCALENDARS = u"""For MAIN Calendars: This is a list (one per line)
+of names (or nicknames) of the subcalendars. The menu choices uses this list for
+display of links to the subcalendars. USE THE SAME ORDER AS IN THE List of
+SubCalendar IDs ABOVE."""
