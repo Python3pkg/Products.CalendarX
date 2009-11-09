@@ -1,8 +1,5 @@
+=========
 Changelog
 =========
 
-0.9.1 - Unreleased
-------------------
-
-* Initial release
-
+See the complete history in ``../Products/CalendarX/docs/HISTORY.txt
