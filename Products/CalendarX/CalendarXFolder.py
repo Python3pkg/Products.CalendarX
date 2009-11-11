@@ -11,12 +11,13 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from Products.Archetypes.BaseFolder import BaseFolder
 
+from Products.SmartColorWidget.Widget import SmartColorWidget
+
 from Products.CalendarX.config import *
-from Products.CalendarX.helplabels as hl
+from Products.CalendarX import helplabels as hl
 from Products.CalendarX import CXMessageFactory as _
 
-# Some looong descriptions
-
+FONTNAME_WIDGET_SIZE = 60
 
 schema = Schema((
 
@@ -33,7 +34,7 @@ schema = Schema((
                     (3, "Wednesday"), (4, "Thursday"), (5, "Friday"),
                     (6, "Saturday",)],
         default=0,
-	),
+        ),
 
     StringField(
         name='defaultView',
@@ -45,7 +46,7 @@ schema = Schema((
             ),
         schemata="Calendar Options",
         default='month',
-	),
+        ),
 
     BooleanField(
         name='useAdvancedQuery',
@@ -55,8 +56,8 @@ schema = Schema((
                           default=hl.HELP_USEADVANCEDQUERY)
             ),
         schemata="Calendar Options",
-		default=True,
-	),
+                default=True,
+        ),
 
     StringField(
         name='dayViewStartHour',
@@ -65,10 +66,10 @@ schema = Schema((
             description=_(u'help_dayViewStartHour',
                           default=hl.HELP_DAYVIEWSTARTHOUR),
 
-		),
+                ),
         schemata="Calendar Options",
         default=8,
-	),
+        ),
 
     StringField(
         name='dayViewEndHour',
@@ -79,7 +80,7 @@ schema = Schema((
             ),
         schemata="Calendar Options",
         default=20,
-	),
+        ),
 
     StringField(
         name='earlyDayEventHour',
@@ -91,7 +92,7 @@ schema = Schema((
             ),
         schemata="Calendar Options",
         default=0,
-	),
+        ),
 
     StringField(
         name='hoursDisplay',
@@ -101,7 +102,7 @@ schema = Schema((
             ),
         schemata="Calendar Options",
         default='12ampm',
-	),
+        ),
 
 
     BooleanField(
@@ -112,7 +113,7 @@ schema = Schema((
             ),
         schemata="Calendar Options",
         default=False,
-	),
+        ),
 
     StringField(
         name='numMonthsForMultiMonthView',
@@ -124,7 +125,7 @@ schema = Schema((
             ),
         schemata="Calendar Options",
         default='3'
-	),
+        ),
 
     BooleanField(
         name='showHeaderTitleAndIcons',
@@ -136,19 +137,19 @@ schema = Schema((
             ),
         schemata="Calendar Options",
         default=False,
-	),
+        ),
 
     BooleanField(
         name='showHighlightFullEvent',
         widget=BooleanWidget(
             label=_(u'label_showHighlightFullEvent',
                     default=u"Show full event highlight"),
-            description=_(u'help_showHighlightFullEvent'
+            description=_(u'help_showHighlightFullEvent',
                           default=hl.HELP_SHOWHILIGHTFULLEVENT)
             ),
         schemata="Calendar Options",
         default=False,
-	),
+        ),
 
     BooleanField(
         name='showJumpToDateWidget',
@@ -160,7 +161,7 @@ schema = Schema((
             ),
         schemata="Calendar Options",
         default=True,
-	),
+        ),
 
     BooleanField(
         name='useNumericMonthInJumpToDateWidget',
@@ -172,7 +173,7 @@ schema = Schema((
             ),
         schemata="Calendar Options",
         default=False
-	),
+        ),
 
     BooleanField(
         name='showPublicPrivateLink',
@@ -184,7 +185,7 @@ schema = Schema((
             ),
         schemata="Calendar Options",
         default=False
-	),
+        ),
 
     BooleanField(
         name='useMultiSubjects',
@@ -196,7 +197,7 @@ schema = Schema((
             ),
         schemata="Calendar Options",
         default=True,
-	),
+        ),
 
     BooleanField(
         name='showSubjectBar',
@@ -207,7 +208,7 @@ schema = Schema((
             ),
         schemata="Calendar Options",
         default=True
-	),
+        ),
 
     BooleanField(
         name='useCalendarHelp',
@@ -218,19 +219,19 @@ schema = Schema((
             ),
         schemata="Calendar Options",
         default=False
-	),
+        ),
 
     BooleanField(
         name='includeReviewStateVisible',
         widget=BooleanWidget(
-            label=_(u'label_includeReviewStateVisible'
+            label=_(u'label_includeReviewStateVisible',
                     default=u"Include 'visible' events"),
-            description=_(u'help_includeReviewStateVisible'
+            description=_(u'help_includeReviewStateVisible',
                           default=hl.HELP_INCLUDEREVIEWSTATEVISIBLE)
             ),
         schemata="Calendar Options",
         default=True
-	),
+        ),
 
     BooleanField(
         name='showPendingLink',
@@ -241,7 +242,7 @@ schema = Schema((
             ),
         schemata="Calendar Options",
         default=False
-	),
+        ),
 
     BooleanField(
         name='showPrivateEventsToGroupMembers',
@@ -253,7 +254,7 @@ schema = Schema((
             ),
         schemata="Calendar Options",
         default=False
-	),
+        ),
 
     LinesField(
         name='listOfReviewStatesDisplayed',
@@ -267,7 +268,7 @@ schema = Schema((
         # FIXME: this may be computed from workflows associated to event types
         # or from a plone.app.vocabulary.
         default= ('published','external','internal','internally_published'),
-	),
+        ),
 
     BooleanField(
         name='showOnlyEventsInMonth',
@@ -279,7 +280,7 @@ schema = Schema((
             ),
         schemata="Calendar Options",
         default=False
-	),
+        ),
 
     BooleanField(
         name='labelEventsOnlyAtStart',
@@ -291,20 +292,20 @@ schema = Schema((
             ),
         schemata="Calendar Options",
         default=True,
-	),
+        ),
 
 
     LinesField(
         name='listOfSubjects',
         widget=LinesWidget(
-            label=_(u'label_listOfSubjects'
+            label=_(u'label_listOfSubjects',
                     default=u"List of subjects"),
             description=_(u'help_listOfSubjects',
                           default=hl.HELP_LISTOFSUBJECTS)
             ),
         # FIXME: The widget should provide a list of available subjects.
         schemata="Calendar Options",
-	),
+        ),
 
     BooleanField(
         name='restrictToThisListOfSubjects',
@@ -316,12 +317,12 @@ schema = Schema((
             ),
         schemata="Calendar Options",
         default=False
-	),
+        ),
 
     LinesField(
         name='eventTypes',
         widget=LinesWidget(
-            label=-(u'label_eventTypes',
+            label=_(u'label_eventTypes',
                     default=u"List of event types"),
             description=_(u'help_eventTypes',
                           default=(u"A list of the portal_types to display "
@@ -330,7 +331,7 @@ schema = Schema((
         # FIXME: the list could be retrived from types that implement IEvent, or
         # IATEvent
         schemata="Calendar Options",
-	),
+        ),
 
     BooleanField(
         name='restrictToThisListOfTypes',
@@ -342,7 +343,7 @@ schema = Schema((
             ),
         schemata="Calendar Options",
         default=False
-	),
+        ),
 
     LinesField(
         name='listOfPaths',
@@ -354,7 +355,7 @@ schema = Schema((
             ),
         # FIXME: use a referencebrowserwidget
         schemata="Calendar Options",
-	),
+        ),
 
     BooleanField(
         name='restrictToThisListOfPaths',
@@ -367,7 +368,7 @@ schema = Schema((
             ),
         schemata="Calendar Options",
         default=False
-	),
+        ),
 
     BooleanField(
         name='restrictToThisFolder',
@@ -381,7 +382,7 @@ schema = Schema((
             ),
         schemata="Calendar Options",
         default=False
-	),
+        ),
 
     LinesField(
         name='listOfSubjectTitles',
@@ -393,7 +394,7 @@ schema = Schema((
                                    u"each of your subjects."))
             ),
         schemata="Calendar Options",
-	),
+        ),
 
     BooleanField(
         name='useSubjectTitles',
@@ -405,7 +406,7 @@ schema = Schema((
             ),
         schemata="Calendar Options",
         default=False
-	),
+        ),
 
     ## Event Display Properties (CX_props_eventdisplays_text) ##
 
@@ -421,18 +422,18 @@ schema = Schema((
             ),
         schemata='Event Display Properties',
         default=False
-	),
+        ),
 
     LinesField(
         name='listOfSubjectIcons',
         widget=LinesWidget(
             label=_(u'label_listOfSubjectIcons',
-                    default=u"Subject Icons")
+                    default=u"Subject Icons"),
             description=_(u'help_listOfSubjectIcons',
                           default=hl.HELP_LISTOFSUBJECTICONS)
             ),
         schemata='Event Display Properties',
-	),
+        ),
 
     BooleanField(
         name='useSubjectCSSClasses',
@@ -446,7 +447,7 @@ schema = Schema((
             ),
         schemata='Event Display Properties',
         default=False
-	),
+        ),
 
     LinesField(
         name='listOfSubjectCSSClasses',
@@ -457,7 +458,7 @@ schema = Schema((
                           default=hl.HELP_LISTOFSUBJECTCSSCLASSES)
             ),
         schemata='Event Display Properties',
-	),
+        ),
 
     BooleanField(
         name='useEventTypeIcons',
@@ -471,7 +472,7 @@ schema = Schema((
             ),
         schemata='Event Display Properties',
         default=False
-	),
+        ),
 
     LinesField(
         name='listOfEventTypeIcons',
@@ -482,7 +483,7 @@ schema = Schema((
                           default=hl.HELP_LISTOFEVENTTYPEICONS)
             ),
         schemata='Event Display Properties',
-	),
+        ),
 
     BooleanField(
         name='useEventTypeCSSClasses',
@@ -496,7 +497,7 @@ schema = Schema((
             ),
         schemata='Event Display Properties',
         default=False
-	),
+        ),
 
     LinesField(
         name='listOfEventTypeCSSClasses',
@@ -507,7 +508,7 @@ schema = Schema((
                           default=hl.HELP_LISTOFEVENTTYPECSSCLASSES)
             ),
         schemata='Event Display Properties',
-	),
+        ),
 
     ## End of Event Display Properties ##
 
@@ -523,7 +524,7 @@ schema = Schema((
             ),
         schemata="Sub Calendar Properties",
         default=False
-	),
+        ),
 
     LinesField(
         name='listOfSubCalendarIDs',
@@ -538,7 +539,7 @@ schema = Schema((
             ),
         # FIXME: Use a reference browser widget
         schemata="Sub Calendar Properties",
-	),
+        ),
 
     LinesField(
         name='listOfSubCalendars',
@@ -593,7 +594,7 @@ schema = Schema((
             ),
         schemata="Pop up Properties",
         default=False
-	),
+        ),
 
     BooleanField(
         name='showPOPType',
@@ -607,7 +608,7 @@ schema = Schema((
             ),
         schemata="Pop up Properties",
         default=False
-	),
+        ),
 
     BooleanField(
         name='showPOPSubject',
@@ -619,7 +620,7 @@ schema = Schema((
                           default=u"Whether to show the Subject of the event")
             ),
         schemata="Pop up Properties",
-	),
+        ),
 
     BooleanField(
         name='showPOPStart',
@@ -633,7 +634,7 @@ schema = Schema((
             ),
         schemata="Pop up Properties",
         default=False
-	),
+        ),
 
     BooleanField(
         name='showPOPEnd',
@@ -647,7 +648,7 @@ schema = Schema((
             ),
         schemata="Pop up Properties",
         default=False
-	),
+        ),
 
     BooleanField(
         name='showPOPCreator',
@@ -662,7 +663,7 @@ schema = Schema((
             ),
         schemata="Pop up Properties",
         default=False
-	),
+        ),
 
     BooleanField(
         name='showPOPCreated',
@@ -676,7 +677,7 @@ schema = Schema((
             ),
         schemata="Pop up Properties",
         default=False
-	),
+        ),
 
     BooleanField(
         name='showPOPModified',
@@ -691,7 +692,7 @@ schema = Schema((
             ),
         schemata="Pop up Properties",
         default=False
-	),
+        ),
 
     BooleanField(
         name='showPOPState',
@@ -706,7 +707,7 @@ schema = Schema((
             ),
         schemata="Pop up Properties",
         default=False
-	),
+        ),
 
     BooleanField(
         name='showPOPDescription',
@@ -719,7 +720,7 @@ schema = Schema((
                 default=u"Whether to show the Description of the event")
             ),
         schemata="Pop up Properties",
-	),
+        ),
 
     ## Add Event Link Properties (CX_props_addeventlink) ##
 
@@ -733,7 +734,7 @@ schema = Schema((
             ),
         schemata='Add Event Link Properties',
         default=False
-	),
+        ),
 
     BooleanField(
         name='useCreateObjectOnClick',
@@ -745,7 +746,7 @@ schema = Schema((
             ),
         schemata='Add Event Link Properties',
         default=True
-	),
+        ),
 
     StringField(
         name='createObjectOnClickCommand',
@@ -756,7 +757,7 @@ schema = Schema((
                           default=hl.HELP_CREATEOBJECTONCLICKCOMMAND)
             ),
         schemata='Add Event Link Properties',
-	),
+        ),
 
     BooleanField(
         name='useMemberFolder',
@@ -768,7 +769,7 @@ schema = Schema((
             ),
         schemata='Add Event Link Properties',
         default=True
-	),
+        ),
 
     BooleanField(
         name='useMemberSubfolder',
@@ -780,7 +781,7 @@ schema = Schema((
             ),
         schemata='Add Event Link Properties',
         default=False
-	),
+        ),
 
     StringField(
         name='memberSubfolderPath',
@@ -792,7 +793,7 @@ schema = Schema((
             ),
         schemata='Add Event Link Properties',
         default="/subfoldername"
-	),
+        ),
 
     BooleanField(
         name='useANEFolder',
@@ -807,7 +808,7 @@ schema = Schema((
             ),
         schemata='Add Event Link Properties',
         default=False
-	),
+        ),
 
     StringField(
         name='ANEFolderPath',
@@ -824,7 +825,7 @@ schema = Schema((
         # FIXME: We should use a reference browser widget for this.
         schemata='Add Event Link Properties',
         default="/thecalendar/thefolderofevents"
-	),
+        ),
 
     BooleanField(
         name='useUsersAndFolders',
@@ -842,7 +843,7 @@ schema = Schema((
             ),
         schemata='Add Event Link Properties',
         default=False,
-	),
+        ),
 
     LinesField(
         name='listOfUsersAndFolders',
@@ -854,7 +855,7 @@ schema = Schema((
             ),
         schemata='Add Event Link Properties',
         default="",
-	),
+        ),
 
     BooleanField(
         name='useRolesAndFolders',
@@ -872,7 +873,7 @@ schema = Schema((
             ),
         schemata='Add Event Link Properties',
         default=False,
-	),
+        ),
 
     LinesField(
         name='listOfRolesAndFolders',
@@ -884,13 +885,13 @@ schema = Schema((
             ),
         schemata='Add Event Link Properties',
         default="",
-	),
+        ),
 
     ## Add CSS Properties (CX_props_css) ##
 
     StringField(
         name='viewTabsBorderColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_viewTabsBorderColor',
                     default=u"View tabs border color"),
             description=_(
@@ -904,22 +905,20 @@ schema = Schema((
                 )
             ),
         schemata='CSS Properties',
-        # FIXME: use Products.ColorField
         default="#8cacbb"
-	),
+        ),
 
     StringField(
         name='viewTabsBackgroundColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_viewTabsBackgroundColor',
                     default=u"View tabs background color"),
             description=_(u'help_viewTabsBackgroundColor',
                           default=u"View tabs background color")
             ),
         schemata='CSS Properties',
-        # FIXME: use Products.ColorField
         default="#dee7ec"
-	),
+        ),
 
     StringField(
         name='viewFontBaseSize',
@@ -932,7 +931,7 @@ schema = Schema((
         schemata='CSS Properties',
         # FIWME: use a slider widget
         default="95%"
-	),
+        ),
 
     StringField(
         name='viewFontFamily',
@@ -943,25 +942,24 @@ schema = Schema((
                           default=u"View tabs font family")
             ),
         schemata='CSS Properties',
-        default='"Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif'
-	),
+        default=DEFAULT_FONTS
+        ),
 
     StringField(
         name='viewTabsFontColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_viewTabsFontColor',
                     default=u"View tabs font color"),
             description=_(u'help_viewTabsFontColor',
                           default=u"View tabs font color")
             ),
         schemata='CSS Properties',
-        # FIXME: use Products.ColorField
         default="#436976"
-	),
+        ),
 
     StringField(
         name='subjectBarBorderColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_subjectBarBorderColor',
                     default=u"Color of the border around the subject bar"),
             description=_(
@@ -974,25 +972,23 @@ schema = Schema((
                 )
             ),
         schemata='CSS Properties',
-        # FIXME: use Products.ColorField
         default="#436976"
-	),
+        ),
 
     StringField(
         name='subjectBarBackgroundColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_subjectBarBackgroundColor',
                     default=(
                         u"Color of the background for subject bar and "
                         u"My:Public bar"
-                        ))
+                        )),
             description=_(u'help_subjectBarBackgroundColor',
                           default=u"")
             ),
         schemata='CSS Properties',
-        # FIXME: use Products.ColorField
         default="#dee7ec"
-	),
+        ),
 
     StringField(
         name='subjectFontFamily',
@@ -1004,8 +1000,8 @@ schema = Schema((
                           default=u"")
             ),
         schemata='CSS Properties',
-        default='"Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif'
-	),
+        default=DEFAULT_FONTS
+        ),
 
     StringField(
         name='subjectFontSize',
@@ -1017,20 +1013,19 @@ schema = Schema((
             ),
         schemata='CSS Properties',
         default="97%"
-	),
+        ),
 
     StringField(
         name='subjectBarFontColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_subjectBarFontColor',
                     default=u"Font Color for the subject bar and My:Public bar"),
             description=_(u'help_subjectBarFontColor',
                           default=u"")
             ),
         schemata='CSS Properties',
-        # FIXME: use Products.ColorField
         default="#436976"
-	),
+        ),
 
     StringField(
         name='headerCenterFontSize',
@@ -1042,7 +1037,7 @@ schema = Schema((
             ),
         schemata='CSS Properties',
         default="135%"
-	),
+        ),
 
     StringField(
         name='headerSideFontSize',
@@ -1054,7 +1049,7 @@ schema = Schema((
             ),
         schemata='CSS Properties',
         default="93%"
-	),
+        ),
 
     StringField(
         name='headerFontFamily',
@@ -1062,26 +1057,25 @@ schema = Schema((
             label=_(
                 u'label_headerFontFamily',
                 default=(u'Font Family name for "prevnextcurrentlinks" macro')
-                )
+                ),
             description=_(u'help_headerFontFamily',
                           default=u"(prev, next, date header, footer)")
             ),
         schemata='CSS Properties',
-        default='Verdana, Helvetica, Arial, sans-serif'
-	),
+        default=DEFAULT_FONTS
+        ),
 
     StringField(
         name='headerFontColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_headerFontColor',
                     default=u"Color of the font for header"),
             description=_(u'help_headerFontColor',
                           default=u"(prev, next, date header, footer)")
             ),
         schemata='CSS Properties',
-        # FIXME: use Products.ColorField
         default="#436976"
-	),
+        ),
 
     StringField(
         name='headerHeight',
@@ -1095,7 +1089,7 @@ schema = Schema((
             ),
         schemata='CSS Properties',
         default="0px"
-	),
+        ),
 
     StringField(
         name='headerMarginBottom',
@@ -1109,7 +1103,7 @@ schema = Schema((
             ),
         schemata='CSS Properties',
         default="0px"
-	),
+        ),
 
     StringField(
         name='headerMarginTop',
@@ -1122,7 +1116,7 @@ schema = Schema((
             ),
         schemata='CSS Properties',
         default="0px"
-	),
+        ),
 
     StringField(
         name='headerPadding',
@@ -1153,7 +1147,7 @@ schema = Schema((
             ),
         schemata='CSS Properties',
         default="90%"
-	),
+        ),
 
     StringField(
         name='continuingHeaderFontFamily',
@@ -1164,21 +1158,20 @@ schema = Schema((
                           default=u"")
             ),
         schemata='CSS Properties',
-        default="Verdana, Helvetica, Arial, sans-serif"
-	),
+        default=DEFAULT_FONTS
+        ),
 
     StringField(
         name='continuingOuterBorderColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_continuingOuterBorderColor',
                     default=u"Continuing events box, outer border color"),
             description=_(u'help_continuingOuterBorderColor',
                           default=u"")
             ),
         schemata='CSS Properties',
-        # FIXME: Use Products.ColorField
-        default="#B3CFD9"
-	),
+        default="#b3cfd9"
+        ),
 
     StringField(
         name='continuingOuterBorderWidth',
@@ -1190,20 +1183,19 @@ schema = Schema((
             ),
         schemata='CSS Properties',
         default="1px"
-	),
+        ),
 
     StringField(
         name='continuingHeaderBorderColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_continuingHeaderBorderColor',
                     default=u"Continuing events box, inner border color"),
             description=_(u'help_continuingHeaderBorderColor',
                           default=u"")
             ),
         schemata='CSS Properties',
-        # FIXME: Use Products.ColorField
         default="#436976"
-	),
+        ),
 
     StringField(
         name='continuingHeaderBorderWidth',
@@ -1215,45 +1207,42 @@ schema = Schema((
             ),
         schemata='CSS Properties',
         default="1px"
-	),
+        ),
 
     StringField(
         name='continuingHeaderBackgroundColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_continuingHeaderBackgroundColor',
                     default=u"Continuing events box, background color"),
             description=_(u'help_continuingHeaderBackgroundColor',
                           default=u"")
             ),
         schemata='CSS Properties',
-        # FIXME: Use Products.ColorField
-        default="#8CACBB"
-	),
+        default="#8cacbb"
+        ),
 
     StringField(
         name='continuingRowEventBackgroundColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_continuingRowEventBackgroundColor',
                     default=u"Continuing events box, color if an event is present"),
             description=_(u'help_continuingRowEventBackgroundColor',
                           default=u"")
             ),
         schemata='CSS Properties',
-        # FIXME: Use Products.ColorField
-        default="#DEE7EC"
-	),
+        default="#dee7ec"
+        ),
 
     StringField(
         name='continuingRowNoEventBackgroundColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_continuingRowNoEventBackgroundColor',
                     default=u"Continuing events box, color if no event"),
             description=_(u'help_continuingRowNoEventBackgroundColor',
                           default=u"")
             ),
         schemata='CSS Properties',
-        # FIXME: Use Products.ColorField
-        default="#F7F9FA"
+        default="#f7f9fa"
         ),
 
     StringField(
@@ -1264,17 +1253,17 @@ schema = Schema((
                 default=(
                     u"Continuing events box, row height, added to event bottom"
                     )
-                )
+                ),
             description=_(u'help_continuingRowHeight',
                           default=u"")
             ),
         schemata='CSS Properties',
         default="5px"
-	),
+        ),
 
     StringField(
         name='calBorderColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_calBorderColor',
                     default=u"Main calendar, border color"),
             description=_(
@@ -1286,9 +1275,8 @@ schema = Schema((
                 )
             ),
         schemata='CSS Properties',
-        # FIXME: Use Products.ColorField
-        default="#B3CFD9"
-	),
+        default="#b3cfd9"
+        ),
 
     StringField(
         name='calBorderWidth',
@@ -1300,11 +1288,11 @@ schema = Schema((
             ),
         schemata='CSS Properties',
         default="1px"
-	),
+        ),
 
     StringField(
         name='calTableRowOddBackgroundColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_calTableRowOddBackgroundColor',
                     default=u"Odd row background color for TR tags"),
             description=_(
@@ -1316,13 +1304,12 @@ schema = Schema((
                 )
             ),
         schemata='CSS Properties',
-        # FIXME: Use Products.ColorField
-        default="#F7F9FA"
-	),
+        default="#f7f9fa"
+        ),
 
     StringField(
         name='calTableRowEvenBackgroundColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_calTableRowEvenBackgroundColor',
                     default=u"Even row background color for TR tags"),
             description=_(
@@ -1334,35 +1321,32 @@ schema = Schema((
                 )
             ),
         schemata='CSS Properties',
-        # FIXME: Use Products.ColorField
-        default="#DEE7EC"
-	),
+        default="#dee7ec"
+        ),
 
     StringField(
         name='calTableHeaderBackgroundColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_calTableHeaderBackgroundColor',
                     default=u"Background color for TH tags"),
             description=_(u'help_calTableHeaderBackgroundColor',
                           default=u"Main calendar, TH tags background color.")
             ),
         schemata='CSS Properties',
-        # FIXME: Use Products.ColorField
-        default="#8CACBB"
-	),
+        default="#8cacbb"
+        ),
 
     StringField(
         name='calTableHeaderBorderColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_calTableHeaderBorderColor',
                     default=u"Border color for TH tags"),
             description=_(u'help_calTableHeaderBorderColor',
                           default=u"Main calendar,  TH tags border color.")
             ),
         schemata='CSS Properties',
-        # FIXME: Use Products.ColorField
         default="#436976"
-	),
+        ),
 
     StringField(
         name='calTableHeaderBorderWidth',
@@ -1374,20 +1358,19 @@ schema = Schema((
             ),
         schemata='CSS Properties',
         default="1px"
-	),
+        ),
 
     StringField(
         name='calTableHeaderFontColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_calTableHeaderFontColor',
                     default=u"Font color for TH tags"),
             description=_(u'help_calTableHeaderFontColor',
                           default=u"Main calendar,  TH tags font color.")
             ),
         schemata='CSS Properties',
-        # FIXME: Use Products.ColorField
-        default="#FFFFFF"
-	),
+        default="#ffffff"
+        ),
 
     StringField(
         name='calEventFontSize',
@@ -1401,7 +1384,7 @@ schema = Schema((
             ),
         schemata='CSS Properties',
         default="85%"
-	),
+        ),
 
     StringField(
         name='calEventFontFamily',
@@ -1413,12 +1396,12 @@ schema = Schema((
                 default=u"Main calendar, font family for the event listings.")
             ),
         schemata='CSS Properties',
-        default="Verdana, Helvetica, Arial, sans-serif"
-	),
+        default=DEFAULT_FONTS
+        ),
 
     StringField(
         name='calEventPendingTextColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_calEventPendingTextColor',
                     default=u"Pending event text color"),
             description=_(
@@ -1428,13 +1411,13 @@ schema = Schema((
                 )
             ),
         schemata='CSS Properties',
-        # FIXME: Use Products.ColorField
         default='#436976'
-	),
+        ),
+
 
     StringField(
         name='calEventPrivateTextColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_calEventPrivateTextColor',
                     default=u"Private event text color"),
             description=_(
@@ -1445,13 +1428,12 @@ schema = Schema((
                 )
             ),
         schemata='CSS Properties',
-        # FIXME: Use Products.ColorField
         default='#821513'
-	),
+        ),
 
     StringField(
         name='calEventPublishedTextColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_calEventPublishedTextColor',
                     default=u"Published event text color"),
             description=_(
@@ -1461,13 +1443,12 @@ schema = Schema((
                 )
             ),
         schemata='CSS Properties',
-        # FIXME: Use Products.ColorField
-        default='#466A06'
-	),
+        default='#466a06'
+        ),
 
     StringField(
         name='calEventVisibleTextColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_calEventVisibleTextColor',
                     default=u"Visible event text color"),
             description=_(
@@ -1478,13 +1459,12 @@ schema = Schema((
                 )
             ),
         schemata='CSS Properties',
-        # FIXME: Use Products.ColorField
         default='#436976'
-	),
+        ),
 
     StringField(
         name='calTableDataFontColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_calTableDataFontColor',
                     default=u"Font color for daily calendar cell"),
             description=_(
@@ -1494,22 +1474,20 @@ schema = Schema((
                 )
             ),
         schemata='CSS Properties',
-        # FIXME: Use Products.ColorField
         default='#000000'
-	),
+        ),
 
     StringField(
         name='calTableDataBorderColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_calTableDataBorderColor',
                     default=u"Border color for daily calendar cell"),
             description=_(u'help_calTableDataBorderColor',
                           default=u'Main calendar, TD tag border color.')
             ),
         schemata='CSS Properties',
-        # FIXME: Use Products.ColorField
-        default='#DEE7EC'
-	),
+        default='#dee7ec'
+        ),
 
     StringField(
         name='calTableDataBorderWidth',
@@ -1521,11 +1499,11 @@ schema = Schema((
             ),
         schemata='CSS Properties',
         default='1px'
-	),
+        ),
 
     StringField(
         name='calTableDataNoEventBackgroundColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_calTableDataNoEventBackgroundColor',
                     default=(u"Background color for daily calendar cell with"
                              u"no event")),
@@ -1534,13 +1512,12 @@ schema = Schema((
                 default=u'Main calendar, color when a cell has NO EVENT.')
             ),
         schemata='CSS Properties',
-        # FIXME: Use Products.ColorField
-        default='#F7F9FA'
-	),
+        default='#f7f9fa'
+        ),
 
     StringField(
         name='calTableDataEventBackgroundColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(
                 u'label_calTableDataEventBackgroundColor',
                 default=u"Background color for daily calendar cell with Events"
@@ -1555,13 +1532,12 @@ schema = Schema((
                 )
             ),
         schemata='CSS Properties',
-        # FIXME: Use Products.ColorField
-        default="#DEE7EC"
-	),
+        default="#dee7ec"
+        ),
 
     StringField(
         name='calTableDataOutOfMonthBackgroundColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_calTableDataOutOfMonthBackgroundColor',
                     default=u"Background color for out-of-month calendar cell"),
             description=_(
@@ -1575,13 +1551,12 @@ schema = Schema((
                 )
             ),
         schemata='CSS Properties',
-        # FIXME: Use Products.ColorField
-        default='#FFFFFF'
-	),
+        default='#ffffff'
+        ),
 
     StringField(
         name='calTableDataOutOfMonthBorderColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_calTableDataOutOfMonthBorderColor',
                     default=u"Border color for out-of-month calendar cell"),
             description=_(
@@ -1593,9 +1568,8 @@ schema = Schema((
                 )
             ),
         schemata='CSS Properties',
-        # FIXME: Use Products.ColorField
-        default='#F7F9FA'
-	),
+        default='#f7f9fa'
+        ),
 
     StringField(
         name='calTableDataOutOfMonthBorderWidth',
@@ -1612,11 +1586,11 @@ schema = Schema((
             ),
         schemata='CSS Properties',
         default='1px'
-	),
+        ),
 
     StringField(
         name='calTableDataSpanDayFontColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(
                 u'label_calTableDataSpanDayFontColor',
                 default=u"Font color for date in month view daily calendar cell"
@@ -1629,9 +1603,8 @@ schema = Schema((
                 )
             ),
         schemata='CSS Properties',
-        # FIXME: Use Products.ColorField
         default='#000000'
-	),
+        ),
 
     StringField(
         name='calTableDataHeightMonthView',
@@ -1648,7 +1621,7 @@ schema = Schema((
             ),
         schemata='CSS Properties',
         default='105px'
-	),
+        ),
 
     StringField(
         name='calTableDataHeightDayView',
@@ -1663,7 +1636,7 @@ schema = Schema((
             ),
         schemata='CSS Properties',
         default='35px'
-	),
+        ),
 
     StringField(
         name='calTableDataHeightWeekbydayView',
@@ -1684,7 +1657,7 @@ schema = Schema((
             ),
         schemata='CSS Properties',
         default='105px'
-	),
+        ),
 
     StringField(
         name='calTableDataHeightWeekbyhourView',
@@ -1700,7 +1673,7 @@ schema = Schema((
             ),
         schemata='CSS Properties',
         default='30px'
-	),
+        ),
 
     StringField(
         name='calTableDataFontSizeHour',
@@ -1718,14 +1691,14 @@ schema = Schema((
             ),
         schemata='CSS Properties',
         default='130%'
-	),
+        ),
 
     StringField(
         name='calTableDataEventHighlightBackgroundColor',
-        widget=StringWidget(
+        widget=SmartColorWidget(
             label=_(u'label_calTableDataEventHighlightBackgroundColor',
                     default=(u"Background color for event rollover in daily "
-                             u"calendar cell"))
+                             u"calendar cell")),
             description=_(
                 u'help_calTableDataEventHighlightBackgroundColor',
                 default=(
@@ -1736,11 +1709,10 @@ schema = Schema((
                 )
             ),
         schemata='CSS Properties',
-        # FIXME: Use Products.ColorField
-        default='#FFE7C4'
-	),
+        default='#ffe7c4'
+        ),
 
-	## End of Schema Properties  ##
+        ## End of Schema Properties  ##
 
     ),
 )
@@ -1752,8 +1724,10 @@ class CalendarXFolder(BaseFolder):
     Based on Archetypes, it has many configurable properties.
     """
     security = ClassSecurityInfo()
+    # FIXME: Always use Zope 2 interfaces?
     __implements__ = (BaseFolder.__implements__, (),)
 
+    # FIXME: remove below stuffs already handled by GenericSetup
     # This name appears in the 'add' box
     archetype_name = 'CalendarX'
 

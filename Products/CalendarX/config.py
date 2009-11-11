@@ -37,16 +37,17 @@ __docformat__ = 'plaintext'
 # AppConfig.py in your product's root directory. The items in there
 # will be included (by importing) in this file if found.
 
-from Products.CMFCore.permissions import setDefaultRoles
+from Products.CMFCore.permissions import setDefaultRoles, AddPortalContent
 
 ##code-section config-head #fill in your manual code here
 ##/code-section config-head
 
 
 PROJECTNAME = "CalendarX"
+I18N_DOMAIN = PROJECTNAME.lower()
 
 # Permissions
-DEFAULT_ADD_CONTENT_PERMISSION = "Add portal content"
+DEFAULT_ADD_CONTENT_PERMISSION = AddPortalContent
 setDefaultRoles(DEFAULT_ADD_CONTENT_PERMISSION, ('Manager', 'Owner'))
 
 product_globals = globals()
@@ -73,7 +74,10 @@ JAVASCRIPTS = []
 
 
 # Load custom configuration not managed by archgenxml
+# FIXME: is this always on topic ?
 try:
     from Products.CalendarX.AppConfig import *
 except ImportError:
     pass
+
+DEFAULT_FONTS = '"Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif'

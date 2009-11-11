@@ -20,7 +20,7 @@ macroName = name
 macrosheetlist = getattr(context,'skinMacros','no such sheet list found')
 for sheet in macrosheetlist:
     macrosheet = getattr(context,sheet,'no such macro sheet found')
-    try: 
+    try:
         pathy = macrosheet.macros[macroName]
         break #break after finding a successful match
     except:

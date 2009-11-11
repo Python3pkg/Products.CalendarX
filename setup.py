@@ -52,6 +52,7 @@ setup(
     install_requires=[
         'setuptools',
         # -*- Extra requirements: -*-
+        'Products.SmartColorWidget'
         ],
     entry_points="""
     # -*- Entry points: -*-

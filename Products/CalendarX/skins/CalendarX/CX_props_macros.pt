@@ -254,7 +254,7 @@
             <select name="jumpyear">
               <option
                  tal:repeat="year python:range(currentDate.year()-4,currentDate.year()+6)"
-                 tal:attributes="selected python:year == currentDate.year() ornothing;
+                 tal:attributes="selected python:year == currentDate.year() or nothing;
                                  value python:year;"
                  tal:content="python:year">
                 2010
