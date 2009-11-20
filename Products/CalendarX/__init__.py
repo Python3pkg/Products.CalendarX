@@ -28,14 +28,6 @@ __author__ = """unknown <unknown>"""
 __docformat__ = 'plaintext'
 
 
-# There are three ways to inject custom code here:
-#
-#   - To set global configuration variables, create a file AppConfig.py.
-#       This will be imported in config.py, which in turn is imported in
-#       each generated class and in this file.
-#   - To perform custom initialisation after types have been registered,
-#       use the protected code section at the bottom of initialize().
-
 import logging
 logger = logging.getLogger('CalendarX')
 logger.debug('Installing Product')
@@ -62,14 +54,11 @@ DirectoryView.registerDirectory('skins', product_globals)
 DirectoryView.registerDirectory('skins/CalendarX',
                                 product_globals)
 
-##code-section custom-init-head #fill in your manual code here
-##/code-section custom-init-head
 
 
 def initialize(context):
-    ##code-section custom-init-top #fill in your manual code here
-    ##/code-section custom-init-top
-
+    """Zope and Plone factories registrations
+    """
     # imports packages and types for registration
 
     import CalendarXFolder
@@ -87,15 +76,4 @@ def initialize(context):
         fti=ftis,
         ).initialize(context)
 
-    profile_registry.registerProfile(
-        name='default',
-        title=PROJECTNAME,
-        description='Profile for CalendarX',
-        path='profiles/default',
-        product='CalendarX',
-        profile_type=EXTENSION,
-        for_=Products.CMFPlone.interfaces.IPloneSiteRoot)
-
-    ##code-section custom-init-bottom #fill in your manual code here
-    ##/code-section custom-init-bottom
     return
