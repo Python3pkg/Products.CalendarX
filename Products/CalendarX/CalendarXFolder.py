@@ -6,6 +6,8 @@
 __author__ = 'Lupa Zurven <lupa@zurven.com>'
 __docformat__ = 'plaintext'
 
+from zope.interface import implements
+
 from Products.CMFCore import permissions
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
@@ -14,6 +16,7 @@ from Products.Archetypes.BaseFolder import BaseFolder
 from Products.SmartColorWidget.Widget import SmartColorWidget
 
 from Products.CalendarX.config import *
+from Products.CalendarX.interfaces import ICalendarX
 from Products.CalendarX import helplabels as hl
 from Products.CalendarX import CXMessageFactory as _
 
@@ -30,6 +33,7 @@ schema = Schema((
                                    u" the Month and Week views begin on.")),
             ),
         schemata="Calendar Options",
+        # FIXME: This should be i18nized
         vocabulary=[(0, "Sunday"), (1, "Monday"), (2, "Tuesday"),
                     (3, "Wednesday"), (4, "Thursday"), (5, "Friday"),
                     (6, "Saturday",)],
@@ -45,6 +49,7 @@ schema = Schema((
                                    u"month, weekbyday, weekbyhour, or day.")),
             ),
         schemata="Calendar Options",
+        # FIXME: Use an i18n vocabulary
         default='month',
         ),
 
@@ -56,7 +61,8 @@ schema = Schema((
                           default=hl.HELP_USEADVANCEDQUERY)
             ),
         schemata="Calendar Options",
-                default=True,
+        # FIXME: AdvancedQuery is in Plone 3 standard bundle. This should always be true.
+        default=True,
         ),
 
     StringField(
@@ -100,6 +106,7 @@ schema = Schema((
             label=_(u'label_hoursDisplay', default=u"Hours Display"),
             description=_(u'help_hoursDisplay', default=hl.HELP_HOURSDISPLAY)
             ),
+        # FIXME: Use a vocabulary with 12ampm and 24:00 or use a boolean.
         schemata="Calendar Options",
         default='12ampm',
         ),
@@ -303,7 +310,7 @@ schema = Schema((
             description=_(u'help_listOfSubjects',
                           default=hl.HELP_LISTOFSUBJECTS)
             ),
-        # FIXME: The widget should provide a list of available subjects.
+        # FIXME: The widget should provide a list of available subjects in a vocabulary
         schemata="Calendar Options",
         ),
 
@@ -394,6 +401,7 @@ schema = Schema((
                                    u"each of your subjects."))
             ),
         schemata="Calendar Options",
+        # FIXME: Ask to Lupa what this is, provide a better widget.
         ),
 
     BooleanField(
@@ -433,6 +441,7 @@ schema = Schema((
                           default=hl.HELP_LISTOFSUBJECTICONS)
             ),
         schemata='Event Display Properties',
+        # FIXME: provide a more controlled user friendly widget (DataGridField/Widget ?)
         ),
 
     BooleanField(
@@ -458,6 +467,7 @@ schema = Schema((
                           default=hl.HELP_LISTOFSUBJECTCSSCLASSES)
             ),
         schemata='Event Display Properties',
+        # FIXME: Provide another controlled widget (DataGridField/Widget ?)
         ),
 
     BooleanField(
@@ -483,6 +493,7 @@ schema = Schema((
                           default=hl.HELP_LISTOFEVENTTYPEICONS)
             ),
         schemata='Event Display Properties',
+        # FIXME: Provide another controlled widget (DataGridField/Widget ?)
         ),
 
     BooleanField(
@@ -508,6 +519,7 @@ schema = Schema((
                           default=hl.HELP_LISTOFEVENTTYPECSSCLASSES)
             ),
         schemata='Event Display Properties',
+        # FIXME: Provide another controlled widget (DataGridField/Widget ?)
         ),
 
     ## End of Event Display Properties ##
@@ -551,6 +563,8 @@ schema = Schema((
                 ),
         schemata="Sub Calendar Properties",
         default="",
+        # FIXME: Ask to Lupa if this does not conflict with above field. I don't really
+        # understand why there are 2 AT fields for the (apparently) same thing.
         ),
 
     BooleanField(
@@ -566,6 +580,8 @@ schema = Schema((
             ),
         schemata="Sub Calendar Properties",
         default=False
+        # FIXME: this should be useless. Use Zope 3 event when a calendar is created
+        # to determine if in a main or sub calendar.
         ),
 
     StringField(
@@ -580,6 +596,7 @@ schema = Schema((
                                    u"(and is NOT used on the Main calendar)."))
             ),
         schemata="Sub Calendar Properties",
+        # FIXME: why not using the standard Title ?
         ),
 
     ## End of Sub Calendar Properties (CX_props_subcalendar_text) ##
@@ -757,6 +774,7 @@ schema = Schema((
                           default=hl.HELP_CREATEOBJECTONCLICKCOMMAND)
             ),
         schemata='Add Event Link Properties',
+        # FIXME: Replace with a i18n combo box that lists the IEvent compatible types
         ),
 
     BooleanField(
@@ -793,6 +811,7 @@ schema = Schema((
             ),
         schemata='Add Event Link Properties',
         default="/subfoldername"
+        # FIXME: This should be a ATReferenceBrowserWidget
         ),
 
     BooleanField(
@@ -855,6 +874,7 @@ schema = Schema((
             ),
         schemata='Add Event Link Properties',
         default="",
+        # FIXME: Use a DataGridField
         ),
 
     BooleanField(
@@ -884,6 +904,7 @@ schema = Schema((
                           default=hl.HELP_LISTOFROLESANDFOLDERS)
             ),
         schemata='Add Event Link Properties',
+        # FIXME: Use a DataGridField
         default="",
         ),
 
@@ -929,7 +950,7 @@ schema = Schema((
                           default=u"View tabs font size")
             ),
         schemata='CSS Properties',
-        # FIWME: use a slider widget
+        # FIXME: use a slider widget
         default="95%"
         ),
 
@@ -1723,6 +1744,8 @@ class CalendarXFolder(BaseFolder):
     """CalendarX is a folder (so it can hold other CalendarX subcalendars)
     Based on Archetypes, it has many configurable properties.
     """
+    implements(ICalendarX)
+
     security = ClassSecurityInfo()
     # FIXME: Always use Zope 2 interfaces?
     __implements__ = (BaseFolder.__implements__, (),)
