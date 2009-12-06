@@ -10,7 +10,7 @@
 """
 Queries the catalog for Events before a start date using ZCatalog query dictionary.
 
-modified for CalendarX 0.9.1(alpha) for 'listOfReviewStatesDisplayed' attribute
+modified for CalendarX 0.9.6(stable) for listOfSubjects bug
 Released under the GPL (see LICENSE.txt)
 does NOT use AdvancedQuery product of Dieter
 List of variables used (and to be used someday)
@@ -116,6 +116,7 @@ else:
 #  (mod 0.6.1) change restrictToThisListOfSubjects so that it is a filter 
 #    instead of overriding the chosen subjects (use a list comprehension).
 #  (mod 0.6.6) initialize q_xsub as empty list instead of zero.
+#  (mod 0.9.6) fixed bug where ALL was not restricted properly to listOfSubjects
 q_xsub = []
 xsub = str(xsub)
 xsub = string.split(xsub, ",") 
@@ -129,8 +130,13 @@ if 'ALL' in xsub:
         q_xsub = xsub
 #add this if clause to filter for restricted Subject list
 if context.getCXAttribute('restrictToThisListOfSubjects'):
-    filterlist = context.getCXAttribute('listOfSubjects')
-    q_xsub = [sub for sub in q_xsub if sub in filterlist]
+    if 'ALL' in xsub:
+        filterlist = context.getCXAttribute('listOfSubjects')
+        q_xsub = [sub for sub in filterlist]
+    else:
+        filterlist = context.getCXAttribute('listOfSubjects')
+        q_xsub = [sub for sub in q_xsub if sub in filterlist]
+
 
 
 #BUILD QUERY

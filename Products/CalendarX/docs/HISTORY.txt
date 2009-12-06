@@ -2,17 +2,27 @@
 History
 =======
 
-* CalendarX 0.9.5(stable)  November 7 2009
-* (last modified for CalendarX 0.9.5)
+* CalendarX 0.9.6(stable)  December 6 2009
+* (last modified for CalendarX 0.9.6)
 * by +lupa+ (lupaz on sf.net, lupa at zurven dot com)
 * Released under the GPL (see LICENSE.txt)
 
 CalendarX by Lupa Zurven (lupa at zurven dot com) A metacalendar for Plone.
 
+v0.9.6(stable)
+==============
+
+* bugfixes for getEventsXXX scripts (all four, for ZCatalog and Advanced 
+  Query) to handle properly the options for restrictToThisListOfPaths, 
+  restrictToThisListOfSubjects, and the Show Public/Private link that only 
+  shows events by the logged in Creator.
+  [lupa]
+
+
 v0.9.5(stable)
 ==============
 
-* Refactored documentation to ReST.
+* Refactored documentation to ReST, with help from glenfant.
   [lupa]
 
 

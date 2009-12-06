@@ -2,8 +2,8 @@
 Installation
 ============
 
-* CalendarX 0.9.5(stable)  November 7 2009
-* (last modified for CalendarX 0.9.5)
+* CalendarX 0.9.6(stable)  December 6 2009
+* (last modified for CalendarX 0.9.6)
 * by +lupa+ (lupaz on sf.net, lupa at zurven dot com)
 * Released under the GPL (see LICENSE.txt)
 

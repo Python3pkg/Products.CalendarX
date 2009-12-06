@@ -10,7 +10,7 @@
 """ 
 Queries catalog to retrieve events between two dates using AdvancedQuery.
 
-modified for CalendarX 0.9.1(alpha) for 'listOfReviewStatesDisplayed' attribute
+modified for CalendarX 0.9.6(stable) for listOfSubjects, xcrt & xpaths bugs
 Released under the GPL (see LICENSE.txt)
 List of variables used 
  xmy = improved MY/PUBLIC event switcher: MY == any review_state + user == CREATOR
@@ -105,6 +105,7 @@ else:
 #    overriding other subjects.
 #  (mod 0.6.1) change restrictToThisListOfSubjects so that it is a filter 
 #    instead of overriding the chosen subjects (use a list comprehension).
+#  (mod 0.9.6) fixed bug where ALL was not restricted properly to listOfSubjects
 q_xsub = 0
 xsub = str(xsub)
 xsub = string.split(xsub, ",") 
@@ -118,9 +119,14 @@ if 'ALL' in xsub:
         q_xsub = 1
 #add this if clause to filter for restricted Subject list
 if context.getCXAttribute('restrictToThisListOfSubjects'):
-    filterlist = context.getCXAttribute('listOfSubjects')
-    xsub = [sub for sub in xsub if sub in filterlist]
     q_xsub = 1
+    if 'ALL' in xsub:
+        filterlist = context.getCXAttribute('listOfSubjects')
+        xsub = [sub for sub in filterlist]
+    else:
+        filterlist = context.getCXAttribute('listOfSubjects')
+        xsub = [sub for sub in xsub if sub in filterlist]
+
 #if flag is 1, then set q_xsub for the Adv Query
 if q_xsub == 1:
     q_xsub = In('Subject', xsub)
@@ -150,6 +156,8 @@ query = query & Ge('end', start)
 
 if q_xtypes:
     query = query & q_xtypes 
+if q_xpaths:
+    query = query & q_xpaths 
 if q_xpub:
     query = query & q_xpub 
 if q_xsub:
