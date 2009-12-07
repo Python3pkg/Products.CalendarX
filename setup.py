@@ -20,7 +20,7 @@ setup(name='Products.CalendarX',
       long_description=long_description,
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
-          "Development Status :: Production/Stable",
+          "Development Status :: 5 - Production/Stable",
           "Framework :: Plone",
           "Framework :: Zope2",
           "Programming Language :: Python",
