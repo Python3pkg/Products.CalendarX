@@ -43,7 +43,10 @@ logger.debug('Installing Product')
 import Products.CMFPlone.interfaces
 import os
 import os.path
-from Globals import package_home
+try:
+    from App.Common import package_home
+except ImportError:
+    from Globals import package_home
 from Products.Archetypes import listTypes
 from Products.Archetypes.atapi import *
 from Products.Archetypes.utils import capitalize

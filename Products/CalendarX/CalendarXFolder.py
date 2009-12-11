@@ -3,10 +3,14 @@
 __author__ = 'Lupa Zurven <lupa@zurven.com>'
 __docformat__ = 'plaintext'
 
+from zope.interface import implements
 from Products.CMFCore import permissions
+from Products.CMFCore.interfaces import IContentish
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from Products.Archetypes.BaseFolder import BaseFolder
+from Products.Archetypes.interfaces import IBaseFolder, IBaseObject, IReferenceable
+from Products.Archetypes.utils import IntDisplayList
 from Products.CalendarX.config import *
 
 schema = Schema((
@@ -19,7 +23,7 @@ schema = Schema((
 			i18n_domain="CalendarX"
 		),
 		schemata="Calendar Options",
-		vocabulary=[(0, "Sunday"), (1, "Monday"), (2, "Tuesday"), (3, "Wednesday"), (4, "Thursday"), (5, "Friday"), (6, "Saturday",)],
+		vocabulary=IntDisplayList([(0, "Sunday"), (1, "Monday"), (2, "Tuesday"), (3, "Wednesday"), (4, "Thursday"), (5, "Friday"), (6, "Saturday",)]),
 		default=0,
 	),
 
@@ -1409,8 +1413,7 @@ class CalendarXFolder(BaseFolder):
     Based on Archetypes, it has many configurable properties.
     """
     security = ClassSecurityInfo()
-    __implements__ = (BaseFolder.__implements__, (),)
-
+    implements(IBaseFolder, IBaseObject, IReferenceable, IContentish)
 	# This name appears in the 'add' box
     archetype_name = 'CalendarX'
 
