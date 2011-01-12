@@ -64,9 +64,7 @@ bugfix: eventlister, mMeventlister - class: defaulted to "eventPublished" instea
   <h1 tal:content="here/title_or_id" class="documentFirstHeading">
             Title or id
   </h1>
-  <div metal:use-macro="here/document_actions/macros/document_actions">
-            Document actions (print, sendto etc)
-  </div>
+  <div tal:replace="structure provider:plone.documentactions" />
   <div class="documentDescription"
        tal:content="here/Description">
       description
