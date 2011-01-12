@@ -6,7 +6,7 @@
 <head>
   <metal:block fill-slot="top_slot"
                  tal:define="dummy python:request.set('disable_border', 1)" />
-  <metal:block fill-slot="css_slot">
+  <metal:block fill-slot="style_slot">
     <!-- NOTE: order is important for these CSS style sheets. -->
     <!-- Import COMMON CALENDAR CSS style sheet. -->
     <LINK href="calendar.css" type=text/css rel=stylesheet 
