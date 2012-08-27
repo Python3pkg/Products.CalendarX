@@ -47,6 +47,8 @@ try:
     from App.Common import package_home
 except ImportError:
     from Globals import package_home
+from AccessControl import allow_module
+from AccessControl import ModuleSecurityInfo
 from Products.Archetypes import listTypes
 from Products.Archetypes.atapi import *
 from Products.Archetypes.utils import capitalize
@@ -64,6 +66,13 @@ DirectoryView.registerDirectory('skins/CalendarX',
 
 ##code-section custom-init-head #fill in your manual code here
 ##/code-section custom-init-head
+
+ModuleSecurityInfo("Products.AdvancedQuery").declarePublic("Between")
+ModuleSecurityInfo("Products.AdvancedQuery").declarePublic("Eq")
+ModuleSecurityInfo("Products.AdvancedQuery").declarePublic("Generic")
+ModuleSecurityInfo("Products.AdvancedQuery").declarePublic("In")
+ModuleSecurityInfo("Products.AdvancedQuery").declarePublic("Le")
+ModuleSecurityInfo("Products.AdvancedQuery").declarePublic("Ge")
 
 
 def initialize(context):
