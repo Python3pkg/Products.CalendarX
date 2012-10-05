@@ -2,6 +2,13 @@
 Changelog
 =========
 
+current
+---------------
+
+* Plone 4.1 compatibility [miohtama]
+
+* Fixed URL escaping issues in month view links [miohtama]
+
 0.9.3 - 2009-11-06
 ------------------
 
