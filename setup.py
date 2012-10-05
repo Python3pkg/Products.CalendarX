@@ -1,6 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
+
 def _textFromPath(*names):
     here = os.path.dirname(os.path.abspath(__file__))
     path = os.path.join(here, *names)
@@ -8,7 +9,7 @@ def _textFromPath(*names):
 
 version = _textFromPath('Products', 'CalendarX', 'version.txt')
 long_description = '\n\n'.join(
-    (_textFromPath('README.txt'),
+    (_textFromPath('README.rst'),
      _textFromPath('docs', 'HISTORY.txt')
      ))
 
@@ -67,5 +68,5 @@ setup(name='Products.CalendarX',
       [z3c.autoinclude.plugin]
       target = plone
       """,
-      paster_plugins = ["ZopeSkel"],
+      paster_plugins=["ZopeSkel"],
       )
