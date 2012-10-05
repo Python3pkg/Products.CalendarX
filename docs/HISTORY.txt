@@ -5,9 +5,13 @@ Changelog
 current
 ---------------
 
-* Plone 4.1 compatibility [miohtama]
+* Plone 4.1 compatibility [miohtama, aclark] - for Plone 3.x releases use older version
+
+* Fixed bad portal_catalog query syntax in get events scripts - was returning no results on P4.1 [miohtama]
 
 * Fixed URL escaping issues in month view links [miohtama]
+
+* Finnish translations [miohtama]
 
 0.9.3 - 2009-11-06
 ------------------
