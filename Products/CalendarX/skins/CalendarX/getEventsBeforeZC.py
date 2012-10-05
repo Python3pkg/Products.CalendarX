@@ -30,12 +30,8 @@ if end:
 else:
     dateBefore = start
 
-#qdict['start'] = dateBefore
-#qdict['start_usage'] = 'range:max'
 qdict['start'] = dict(query=dateBefore, range="max")
 
-#qdict['end'] = start
-#qdict['end_usage'] = 'range:min'
 qdict['end'] = dict(query=start, range="min")
 
 qdict['sort_on'] = 'start'

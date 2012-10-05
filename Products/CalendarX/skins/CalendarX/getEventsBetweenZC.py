@@ -24,8 +24,6 @@ does NOT use AdvancedQuery product of Dieter
 qdict = {}
 
 #START and END datetime objects (not date strings)
-#qdict['start'] = [start, end]
-#qdict['start_usage'] = 'range:min:max'
 qdict['start'] = dict(query=[start,end], range="min:max")
 qdict['sort_on'] = 'start'
 
@@ -142,7 +140,5 @@ if q_xcrt:
     qdict['Creator'] = q_xcrt
 if q_xsub:
     qdict['Subject'] = q_xsub
-
-import pdb ; pdb.set_trace()
 
 return context.portal_catalog(qdict)
