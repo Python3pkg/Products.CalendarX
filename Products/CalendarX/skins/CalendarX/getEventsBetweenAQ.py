@@ -16,7 +16,7 @@ Released under the GPL (see LICENSE.txt)
  xmy = improved MY/PUBLIC event switcher: MY == any review_state + user == CREATOR
  xsub = category to view (from Subject -- works with existing CMFEvents and ATEvents)
  xpub = default 1 query for published, 0 = not queried for published status, 'visible' for visible status
- xcrt = (creator) default 1 for no test (view events from anyone), or 0 = query for user = CREATOR, 
+ xcrt = (creator) default 1 for no test (view events from anyone), or 0 = query for user = CREATOR,
  xgroups = show shared private events to shared (listed) group members.
 """
 
@@ -44,12 +44,12 @@ if context.getCXAttribute('restrictToThisFolder'):
 #  if 'xmy' == '1' or anything else, then set xcrt = '11' to ONLY show user == CREATOR
 #  and then set xpub = '11' to allow viewing ANY review_state events (including PRIVATE)
 xmy = str(xmy)
-xcrt = '0' 
+xcrt = '0'
 if xmy == '0':
     q_xmy = 0
 else:
-    xcrt = '11' 
-    xpub = '11' 
+    xcrt = '11'
+    xpub = '11'
 
 
 
@@ -74,7 +74,7 @@ if context.getCXAttribute('includeReviewStateVisible'):
 if xpub == 'pend':
     qxpublist.append('pending')
 showForGroups = context.getCXAttribute('showPrivateEventsToGroupMembers')
-if showForGroups:  
+if showForGroups:
     qxpublist.append('private')
 extraStates = context.getCXAttribute('listOfReviewStatesDisplayed')
 for state in extraStates:
@@ -85,11 +85,11 @@ if xpub == '11':   #override other requests for Personal Events calendar call
 
 
 #XCREATOR works
-#  if 'xcrt' (Creator) == '11', then we want to show ONLY those events 
+#  if 'xcrt' (Creator) == '11', then we want to show ONLY those events
 #  in the query for which this user is Creator
 xcrt = str(xcrt)
 if xcrt == '11':
-    q_xcrt = Eq('Creator', context.portal_membership.getAuthenticatedMember().getUserName()) 
+    q_xcrt = Eq('Creator', context.portal_membership.getAuthenticatedMember().getUserName())
 else:
     q_xcrt = 0
 
@@ -101,12 +101,12 @@ else:
 #  initialize q_xsub, make sure xsub is a string, then split xsub into a list
 #  (mod 0.6.1) make ALL work ONLY if it is the only item in xsub, rather than
 #    overriding other subjects.
-#  (mod 0.6.1) change restrictToThisListOfSubjects so that it is a filter 
+#  (mod 0.6.1) change restrictToThisListOfSubjects so that it is a filter
 #    instead of overriding the chosen subjects (use a list comprehension).
 #  (mod 0.9.6) fixed bug where ALL was not restricted properly to listOfSubjects
 q_xsub = 0
 xsub = str(xsub)
-xsub = string.split(xsub, ",") 
+xsub = string.split(xsub, ",")
 # if ALL is not in xsub, then we use xsub for the query
 if 'ALL' not in xsub:
     q_xsub = 1
@@ -138,23 +138,23 @@ if q_xsub == 1:
 Build the query for evalAdvancedQuery based on the tests above
 No query is needed for xmy: it just sets xcrt and xpub appropriately
   some old tests:
-    query = Between('start', start, end) & Generic(generic_qdict)  
-    this works: query = Between('start', start, end) & Generic('review_state','published')   
+    query = Between('start', start, end) & Generic(generic_qdict)
+    this works: query = Between('start', start, end) & Generic('review_state','published')
     this works: query = Between('start', start, end) &~ q_xpub
-    query = Between('start', start, end) &~ q_xpub 
-"""   
-query = Between('start', start, end) 
+    query = Between('start', start, end) &~ q_xpub
+"""
+query = Between('start', start, end)
 
 if q_xtypes:
-    query = query & q_xtypes 
+    query = query & q_xtypes
 if q_xpaths:
-    query = query & q_xpaths 
+    query = query & q_xpaths
 if q_xpub:
-    query = query & q_xpub 
+    query = query & q_xpub
 if q_xsub:
-    query = query & q_xsub 
+    query = query & q_xsub
 if q_xcrt:
-    query = query & q_xcrt 
+    query = query & q_xcrt
 
 
 

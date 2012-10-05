@@ -17,12 +17,12 @@ dowts = integer representing "day of week to start" on for each week
 """
 try:
   dowts = int(context.getCXAttribute('dayOfWeekToStart'))
-  dayList = context.getCXAttribute('weekdayNames')
+#  dayList = context.getCXAttribute('weekdayNames')
 
 #but if they're not available, set them as default values here
 except:
   dowts = 0
-  dayList =  ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+#  dayList =  ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
 
 
 #set which day of the week has been passed into the function
