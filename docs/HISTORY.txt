@@ -11,6 +11,8 @@ current
 
 * Fixed URL escaping issues in month view links [miohtama]
 
+* Fixed syntax errors in getEventDictWeekbyday.py [miohtama]
+
 * Finnish translations [miohtama]
 
 0.9.3 - 2009-11-06

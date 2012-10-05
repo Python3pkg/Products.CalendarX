@@ -4,15 +4,15 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=event, type='C', dayID, cDate
+##parameters=event, type, dayID, cDate
 ##title=Get dictionary of Event info for day view
 ##
 """
-returns a dictionary of useful objects for Events for the Weekbyday view  
+returns a dictionary of useful objects for Events for the Weekbyday view
 
 modified for CalendarX 0.4.8 for untitled events
 Released under the GPL (see LICENSE.txt)
-event types: 
+event types:
    'C' for continuing event (above main calendar view)
    'E' for normal event (in main calendar view)
 hourID only submitted with 'E' events
@@ -57,9 +57,9 @@ etime = test(ampm, eventend.AMPMMinutes(), eventend.TimeMinutes() + ' h')
 if type == 'C':    #FOR CONTINUING EVENTS
     howManyDays = context.getNumOfDays(startDate, eventend)
     jsStart = dayID
-    jsEnd = dayID + howManyDays 
+    jsEnd = dayID + howManyDays
     jsEndIfAllWeek = 7
-  #the following test() is for events ending ON THE HOUR AT MIDNIGHT, so the highlighting doesn't spill over into the next day upon rollover 
+  #the following test() is for events ending ON THE HOUR AT MIDNIGHT, so the highlighting doesn't spill over into the next day upon rollover
     jsEndIfNotAllWeek = test((eventend.hour() == 0) and (eventend.minute() == 0), jsEnd, jsEnd + 1)
     jsEnd = test(jsEndIfNotAllWeek < jsEndIfAllWeek, jsEndIfNotAllWeek, jsEndIfAllWeek)
   #test() to make sure End is not prior to Start
@@ -72,9 +72,9 @@ if type == 'E':    #FOR EVENTS IN THE REGULAR DAY by hour TABLE
     howManyDays = context.getNumOfDays(eventstart, eventend, daysordates='dates')
     jsStart = dayID
     jsEnd = dayID + howManyDays
-  #FIX too many days called for continuing events running more than all week 
-    jsEndIfAllWeek = 7 
-  #the following test() is for events ending ON THE STROKE OF MIDNIGHT, so the highlighting doesn't spill over into the next day upon rollover 
+  #FIX too many days called for continuing events running more than all week
+    jsEndIfAllWeek = 7
+  #the following test() is for events ending ON THE STROKE OF MIDNIGHT, so the highlighting doesn't spill over into the next day upon rollover
     jsEndIfNotAllWeek = test((eventend.hour() == 0) and (eventend.minute() == 0), jsEnd - 1, jsEnd)
     jsEnd = test(jsEndIfNotAllWeek < jsEndIfAllWeek, jsEndIfNotAllWeek, jsEndIfAllWeek)
   #test() to make sure End is not prior to Start
@@ -87,11 +87,11 @@ if type == 'E':    #FOR EVENTS IN THE REGULAR DAY by hour TABLE
 
 #marshall all these into a dictionary
 ewbddict = {
-         'eventurl':eventurl, 
-         'eventstart':eventstart, 
-         'eventend':eventend, 
-         'jsStart':jsStart, 
-         'jsEnd':jsEnd, 
+         'eventurl':eventurl,
+         'eventstart':eventstart,
+         'eventend':eventend,
+         'jsStart':jsStart,
+         'jsEnd':jsEnd,
          'eventurl':eventurl,
          'eventState':eventState,
          'eventtitle':eventtitle,
@@ -104,7 +104,7 @@ ewbddict = {
          'emonth':emonth,
          'eday':eday,
          'etime':etime,
-         'eventstring':eventstring, 
+         'eventstring':eventstring,
         }
 
 return ewbddict
