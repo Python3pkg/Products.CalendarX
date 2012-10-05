@@ -4,16 +4,16 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=event, type='C', periodID=None, cDate
+##parameters=event, type='C', periodID=None, cDate=None
 ##title=Get dictionary of Event info for day view
 ##
 """
-returns a dictionary of useful objects for Events for the Day view  
+returns a dictionary of useful objects for Events for the Day view
 
-modified for CalendarX-0.6.4 change jsStart to reflect "earlier" event 
+modified for CalendarX-0.6.4 change jsStart to reflect "earlier" event
   highlighting changes.
 Released under the GPL (see LICENSE.txt)
-event types: 
+event types:
    'C' for continuing event (above main calendar view)
    'E' for normal event (in main calendar view)
    'L' for later event (below main calendar view)
@@ -73,7 +73,7 @@ if type == 'C':    #FOR CONTINUING EVENTS
   #the following test() is for events ending ON THE PERIOD, so they don't spill over into the next period upon rollover.
     if useHalfHours:
         jsEndIfNotAllDay = test(eventend.minute() in [0,30], jsEnd-1, jsEnd)
-    else:   
+    else:
         jsEndIfNotAllDay = test(eventend.minute() in [0], jsEnd-1, jsEnd)
     jsEnd = test(jsEndIfNotAllDay < jsEndIfAllDay, jsEndIfNotAllDay, jsEndIfAllDay)
   #test() just to make sure End is not prior to Start; an old test, not sure it is still needed.
@@ -91,7 +91,7 @@ if type == 'E':    #FOR EVENTS IN THE REGULAR DAY by hour TABLE
   #the following test() is for events ending ON THE PERIOD, so they don't spill over into the next period upon rollover.
     if useHalfHours:
         jsEndIfNotAllDay = test(eventend.minute() in [0,30], jsEnd-1, jsEnd)
-    else:   
+    else:
         jsEndIfNotAllDay = test(eventend.minute() in [0], jsEnd-1, jsEnd)
     jsEnd = test(jsEndIfNotAllDay < jsEndIfAllDay, jsEndIfNotAllDay, jsEndIfAllDay)
   #test() to make sure End is not prior to Start
@@ -102,7 +102,7 @@ if type == 'E':    #FOR EVENTS IN THE REGULAR DAY by hour TABLE
 
 
 #calculate jsStart and jsEnd: integer range of cells in view for hightlighting
-if type == 'L':    #FOR LATER EVENTS 
+if type == 'L':    #FOR LATER EVENTS
     jsStart = dayviewendhour*periodsFactor + 1
     jsEnd = jsStart
   #generate the eventstring
@@ -113,11 +113,11 @@ if type == 'L':    #FOR LATER EVENTS
 
 #marshall all these into a dictionary
 eddict = {
-         'eventurl':eventurl, 
-         'eventstart':eventstart, 
-         'eventend':eventend, 
-         'jsStart':jsStart, 
-         'jsEnd':jsEnd, 
+         'eventurl':eventurl,
+         'eventstart':eventstart,
+         'eventend':eventend,
+         'jsStart':jsStart,
+         'jsEnd':jsEnd,
          'eventurl':eventurl,
          'eventState':eventState,
          'eventtitle':eventtitle,
@@ -130,7 +130,7 @@ eddict = {
          'emonth':emonth,
          'eday':eday,
          'etime':etime,
-         'eventstring':eventstring, 
+         'eventstring':eventstring,
         }
 
 return eddict
