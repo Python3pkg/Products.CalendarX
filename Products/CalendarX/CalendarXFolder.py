@@ -1657,7 +1657,7 @@ class CalendarXFolder(BaseFolder):
     Based on Archetypes, it has many configurable properties.
     """
     security = ClassSecurityInfo()
-    __implements__ = (BaseFolder.__implements__, (),)
+    #__implements__ = (BaseFolder.__implements__, (),)
 
 	# This name appears in the 'add' box
     archetype_name = 'CalendarX'
