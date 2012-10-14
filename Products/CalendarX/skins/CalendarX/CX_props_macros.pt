@@ -404,7 +404,7 @@ bugfix: eventlister, mMeventlister - class: defaulted to "eventPublished" instea
 <!-- Link displaying powered by information, or use for copyright info -->
 <div metal:define-macro="copyright" class="calxcopyright" i18n:domain="calendarx">
   <hr/>
-  <p i18n:translate="calx_powered_by">Powered by <span i18n:name="calx_org_link"><a href="http://calendarx.org" i18n:translate="calx_a_plone_calendar">CalendarX, a Plone Calendar</a></span>.</p>  
+  <p i18n:translate="calx_powered_by">Powered by <span i18n:name="calx_org_link"><a href="http://collective.github.com/calendarx" i18n:translate="calx_a_plone_calendar">CalendarX, a Plone Calendar</a></span>.</p>  
 </div>
 
 
