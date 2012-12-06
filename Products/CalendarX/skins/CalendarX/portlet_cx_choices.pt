@@ -12,7 +12,7 @@
      tal:define="MODIFIED string:mod 0.5.1 use CXsheetlist;
                  viewname string:${request/PUBLISHED/title_or_id};
                  CXsheetlist python:here.getCXSheetlist();
-                 Dict python:here.getDictCommon(viewname, CXsheetlist);
+                 Dict python: here.getDictCommon(viewname, CXsheetlist);
                  std modules/Products.PythonScripts.standard;
                  mstring modules/string;
                  url_quote nocall: std/url_quote;

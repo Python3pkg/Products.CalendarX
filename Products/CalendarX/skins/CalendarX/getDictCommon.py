@@ -71,6 +71,11 @@ if hasattr(request,'jumpyear'):
 """
 startDate = ''
 endDate = ''
+nextDate = ''
+prevDate = ''
+prevstring = ''
+nextstring = ''
+currentstring = ''
 startDateList = []
 endDateList = []
 startDateToShowList = []
