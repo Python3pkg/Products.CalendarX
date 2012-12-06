@@ -28,4 +28,7 @@ for sheet in macrosheetlist:
 if pathy != 'nope':
     return pathy
 
-return context.CX_props_macros.macros[macroName]  #guess the default value
+try:
+    return context.CX_props_macros.macros[macroName]  #guess the default value
+except:
+    return context.CX_props_macros.macros['headstuff']
