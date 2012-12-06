@@ -16,9 +16,9 @@ new for CalendarX-0.5.1 to speed things up
 Released under the GPL (see LICENSE.txt)
 """
 CXsheetlist = []
-sheetnamelist = getattr(context,'skinSheets','no such sheet list found')
+sheetnamelist = getattr(context, 'skinSheets', 'no such sheet list found')
 for sheetname in sheetnamelist:
-    CXsheetlist.append(getattr(context,sheetname))
+    if hasattr(context, sheetname):
+        obj = getattr(context, sheetname)
+        CXsheetlist.append(obj)
 return CXsheetlist
-
-
