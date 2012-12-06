@@ -17,4 +17,7 @@ modified for Archetypes and /plone-3-compatibility branch at the
   PSU CalendarX Patch Sprint in Dec 2007. thanks folks :-)
 """
 
-return getattr(context, 'get%s%s' % (key[0].upper(), key[1:]))()
+if hasattr(context, 'get%s%s' % (key[0].upper(), key[1:])):
+    return getattr(context, 'get%s%s' % (key[0].upper(), key[1:]))()
+else:
+    return 0
