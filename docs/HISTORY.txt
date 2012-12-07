@@ -2,6 +2,12 @@
 Changelog
 =========
 
+1.0.2 (2012-12-06)
+==================
+
+- Make portet_cx_choices portlet display nothing instead of errors (No Plone 4 support yet)
+  [aclark]
+
 1.0.1 (2012-11-05)
 ==================
 

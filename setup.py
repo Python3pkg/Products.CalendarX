@@ -7,7 +7,7 @@ def _textFromPath(*names):
     path = os.path.join(here, *names)
     return open(path, 'r').read().strip()
 
-version = '1.0.1'
+version = '1.0.2'
 long_description = '\n\n'.join(
     (_textFromPath('README.rst'),
      _textFromPath('docs', 'HISTORY.txt')
