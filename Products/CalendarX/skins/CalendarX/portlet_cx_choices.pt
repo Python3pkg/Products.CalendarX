@@ -73,10 +73,11 @@
                                type="submit"
                                value="Refresh"
                                alt="Refresh View"
-                               tal:attributes="tabindex tabindex/next"
                                accesskey="accesskeys-login"
                                i18n:attributes="value alt"
                                />
+<!--                               tal:attributes="tabindex tabindex/next" -->
+
                     </div>
                 </form>
             </div>
