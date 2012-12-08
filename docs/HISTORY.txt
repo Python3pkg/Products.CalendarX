@@ -2,6 +2,12 @@
 Changelog
 =========
 
+1.0.4 (2012-12-07)
+==================
+
+- Functionality provided by ``portlet_cx_choices`` in earlier versions of CalendarX has moved to the main calendar area in Plone 4
+  [aclark]
+
 1.0.3 (2012-12-07)
 ==================
 
