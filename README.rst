@@ -1,8 +1,9 @@
+.. contents :: :local:
+
 Introduction
 ============
 
 **Products.CalendarX** is an add-on for Plone that displays Events [1]_ in monthly, weekly and daily views. There is also localization for various languages included.
-
 
 .. Note::
 
@@ -20,3 +21,14 @@ Source code and issue tracker:
 - https://github.com/collective/Products.CalendarX/
 
 .. [1] I.e. event-ish content, e.g. events created with the default Plone event content type.
+
+Alternative products
+========================
+
+**Products.CalendarX** is already very old codebase. It is stable, but does not see frequent updates
+anymore. For similar addons see
+
+* http://plone.org/products/solgema.fullcalendar
+
+* http://plone.org/products/zettwerk.fullcalendar
+
