@@ -37,7 +37,7 @@ else:
 
 classy = 0
 for sub in subs:
-    if classdict.has_key(sub):
+    if sub in classdict:
         classy = classdict[sub]
         break
     else:

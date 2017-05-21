@@ -29,7 +29,7 @@ if context.getCXAttribute('useEventTypeCSSClasses'):
         classdict[key] = classname
 
 classy = 0
-if classdict.has_key(type):
+if type in classdict:
     return classdict[type]
 else:
     return fbc
